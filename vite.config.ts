@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
 
   // Base path for the GitHub Pages repository site
-  base: '/restaurant-web-demo-starter/',
+  base: '/restaurant-web-demo/',
 
   server: {
     port: 5173,
