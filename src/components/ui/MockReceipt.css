@@ -214,6 +214,8 @@
 .receipt-lightbox-card {
   width: 100%;
   max-width: 360px;
+  max-height: calc(100% - 32px);
+  max-height: calc(100dvh - 32px);
   background-color: #ffffff;
   border-radius: 16px;
   overflow: hidden;
@@ -229,6 +231,7 @@
   justify-content: space-between;
   padding: 12px 16px;
   border-bottom: 1px solid #f1f5f9;
+  flex-shrink: 0;
 }
 
 .lightbox-title {
@@ -246,12 +249,21 @@
   align-items: center;
   justify-content: center;
   color: #64748b;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.lightbox-close-btn:active {
+  background-color: #e2e8f0;
 }
 
 .lightbox-body {
   padding: 12px 16px;
   max-height: 70vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
 }
 
 .receipt-ticket.enlarged {
@@ -275,6 +287,8 @@
 .lightbox-footer {
   padding: 12px 16px;
   border-top: 1px solid #f1f5f9;
+  flex-shrink: 0;
+  background-color: #ffffff;
 }
 
 .lightbox-done-btn {

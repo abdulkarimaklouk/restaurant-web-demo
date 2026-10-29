@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { X, ShoppingBag, Coins, Clock, CheckCircle2, ChefHat, Package, Check } from 'lucide-react';
 import { Order } from '../../types/order';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { getModalActionInfo } from '../../features/orders/orderTransitions';
-import { MockReceipt } from './MockReceipt';
+import { MockReceipt, ReceiptReviewModal } from './MockReceipt';
 import './SummaryModal.css';
 
 interface SummaryModalProps {
@@ -19,6 +19,15 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
 }) => {
   if (!order) return null;
 
+  const [isReceiptReviewActive, setIsReceiptReviewActive] = useState(false);
+  const modalBodyRef = useRef<HTMLDivElement>(null);
+  const scrollPosRef = useRef(0);
+
+  // Reset review modal if order changes
+  useEffect(() => {
+    setIsReceiptReviewActive(false);
+  }, [order.id]);
+
   const modalAction = getModalActionInfo(order);
 
   const handleActionClick = () => {
@@ -26,6 +35,23 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
       onAction(order);
       onClose(); // Close modal after successful state advancement
     }
+  };
+
+  const handleOpenReceiptReview = () => {
+    if (modalBodyRef.current) {
+      scrollPosRef.current = modalBodyRef.current.scrollTop;
+    }
+    setIsReceiptReviewActive(true);
+  };
+
+  const handleCloseReceiptReview = () => {
+    setIsReceiptReviewActive(false);
+    // Restore previous scroll position
+    requestAnimationFrame(() => {
+      if (modalBodyRef.current) {
+        modalBodyRef.current.scrollTop = scrollPosRef.current;
+      }
+    });
   };
 
   const renderStatusBadge = () => {
@@ -90,29 +116,35 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
-      <div className="summary-modal" onClick={(e) => e.stopPropagation()}>
-        {/* Modal Header */}
-        <div className="modal-header">
-          <div className="modal-title-group">
-            <div className="modal-order-headline">
-              <span className="modal-order-number">{order.orderNumber}</span>
-              {renderStatusBadge()}
+      {/* Primary Order Details Modal */}
+      <div
+        className={`summary-modal ${isReceiptReviewActive ? 'hidden-for-review' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        {/* Modal Header - Hidden while receipt review is active */}
+        {!isReceiptReviewActive && (
+          <div className="modal-header">
+            <div className="modal-title-group">
+              <div className="modal-order-headline">
+                <span className="modal-order-number">{order.orderNumber}</span>
+                {renderStatusBadge()}
+              </div>
+              {/* Student name without faculty or academic specialization */}
+              <span className="modal-student-name">الطالب: {order.studentName}</span>
             </div>
-            {/* Student name without faculty or academic specialization */}
-            <span className="modal-student-name">الطالب: {order.studentName}</span>
+            <button
+              type="button"
+              className="modal-close-btn"
+              onClick={onClose}
+              aria-label="إغلاق مراجعة الطلب"
+            >
+              <X size={20} />
+            </button>
           </div>
-          <button
-            type="button"
-            className="modal-close-btn"
-            onClick={onClose}
-            aria-label="إغلاق مراجعة الطلب"
-          >
-            <X size={20} />
-          </button>
-        </div>
+        )}
 
         {/* Modal Scrollable Body */}
-        <div className="modal-body">
+        <div ref={modalBodyRef} className="modal-body">
           {/* Order Items Heading */}
           <div className="summary-section-title">
             <ShoppingBag size={16} />
@@ -158,22 +190,32 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
           </div>
 
           {/* Payment Receipt Inspection Section */}
-          <MockReceipt order={order} />
+          <MockReceipt order={order} onOpenReview={handleOpenReceiptReview} />
         </div>
 
-        {/* Modal Fixed Footer Action */}
-        <div className="modal-footer">
-          <button
-            type="button"
-            className={`modal-primary-btn ${modalAction.variant}`}
-            onClick={handleActionClick}
-            disabled={modalAction.disabled}
-          >
-            {renderActionIcon()}
-            <span>{modalAction.label}</span>
-          </button>
-        </div>
+        {/* Modal Fixed Footer Action - Hidden while receipt review is active */}
+        {!isReceiptReviewActive && (
+          <div className="modal-footer">
+            <button
+              type="button"
+              className={`modal-primary-btn ${modalAction.variant}`}
+              onClick={handleActionClick}
+              disabled={modalAction.disabled}
+            >
+              {renderActionIcon()}
+              <span>{modalAction.label}</span>
+            </button>
+          </div>
+        )}
       </div>
+
+      {/* Standalone Receipt Review Modal */}
+      {isReceiptReviewActive && (
+        <ReceiptReviewModal
+          order={order}
+          onClose={handleCloseReceiptReview}
+        />
+      )}
     </div>
   );
 };

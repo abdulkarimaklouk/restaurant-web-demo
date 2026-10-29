@@ -17,12 +17,18 @@
   width: 100%;
   background-color: #ffffff;
   border-radius: 22px 22px 0 0;
-  max-height: 86vh;
+  max-height: calc(100% - 16px);
   display: flex;
   flex-direction: column;
   box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.2);
   animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+}
+
+.summary-modal.hidden-for-review {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
 }
 
 .modal-header {
@@ -124,6 +130,8 @@
   flex-direction: column;
   gap: 14px;
   -webkit-overflow-scrolling: touch;
+  flex: 1;
+  min-height: 0;
 }
 
 .summary-section-title {
