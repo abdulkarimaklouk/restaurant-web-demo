@@ -1,0 +1,254 @@
+.order-card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  padding: 13px 15px;
+  margin-bottom: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  cursor: pointer;
+}
+
+.order-card:hover {
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.07);
+}
+
+.order-card:active {
+  transform: scale(0.995);
+}
+
+/* Card Top 3-Zone Row */
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Zone 1: Order Metadata (Right in RTL) */
+.zone-metadata {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 66px;
+  flex-shrink: 0;
+}
+
+.order-time {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.order-number {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+  margin: 1px 0;
+}
+
+.order-items-count {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.bag-icon {
+  color: var(--color-text-secondary);
+}
+
+/* Zone 2: Customer (Center) */
+.zone-customer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.avatar-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  color: #94a3b8;
+}
+
+.customer-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 3px;
+  justify-content: center;
+}
+
+.customer-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2;
+}
+
+.coins-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  background-color: var(--color-amber-bg);
+  border: 1px solid var(--color-amber-border);
+  border-radius: var(--radius-pill);
+  padding: 1.5px 7px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-amber);
+  width: fit-content;
+}
+
+.coins-icon {
+  color: #f59e0b;
+}
+
+/* Zone Divider */
+.zone-divider {
+  width: 1px;
+  height: 46px;
+  background-color: var(--color-border-subtle);
+  flex-shrink: 0;
+  margin: 0 1px;
+}
+
+/* Zone 3: Pricing & Status (Left in RTL) */
+.zone-pricing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  min-width: 72px;
+  flex-shrink: 0;
+  gap: 3px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.status-badge.new {
+  background-color: var(--color-orange-status-bg);
+  color: var(--color-orange-status);
+}
+
+.status-badge.preparing {
+  background-color: var(--color-blue-bg);
+  color: var(--color-blue);
+}
+
+.status-badge.ready {
+  background-color: var(--color-green-bg);
+  color: var(--color-green);
+}
+
+.status-badge.delivered {
+  background-color: #f1f5f9;
+  color: var(--color-text-secondary);
+}
+
+.pricing-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.total-label {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.total-amount {
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+}
+
+/* Bottom Action Row */
+.card-action-row {
+  width: 100%;
+}
+
+.card-action-btn {
+  width: 100%;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.15s ease;
+}
+
+.card-action-btn:active:not(:disabled) {
+  transform: scale(0.985);
+}
+
+/* Button Variants */
+.card-action-btn.crimson {
+  background-color: var(--color-crimson);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(239, 35, 60, 0.25);
+}
+
+.card-action-btn.crimson:hover {
+  background-color: var(--color-crimson-hover);
+}
+
+.card-action-btn.primary {
+  background-color: var(--color-blue);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+.card-action-btn.green {
+  background-color: var(--color-green);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.25);
+}
+
+.card-action-btn.dark {
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+}
+
+.card-action-btn.none {
+  background-color: #f1f5f9;
+  color: var(--color-text-muted);
+  cursor: default;
+}

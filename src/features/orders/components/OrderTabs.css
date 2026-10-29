@@ -1,0 +1,121 @@
+.order-tabs-wrapper {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 2px 0 10px 0;
+  flex-shrink: 0;
+}
+
+.order-tabs-scroll {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  min-width: 0;
+  padding: 0 16px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.order-tabs-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.order-tab-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.tab-icon {
+  flex-shrink: 0;
+  color: var(--color-text-muted);
+}
+
+.tab-count-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1.5px 7px;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  color: var(--color-text-secondary);
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Active tab styles matching reference */
+.order-tab-item.pending.active {
+  border-color: var(--color-crimson-border);
+  background-color: var(--color-crimson-light);
+  color: var(--color-crimson);
+}
+.order-tab-item.pending.active .tab-icon {
+  color: var(--color-crimson);
+}
+.order-tab-item.pending.active .tab-count-badge {
+  background-color: var(--color-crimson-badge);
+  color: var(--color-crimson);
+}
+
+.order-tab-item.new.active {
+  border-color: #fed7aa;
+  background-color: #fff7ed;
+  color: #ea580c;
+}
+.order-tab-item.new.active .tab-icon {
+  color: #ea580c;
+}
+.order-tab-item.new.active .tab-count-badge {
+  background-color: #ffedd5;
+  color: #ea580c;
+}
+
+.order-tab-item.preparing.active {
+  border-color: #bfdbfe;
+  background-color: var(--color-blue-bg);
+  color: var(--color-blue);
+}
+.order-tab-item.preparing.active .tab-icon {
+  color: var(--color-blue);
+}
+.order-tab-item.preparing.active .tab-count-badge {
+  background-color: #dbeafe;
+  color: #1d4ed8;
+}
+
+.order-tab-item.ready.active {
+  border-color: #bbf7d0;
+  background-color: var(--color-green-bg);
+  color: var(--color-green);
+}
+.order-tab-item.ready.active .tab-icon {
+  color: var(--color-green);
+}
+.order-tab-item.ready.active .tab-count-badge {
+  background-color: #dcfce7;
+  color: #15803d;
+}
+
+.order-tab-item.delivered.active {
+  border-color: #cbd5e1;
+  background-color: #f1f5f9;
+  color: var(--color-primary-dark);
+}
+.order-tab-item.delivered.active .tab-icon {
+  color: var(--color-primary-dark);
+}
+.order-tab-item.delivered.active .tab-count-badge {
+  background-color: #e2e8f0;
+  color: var(--color-text-main);
+}
