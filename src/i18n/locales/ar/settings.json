@@ -108,6 +108,28 @@
     },
     "saveSuccess": "تم تحديث أوقات العمل بنجاح"
   },
+  "restaurantInfo": {
+    "pageTitle": "بيانات المطعم",
+    "backAria": "العودة للإعدادات",
+    "infoCardTitle": "بيانات التواصل والعنوان",
+    "infoCardDesc": "تُستخدم هذه البيانات للتواصل مع المطعم واستقبال استفسارات الطلاب والطلبات داخل الحرم الجامعي.",
+    "phoneLabel": "رقم الهاتف",
+    "phonePlaceholder": "مثال: 0100 123 4567",
+    "phoneRequired": "رقم الهاتف مطلوب",
+    "addressLabel": "عنوان المطعم",
+    "addressPlaceholder": "مثال: مجمع الخدمات الطلابية - مبنى ج - كشك رقم 4",
+    "addressRequired": "عنوان المطعم مطلوب",
+    "whatsappLabel": "رقم الواتساب",
+    "whatsappPlaceholder": "مثال: 0100 123 4567",
+    "whatsappRequired": "رقم الواتساب مطلوب",
+    "emailLabel": "البريد الإلكتروني",
+    "emailPlaceholder": "مثال: contact@goodfood-campus.eg",
+    "emailRequired": "البريد الإلكتروني مطلوب",
+    "emailInvalid": "يرجى إدخال بريد إلكتروني صحيح",
+    "saveBtn": "حفظ التغييرات",
+    "cancelBtn": "إلغاء",
+    "saveSuccess": "تم حفظ بيانات المطعم بنجاح"
+  },
   "toasts": {
     "profile": "الملف التعريفي للمطعم: سيتم تفعيل تعديل البيانات في المرحلة التالية",
     "langAr": "لغة التطبيق (العربية): تم تعيينها كلغة افتراضية",

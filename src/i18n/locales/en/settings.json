@@ -108,6 +108,28 @@
     },
     "saveSuccess": "Opening hours updated successfully"
   },
+  "restaurantInfo": {
+    "pageTitle": "Restaurant Information",
+    "backAria": "Back to Settings",
+    "infoCardTitle": "Contact & Address Information",
+    "infoCardDesc": "This information is used to contact the restaurant and handle student inquiries and orders across campus.",
+    "phoneLabel": "Phone Number",
+    "phonePlaceholder": "e.g. +20 100 123 4567",
+    "phoneRequired": "Phone number is required",
+    "addressLabel": "Restaurant Address",
+    "addressPlaceholder": "e.g. Student Services Center, Building C - Counter #4",
+    "addressRequired": "Restaurant address is required",
+    "whatsappLabel": "WhatsApp Number",
+    "whatsappPlaceholder": "e.g. +20 100 123 4567",
+    "whatsappRequired": "WhatsApp number is required",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "e.g. contact@goodfood-campus.eg",
+    "emailRequired": "Email address is required",
+    "emailInvalid": "Please enter a valid email address",
+    "saveBtn": "Save Changes",
+    "cancelBtn": "Cancel",
+    "saveSuccess": "Restaurant information saved successfully"
+  },
   "toasts": {
     "profile": "Restaurant Profile: Editing will be enabled in the next phase",
     "langAr": "App Language (Arabic): Set as active interface language",

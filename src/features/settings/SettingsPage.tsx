@@ -20,6 +20,7 @@ import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import { useWorkingHoursStore } from '../../data/workingHoursStore';
 import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import { EditWorkingHours } from './components/EditWorkingHours';
+import { EditRestaurantInfo } from './components/EditRestaurantInfo';
 import './SettingsPage.css';
 
 interface SettingsRowProps {
@@ -100,6 +101,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const { getEffectiveStatus, getTodaySummary } = useWorkingHoursStore();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingHours, setIsEditingHours] = useState(false);
+  const [isEditingInfo, setIsEditingInfo] = useState(false);
 
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
@@ -126,6 +128,15 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     return (
       <EditWorkingHours
         onBack={() => setIsEditingHours(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
+
+  if (isEditingInfo) {
+    return (
+      <EditRestaurantInfo
+        onBack={() => setIsEditingInfo(false)}
         onShowToast={onShowToast}
       />
     );
@@ -253,7 +264,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
               icon={<Building2 size={17} strokeWidth={2} />}
               title={t('restaurant.infoTitle')}
               subtitle={t('restaurant.infoSubtitle')}
-              onClick={() => handleItemClick(t('toasts.info'))}
+              onClick={() => setIsEditingInfo(true)}
             />
             <SettingsRow
               icon={<UtensilsCrossed size={17} strokeWidth={2} />}
