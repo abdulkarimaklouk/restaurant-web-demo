@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Order, OrderViewTab } from '../../types/order';
 import { useOrderStore } from '../../data/mockStore';
+import { useNotificationsStore } from '../../data/notificationsStore';
 import { OrderTabs } from './components/OrderTabs';
 import { OrderCard } from './components/OrderCard';
 import { EmptyState } from '../../components/ui/EmptyState';
@@ -16,6 +17,7 @@ interface OrdersPageProps {
 export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
   const { t } = useTranslation('orders');
   const { getOrdersByTab, counts, advanceOrder } = useOrderStore();
+  const { preferences } = useNotificationsStore();
   const [activeTab, setActiveTab] = useState<OrderViewTab>('pending');
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
@@ -28,10 +30,12 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
     const result = advanceOrder(order.id);
     if (result.success) {
       if (prevPayment === 'pendingConfirmation') {
-        onShowToast(
-          t('toasts.paymentConfirmed', { orderNumber: order.orderNumber }),
-          'success'
-        );
+        if (preferences.paymentConfirmationsEnabled) {
+          onShowToast(
+            t('toasts.paymentConfirmed', { orderNumber: order.orderNumber }),
+            'success'
+          );
+        }
       } else if (prevOperational === 'newOrder') {
         onShowToast(
           t('toasts.prepStarted', { orderNumber: order.orderNumber }),

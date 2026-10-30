@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Bell, CheckCircle2, Info } from 'lucide-react';
 import { ToastProps } from '../../../components/ui/Toast';
+import { useNotificationsStore } from '../../../data/notificationsStore';
 import './EditNotifications.css';
 
 export interface EditNotificationsProps {
@@ -14,15 +15,25 @@ export const EditNotifications: React.FC<EditNotificationsProps> = ({
   onShowToast,
 }) => {
   const { t } = useTranslation('settings');
+  const { preferences, updatePreferences } = useNotificationsStore();
 
-  // Local state initialized with default enabled state (true) per specification
-  const [newOrdersEnabled, setNewOrdersEnabled] = useState(true);
-  const [paymentConfirmationsEnabled, setPaymentConfirmationsEnabled] = useState(true);
+  // Local form state initialized with saved preferences from store
+  const [newOrdersEnabled, setNewOrdersEnabled] = useState(
+    preferences.newOrdersEnabled
+  );
+  const [paymentConfirmationsEnabled, setPaymentConfirmationsEnabled] = useState(
+    preferences.paymentConfirmationsEnabled
+  );
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // UI-only Phase 1: show feedback toast and return to Settings
+    // Persist preferences to store and localStorage
+    updatePreferences({
+      newOrdersEnabled,
+      paymentConfirmationsEnabled,
+    });
+
     onShowToast(t('notifications.saveSuccess'), 'success');
     onBack();
   };

@@ -60,3 +60,13 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Changing `--color-primary-dark` dynamically propagates to the active footer button, Save Changes button, and active daily toggles in unison.
 - [x] Blue accents on info icon and input focus border remain unaffected.
 - [x] Save button hover, active, focus, and disabled states verified across RTL Arabic and LTR English.
+
+## Notifications & Alerts Preferences
+
+- [x] Both preferences (`newOrdersEnabled`, `paymentConfirmationsEnabled`) default to `true`.
+- [x] Preferences persist in `localStorage` under key `notification_preferences`.
+- [x] Disabling new-order notifications suppresses the header bell dot indicator and toast without impacting order lists.
+- [x] Disabling payment confirmation notifications suppresses only the payment confirmation toast; the payment transition itself still advances order state normally.
+- [x] Both preferences persist independently across page reloads.
+- [x] Cancel discards unsaved toggle changes.
+- [x] Full Arabic RTL and English LTR coverage verified with 0 console errors.

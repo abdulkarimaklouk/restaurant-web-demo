@@ -94,3 +94,11 @@ To maintain design system consistency across the mobile interface without duplic
 - In the Working Hours feature (`EditWorkingHours.css`), both the Save Changes button background (`.btn-save-changes`) and the active state of daily toggle switches (`.day-toggle-switch.active`) reuse `var(--color-primary-dark)`.
 - Dynamically updating `--color-primary-dark` instantly and synchronously updates all three interface elements in unison.
 
+## D-016: Notifications & Alerts Preferences Architecture
+
+To provide realistic in-app notification controls without backend/push dependencies:
+- Notification preferences are encapsulated in `src/data/notificationsStore.ts` under `notification_preferences` in `localStorage`.
+- Two independent preferences: `newOrdersEnabled` (defaults to true) and `paymentConfirmationsEnabled` (defaults to true).
+- In accordance with non-blocking enterprise UX standards, disabling notifications suppresses only UI notification presentation (toasts, bell icon dot indicator); it never blocks order progression, payment confirmations, or error alerts.
+- In the static demo environment, incoming orders are currently initial seed states; therefore, `newOrdersEnabled` controls presentation on the header bell notification action and dot badge, while `paymentConfirmationsEnabled` controls payment confirmation toasts upon state transition.
+

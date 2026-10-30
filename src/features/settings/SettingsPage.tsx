@@ -18,6 +18,7 @@ import {
 import { ToastProps } from '../../components/ui/Toast';
 import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import { useWorkingHoursStore } from '../../data/workingHoursStore';
+import { useNotificationsStore } from '../../data/notificationsStore';
 import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import { EditWorkingHours } from './components/EditWorkingHours';
 import { EditRestaurantInfo } from './components/EditRestaurantInfo';
@@ -100,6 +101,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('settings');
   const { profile } = useRestaurantProfileStore();
   const { getEffectiveStatus, getTodaySummary } = useWorkingHoursStore();
+  const { preferences: notificationPreferences } = useNotificationsStore();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
@@ -297,7 +299,12 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
               icon={<Bell size={17} strokeWidth={2} />}
               title={t('preferences.notificationsTitle')}
               subtitle={t('preferences.notificationsSubtitle')}
-              valueTag={t('preferences.notificationsBadge')}
+              valueTag={
+                notificationPreferences.newOrdersEnabled ||
+                notificationPreferences.paymentConfirmationsEnabled
+                  ? t('preferences.notificationsBadge')
+                  : t('notifications.statusDisabled')
+              }
               onClick={() => setIsEditingNotifications(true)}
             />
             <SettingsRow

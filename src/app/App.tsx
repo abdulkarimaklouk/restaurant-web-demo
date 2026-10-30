@@ -7,6 +7,7 @@ import { OrdersPage } from '../features/orders/OrdersPage';
 import { SettingsPage } from '../features/settings/SettingsPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
 import { useOrderStore } from '../data/mockStore';
+import { useNotificationsStore } from '../data/notificationsStore';
 import i18n from '../i18n';
 import '../styles/global.css';
 
@@ -34,6 +35,7 @@ export function getNotificationMessage(
 export function App() {
   const { t } = useTranslation('common');
   const { counts } = useOrderStore();
+  const { preferences } = useNotificationsStore();
   const [activeTab, setActiveTab] = useState<NavTab>('orders');
   const [toast, setToast] = useState<{
     message: string;
@@ -49,6 +51,9 @@ export function App() {
   };
 
   const handleNotificationsClick = () => {
+    if (!preferences.newOrdersEnabled) {
+      return;
+    }
     showToast(getNotificationMessage(counts.pending, (k, o) => String(t(k, o))), 'info');
   };
 
@@ -58,7 +63,7 @@ export function App() {
       <TopHeader
         onSearchClick={handleSearchClick}
         onNotificationsClick={handleNotificationsClick}
-        hasNotifications={counts.pending > 0}
+        hasNotifications={preferences.newOrdersEnabled && counts.pending > 0}
       />
 
       {/* Primary Approved Screens */}
