@@ -3,6 +3,7 @@ import { MobileAppShell } from '../components/layout/MobileAppShell';
 import { TopHeader } from '../components/layout/TopHeader';
 import { BottomNavigation, NavTab } from '../components/layout/BottomNavigation';
 import { OrdersPage } from '../features/orders/OrdersPage';
+import { SettingsPage } from '../features/settings/SettingsPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
 import { useOrderStore } from '../data/mockStore';
 import '../styles/global.css';
@@ -54,7 +55,7 @@ export function App() {
 
       {/* Primary Approved Screens */}
       {activeTab === 'orders' && <OrdersPage onShowToast={showToast} />}
-      {activeTab === 'settings' && <main className="settings-page" aria-label="الإعدادات" />}
+      {activeTab === 'settings' && <SettingsPage onShowToast={showToast} />}
 
       {/* Full-width Edge-to-Edge Bottom Navigation */}
       <BottomNavigation

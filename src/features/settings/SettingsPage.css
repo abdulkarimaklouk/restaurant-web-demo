@@ -1,0 +1,401 @@
+.settings-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Demo Notice Banner */
+.settings-page .demo-notice-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(241, 245, 249, 0.6);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  padding: 3px 16px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.settings-page .notice-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.settings-page .notice-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Main Title Header */
+.settings-page-header {
+  padding: 6px 16px 8px 16px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.settings-title {
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+/* Settings Scroll Container */
+.settings-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2px 16px calc(88px + env(safe-area-inset-bottom, 0px)) 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+/* Section Wrapper */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+}
+
+.settings-section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+  padding: 0 4px;
+}
+
+.section-title-icon {
+  color: var(--color-text-muted);
+}
+
+/* Consolidated Card Base */
+.settings-card,
+.restaurant-profile-card {
+  background-color: var(--color-card-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+}
+
+.settings-card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.15s ease;
+}
+
+/* 1. Restaurant Profile Card */
+.restaurant-profile-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  text-align: right;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.restaurant-profile-card:hover {
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.restaurant-profile-card:active {
+  background-color: var(--color-page-bg);
+  transform: scale(0.995);
+}
+
+.profile-logo-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-btn);
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.1);
+}
+
+.profile-store-icon {
+  color: #ffffff;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+  justify-content: center;
+}
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.profile-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.verified-badge {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-green);
+  background-color: var(--color-green-bg);
+  padding: 1px 5px;
+  border-radius: var(--radius-badge);
+  line-height: 1.3;
+}
+
+.profile-sub-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.profile-status {
+  font-size: 11.5px;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-action {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+  color: var(--color-text-secondary);
+}
+
+.edit-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+/* Generic In-Card Row Button */
+.settings-row-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  min-height: 48px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: right;
+  user-select: none;
+  position: relative;
+  transition: background-color 0.15s ease;
+}
+
+.settings-row-btn:hover {
+  background-color: var(--color-page-bg);
+}
+
+.settings-row-btn:active {
+  background-color: var(--color-border);
+}
+
+/* Divider line using :not(:last-child) */
+.settings-card > .settings-row-btn:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 14px;
+  left: 14px;
+  height: 1px;
+  background-color: var(--color-border);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Row Start & End Zones */
+.settings-row-start {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.settings-row-end {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Icon Wrappers */
+.settings-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-btn);
+  background-color: var(--color-border);
+  color: var(--color-primary-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.lang-icon-wrap {
+  background-color: var(--color-border-subtle);
+}
+
+.lang-code-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  line-height: 1;
+}
+
+/* Row Typography */
+.settings-row-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.settings-row-title {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.25;
+}
+
+.settings-row-subtitle {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  line-height: 1.2;
+}
+
+/* Navigation Indicator Chevron */
+.settings-chevron {
+  color: var(--color-text-muted);
+  transition: transform 0.15s ease;
+}
+
+.settings-row-btn:hover .settings-chevron {
+  transform: translateX(-2px);
+}
+
+/* Value Status Tags */
+.status-value-text {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  background-color: var(--color-border);
+  padding: 2px 7px;
+  border-radius: var(--radius-badge);
+}
+
+/* Language Selection Details */
+.active-tag {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--color-green);
+  background-color: var(--color-green-bg);
+  padding: 1.5px 6px;
+  border-radius: var(--radius-badge);
+  margin-left: 2px;
+}
+
+.radio-indicator {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1.5px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.radio-indicator.active {
+  border-color: var(--color-primary-dark);
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+}
+
+/* Logout Specific Styling */
+.logout-btn:hover {
+  background-color: var(--color-crimson-light);
+}
+
+.logout-icon-wrap {
+  background-color: var(--color-crimson-light);
+  color: var(--color-crimson);
+}
+
+.logout-text {
+  color: var(--color-crimson);
+}
+
+.logout-chevron {
+  color: var(--color-crimson-border);
+}
+
+/* Footer Version Info */
+.settings-version-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 0 6px 0;
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  text-align: center;
+  user-select: none;
+}
+
+.version-name {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.version-number {
+  font-weight: 400;
+}
