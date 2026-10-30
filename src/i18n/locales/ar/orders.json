@@ -1,0 +1,91 @@
+{
+  "pageTitle": "الطلبات",
+  "demoNotice": "نسخة تجريبية لجامعة المستقبل • جميع بيانات الطلاب والمدفوعات افتراضية",
+  "tabs": {
+    "pending": "بانتظار الدفع",
+    "new": "جديد",
+    "preparing": "قيد التحضير",
+    "ready": "جاهز للاستلام",
+    "delivered": "تم التسليم",
+    "ariaLabel": "أقسام الطلبات"
+  },
+  "card": {
+    "total": "الإجمالي",
+    "status": {
+      "new": "جديد",
+      "confirmed": "مؤكد",
+      "preparing": "تحضير",
+      "ready": "جاهز",
+      "delivered": "مستلم"
+    },
+    "actions": {
+      "reviewReceipt": "مراجعة الإيصال",
+      "startPreparing": "بدء التحضير",
+      "markReady": "جاهز للاستلام",
+      "markDelivered": "تسليم الطلب",
+      "delivered": "تم التسليم"
+    },
+    "ariaDetails": "تفاصيل الطلب رقم {{orderNumber}}"
+  },
+  "modal": {
+    "title": "تفاصيل الطلب",
+    "closeAria": "إغلاق مراجعة الطلب",
+    "student": "الطالب: {{name}}",
+    "status": {
+      "pending": "بانتظار تأكيد الدفع",
+      "new": "طلب جديد • الدفع مؤكد",
+      "preparing": "قيد التحضير في المطبخ",
+      "ready": "جاهز للاستلام الفوري",
+      "delivered": "تم تسليم الطلب بنجاح"
+    },
+    "itemsTitle": "عناصر الطلب ({{count}} {{unit}})",
+    "studentNote": "ملاحظات التحضير من الطالب:",
+    "totalRequired": "الإجمالي المطلوب:",
+    "coinsEarned": "العملات المكتسبة للطالب:",
+    "confirmPayment": "تأكيد الدفع"
+  },
+  "receipt": {
+    "sectionTitle": "إيصال التحويل الإلكتروني (إنستاباي)",
+    "inspectionHint": "فحص يدوي مطلوب",
+    "zoomOverlay": "انقر لتكبير الإيصال والفحص",
+    "zoomAria": "تكبير إيصال الدفع للفحص",
+    "lightboxTitle": "فحص إيصال الدفع",
+    "lightboxCloseAria": "إغلاق معاينة الإيصال",
+    "doneBtn": "تم التدقيق والرجوع",
+    "bannerPill": "إيصال تجريبي",
+    "successHero": "تم التحويل بنجاح",
+    "beneficiary": "المستفيد:",
+    "beneficiaryName": "مطعم الأطايب الجامعي",
+    "sender": "الراسل:",
+    "accountHandle": "معرف الحساب:",
+    "refNumber": "الرقم المرجعي:",
+    "orderNumber": "رقم الطلب:",
+    "transferDate": "تاريخ التحويل:",
+    "today": "اليوم، {{time}}",
+    "watermark": "إشعار تحويل افتراضي صادر لأغراض الفحص والاعتماد اليدوي"
+  },
+  "empty": {
+    "pendingTitle": "لا توجد طلبات بانتظار الدفع",
+    "pendingDesc": "ستظهر الطلبات الجديدة المحولة عبر إنستاباي هنا للمراجعة والتأكيد.",
+    "newTitle": "لا توجد طلبات جديدة",
+    "newDesc": "تم تأكيد جميع المدفوعات وبدء تجهيزها في المطبخ.",
+    "preparingTitle": "لا توجد طلبات قيد التحضير",
+    "preparingDesc": "المطبخ جاهز لاستقبال وتجهيز طلبات الطلاب.",
+    "readyTitle": "لا توجد طلبات جاهزة",
+    "readyDesc": "ستظهر هنا الوجبات المكتملة فور تجهيزها لتسليمها للطلاب.",
+    "deliveredTitle": "لا توجد طلبات مكتملة",
+    "deliveredDesc": "سجل الطلبات المسلمة فارغ حالياً.",
+    "genericTitle": "لا توجد طلبات",
+    "genericDesc": "لا توجد عناصر لعرضها في هذه القائمة."
+  },
+  "toasts": {
+    "paymentConfirmed": "تم تأكيد دفع الطلب {{orderNumber}} بنجاح وتم نقله إلى الطلبات الجديدة",
+    "prepStarted": "تم بدء تحضير الطلب {{orderNumber}} في المطبخ",
+    "orderReady": "أصبح الطلب {{orderNumber}} جاهزاً للاستلام الآن",
+    "orderDelivered": "تم تسليم الطلب {{orderNumber}} للطالب بنجاح",
+    "cannotPrepare": "لا يمكن بدء التحضير قبل تأكيد استلام الدفع.",
+    "alreadyDelivered": "تم تسليم هذا الطلب بالفعل.",
+    "orderNotFound": "الطلب غير موجود."
+  }
+}
+

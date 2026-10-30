@@ -1,0 +1,63 @@
+{
+  "pageTitle": "Settings",
+  "demoNotice": "Demo Prototype • Initial Restaurant Settings",
+  "profile": {
+    "name": "Good Food",
+    "verified": "Verified",
+    "status": "Open • Campus Branch",
+    "edit": "Edit",
+    "ariaLabel": "Profile: Good Food, Main Campus Branch"
+  },
+  "language": {
+    "sectionTitle": "App Language",
+    "arTitle": "Arabic",
+    "arSubtitle": "Default interface language",
+    "arAria": "Arabic - Currently active",
+    "currentBadge": "Current",
+    "enTitle": "English",
+    "enSubtitle": "English interface",
+    "enAria": "English - English interface"
+  },
+  "restaurant": {
+    "sectionTitle": "Restaurant Settings",
+    "hoursTitle": "Opening Hours",
+    "hoursSubtitle": "Open • 09:00 AM - 11:00 PM",
+    "infoTitle": "Restaurant Information",
+    "infoSubtitle": "Address, contact info, and licensing",
+    "menuTitle": "Menu Settings",
+    "menuSubtitle": "Categories, auto-availability, and pricing"
+  },
+  "preferences": {
+    "sectionTitle": "App Preferences",
+    "notificationsTitle": "Notifications & Alerts",
+    "notificationsSubtitle": "Order alerts and payment confirmations",
+    "notificationsBadge": "Enabled",
+    "appearanceTitle": "Appearance & Theme",
+    "appearanceSubtitle": "Default Light Mode",
+    "appearanceBadge": "Light"
+  },
+  "account": {
+    "sectionTitle": "Account & Security",
+    "passwordTitle": "Change Password",
+    "passwordSubtitle": "Update passcode and password",
+    "logoutTitle": "Logout",
+    "logoutSubtitle": "End current session on this device"
+  },
+  "footer": {
+    "systemName": "Campus Restaurant Management System",
+    "version": "Version 1.0.0 • Demo Prototype"
+  },
+  "toasts": {
+    "profile": "Restaurant Profile: Editing will be enabled in the next phase",
+    "langAr": "App Language (Arabic): Set as active interface language",
+    "langEn": "App Language (English): Set as active interface language",
+    "hours": "Opening Hours: Schedule editing will be enabled in the next phase",
+    "info": "Restaurant Information: Updating details will be enabled in the next phase",
+    "menu": "Menu Settings: This section will be enabled in the next phase",
+    "notifications": "Notifications: Customization will be enabled in the next phase",
+    "appearance": "Appearance: Theme customization will be enabled in the next phase",
+    "password": "Change Password: This feature will be enabled in the next phase",
+    "logout": "Logout: Logout process will be enabled in the next phase"
+  }
+}
+

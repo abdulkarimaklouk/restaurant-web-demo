@@ -1,0 +1,91 @@
+{
+  "pageTitle": "Orders",
+  "demoNotice": "Future University Demo Prototype • All student and payment data is simulated",
+  "tabs": {
+    "pending": "Awaiting Payment",
+    "new": "New",
+    "preparing": "Preparing",
+    "ready": "Ready for Pickup",
+    "delivered": "Delivered",
+    "ariaLabel": "Order categories"
+  },
+  "card": {
+    "total": "Total",
+    "status": {
+      "new": "New",
+      "confirmed": "Confirmed",
+      "preparing": "Preparing",
+      "ready": "Ready",
+      "delivered": "Delivered"
+    },
+    "actions": {
+      "reviewReceipt": "Review Receipt",
+      "startPreparing": "Start Preparing",
+      "markReady": "Mark Ready",
+      "markDelivered": "Mark Delivered",
+      "delivered": "Delivered"
+    },
+    "ariaDetails": "Details for order #{{orderNumber}}"
+  },
+  "modal": {
+    "title": "Order Details",
+    "closeAria": "Close order review",
+    "student": "Student: {{name}}",
+    "status": {
+      "pending": "Awaiting Payment Confirmation",
+      "new": "New Order • Payment Confirmed",
+      "preparing": "Preparing in Kitchen",
+      "ready": "Ready for Immediate Pickup",
+      "delivered": "Order Delivered Successfully"
+    },
+    "itemsTitle": "Order Items ({{count}} {{unit}})",
+    "studentNote": "Student Preparation Note:",
+    "totalRequired": "Total Required:",
+    "coinsEarned": "Student Loyalty Coins:",
+    "confirmPayment": "Confirm Payment"
+  },
+  "receipt": {
+    "sectionTitle": "Electronic Transfer Receipt (InstaPay)",
+    "inspectionHint": "Manual inspection required",
+    "zoomOverlay": "Click to enlarge and inspect",
+    "zoomAria": "Enlarge payment receipt for inspection",
+    "lightboxTitle": "Inspect Payment Receipt",
+    "lightboxCloseAria": "Close receipt preview",
+    "doneBtn": "Reviewed • Return",
+    "bannerPill": "Demo Receipt",
+    "successHero": "Transfer Successful",
+    "beneficiary": "Beneficiary:",
+    "beneficiaryName": "Campus Good Food Restaurant",
+    "sender": "Sender:",
+    "accountHandle": "Account Address:",
+    "refNumber": "Reference No:",
+    "orderNumber": "Order Number:",
+    "transferDate": "Transfer Date:",
+    "today": "Today, {{time}}",
+    "watermark": "Simulated transfer notice issued for manual inspection and verification"
+  },
+  "empty": {
+    "pendingTitle": "No orders awaiting payment",
+    "pendingDesc": "New orders transferred via InstaPay will appear here for review and confirmation.",
+    "newTitle": "No new orders",
+    "newDesc": "All payments have been confirmed and sent to the kitchen.",
+    "preparingTitle": "No orders being prepared",
+    "preparingDesc": "The kitchen is ready to receive and prepare student orders.",
+    "readyTitle": "No orders ready",
+    "readyDesc": "Completed meals will appear here ready to be delivered to students.",
+    "deliveredTitle": "No completed orders",
+    "deliveredDesc": "Delivered orders history is currently empty.",
+    "genericTitle": "No orders",
+    "genericDesc": "No items to display in this list."
+  },
+  "toasts": {
+    "paymentConfirmed": "Payment confirmed for order {{orderNumber}} and moved to New Orders",
+    "prepStarted": "Order {{orderNumber}} preparation started in kitchen",
+    "orderReady": "Order {{orderNumber}} is now ready for pickup",
+    "orderDelivered": "Order {{orderNumber}} delivered to student successfully",
+    "cannotPrepare": "Preparation cannot start before payment is confirmed.",
+    "alreadyDelivered": "This order has already been delivered.",
+    "orderNotFound": "Order not found."
+  }
+}
+

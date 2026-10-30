@@ -1,0 +1,45 @@
+{
+  "appTitle": "Restaurant Orders Dashboard",
+  "brandName": "Good Food",
+  "brandStatus": "Open • Closes 11:00 PM",
+  "nav": {
+    "orders": "Orders",
+    "menu": "Menu",
+    "analytics": "Analytics",
+    "settings": "Settings",
+    "mainNavAria": "Main navigation bar",
+    "newOrdersBadge": "{{count}} new orders",
+    "menuNotice": "Menu management will be activated in the next phase",
+    "analyticsNotice": "Demo tools will be activated in the next phase"
+  },
+  "header": {
+    "searchAria": "Search",
+    "notificationsAria": "Notifications",
+    "searchNotice": "Quick search will be available with upcoming screens"
+  },
+  "notifications": {
+    "none": "No new notifications",
+    "one": "Notification Center: You have 1 new order awaiting payment confirmation",
+    "two": "Notification Center: You have 2 new orders awaiting payment confirmation",
+    "few": "Notification Center: You have {{count}} new orders awaiting payment confirmation",
+    "many": "Notification Center: You have {{count}} new orders awaiting payment confirmation",
+    "other": "Notification Center: You have {{count}} new orders awaiting payment confirmation"
+  },
+  "units": {
+    "currency": "EGP",
+    "currencyFormat": "{{amount}} EGP",
+    "coins": "+{{count}} coins",
+    "itemCount_one": "1 item",
+    "itemCount_other": "{{count}} items"
+  },
+  "time": {
+    "justNow": "Just now",
+    "oneMinuteAgo": "1m ago",
+    "minutesAgo": "{{count}}m ago",
+    "oneHourAgo": "1h ago",
+    "twoHoursAgo": "2h ago",
+    "hoursAgo": "{{count}}h ago",
+    "hoursAgoSingle": "{{count}}h ago"
+  }
+}
+
