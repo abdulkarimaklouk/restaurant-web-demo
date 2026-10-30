@@ -5,11 +5,13 @@ import './TopHeader.css';
 interface TopHeaderProps {
   onSearchClick?: () => void;
   onNotificationsClick?: () => void;
+  hasNotifications?: boolean;
 }
 
 export const TopHeader: React.FC<TopHeaderProps> = ({
   onSearchClick,
   onNotificationsClick,
+  hasNotifications = false,
 }) => {
   return (
     <header className="top-header">
@@ -47,7 +49,7 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
           onClick={onNotificationsClick}
         >
           <Bell size={21} className="action-icon" />
-          <span className="notification-badge-dot"></span>
+          {hasNotifications && <span className="notification-badge-dot"></span>}
         </button>
       </div>
     </header>

@@ -52,4 +52,3 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({ onShowNotice
     </nav>
   );
 };
-

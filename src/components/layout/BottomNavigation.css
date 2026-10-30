@@ -50,13 +50,24 @@
   color: #ffffff;
 }
 
-.nav-item:not(.active):hover {
-  background-color: rgba(241, 245, 249, 0.8);
-  color: var(--color-text-main);
-}
-
 .nav-item:active {
   transform: scale(0.97);
+}
+
+/* Desktop hover: active while cursor is over the item, removed immediately on mouse leave */
+@media (hover: hover) and (pointer: fine) {
+  .nav-item:not(.active):hover {
+    background-color: rgba(241, 245, 249, 0.8);
+    color: var(--color-text-main);
+  }
+}
+
+/* Mobile touch: temporary pressed background only while touching down, no sticky hover */
+@media (hover: none) and (pointer: coarse) {
+  .nav-item:not(.active):active {
+    background-color: rgba(241, 245, 249, 0.8);
+    color: var(--color-text-main);
+  }
 }
 
 .nav-icon {

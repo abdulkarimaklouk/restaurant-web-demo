@@ -4,9 +4,27 @@ import { TopHeader } from '../components/layout/TopHeader';
 import { BottomNavigation } from '../components/layout/BottomNavigation';
 import { OrdersPage } from '../features/orders/OrdersPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
+import { useOrderStore } from '../data/mockStore';
 import '../styles/global.css';
 
+export function getNotificationMessage(pendingCount: number): string {
+  if (pendingCount <= 0) {
+    return 'لا توجد إشعارات جديدة';
+  }
+  if (pendingCount === 1) {
+    return 'مركز التنبيهات: لديك طلب واحد جديد بانتظار تأكيد الدفع';
+  }
+  if (pendingCount === 2) {
+    return 'مركز التنبيهات: لديك طلبان جديدان بانتظار تأكيد الدفع';
+  }
+  if (pendingCount >= 3 && pendingCount <= 10) {
+    return `مركز التنبيهات: لديك ${pendingCount} طلبات جديدة بانتظار تأكيد الدفع`;
+  }
+  return `مركز التنبيهات: لديك ${pendingCount} طلباً جديداً بانتظار تأكيد الدفع`;
+}
+
 export function App() {
+  const { counts } = useOrderStore();
   const [toast, setToast] = useState<{
     message: string;
     type?: ToastProps['type'];
@@ -21,7 +39,7 @@ export function App() {
   };
 
   const handleNotificationsClick = () => {
-    showToast('مركز التنبيهات: لديك طلبات جديدة بانتظار التأكيد', 'info');
+    showToast(getNotificationMessage(counts.pending), 'info');
   };
 
   return (
@@ -30,6 +48,7 @@ export function App() {
       <TopHeader
         onSearchClick={handleSearchClick}
         onNotificationsClick={handleNotificationsClick}
+        hasNotifications={counts.pending > 0}
       />
 
       {/* Primary Approved Screen: Orders Dashboard */}
@@ -51,4 +70,3 @@ export function App() {
 }
 
 export default App;
-
