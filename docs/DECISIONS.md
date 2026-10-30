@@ -144,6 +144,18 @@ To establish the central data foundation for Menu Management:
 - **Defensive Parsing & Validation**: Implemented robust schema validation (`validateMenuItem`) for IDs, bilingual names, categories, positive prices, currencies, image types, and availability booleans. Malformed or invalid storage payloads fall back gracefully to the initial seed without throwing runtime errors.
 - **UI Integration**: Updated `MenuPage.tsx` and `MenuProductCard.tsx` to subscribe to the store, dynamically compute category badge counts, and display the appropriate localized product name based on the active language while preserving all Phase 1 visual styling, tokens, and non-blocking placeholder interactions.
 
+## D-021: Add New Product Editing Interface (Phase 3A)
+
+To provide an intuitive, accessible Add Product editing experience:
+- **Sub-page Navigation**: Replaced the Add Item placeholder toast in `MenuPage.tsx` with dedicated view state (`isAddingProduct`). Header Back button (with RTL mirror) and Cancel button discard input and return to the Menu dashboard.
+- **Form Architecture**: Local component state encapsulates Arabic name, English name, category, price, image type, and availability toggle.
+- **Bilingual Inputs**: Distinct fields for Arabic (`dir="rtl"`) and English (`dir="ltr"`) product names with explicit required markers and validation.
+- **Category Control**: Segmented buttons for Main Dishes (`main`), Appetizers (`appetizers`), and Drinks (`drinks`) with active highlight states.
+- **Price Control**: Formatted decimal numeric input with `EGP` / `ج.م` suffix; disallows negative signs and validates that price is numeric and strictly greater than zero.
+- **Image Type Selector & Live Preview**: Interactive grid supporting all 7 existing culinary types (`burger`, `chicken`, `pasta`, `fries`, `salad`, `cola`, `juice`). An interactive live preview card mirrors the dashboard card anatomy in real-time.
+- **Phase 3A UI Scope**: Validating all fields triggers informative localized warning toasts if incomplete; submitting a valid form provides localized placeholder feedback (`addProduct.placeholderSaveSuccess`) and returns to Menu without mutating `menuStore` or persisting data.
+
+
 
 
 

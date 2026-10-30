@@ -55,11 +55,28 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Zero regression on Orders, Settings, Working Hours, Notifications, and Themes.
 - [x] 0 console errors; production build succeeded.
 
-## Menu (Phase 3 Full CRUD & Mutations — Upcoming)
+## Menu (Phase 3A Add New Product Interface)
 
+- [x] Dedicated Add Product screen accessible from "+ Add Item" button in Menu header.
+- [x] Sub-page navigation provides Back header arrow (with RTL mirror) and Cancel button returning to Menu dashboard.
+- [x] Required Arabic name input (`dir="rtl"`) and English name input (`dir="ltr"`).
+- [x] Category selection buttons for Main Dishes (`main`), Appetizers (`appetizers`), and Drinks (`drinks`).
+- [x] Numeric price input with decimal support, negative sign prevention, and validation > 0.
+- [x] Image selector grid supporting 7 culinary icon types with active selection indicator.
+- [x] Live product preview card updating in real time with selected image, name, category, price, and availability.
+- [x] Availability toggle switch defaulting to enabled with reactive status badge ("متوفر" / "غير متوفر").
+- [x] Required fields validation displays localized warning toasts and inline errors.
+- [x] Cancel discards entered input and returns to Menu dashboard.
+- [x] Submitting valid form provides localized placeholder feedback (`addProduct.placeholderSaveSuccess`) without mutating `menuStore`.
+- [x] 100% Arabic and English localization with natural terminology.
+- [x] Light and Dark theme compatibility via design system tokens.
+- [x] Production build succeeded with zero errors.
+
+## Menu (Phase 3B Product Creation & Mutations — Upcoming)
+
+- [ ] Product creation mutates in-memory menu state and assigns stable IDs.
 - [ ] Availability changes immediately mutate in-memory menu state.
 - [ ] Unavailable items are excluded from simulated orders.
-- [ ] Add and edit forms validate required fields and positive numeric prices.
 - [ ] Existing order item snapshots do not change when a menu item is edited.
 - [ ] Item deletion is not present.
 

@@ -6,6 +6,7 @@ import { useMenuStore } from '../../data/menuStore';
 import { CategoryTabs } from './components/CategoryTabs';
 import { SearchAndFilterBar } from './components/SearchAndFilterBar';
 import { MenuProductCard } from './components/MenuProductCard';
+import { AddProductScreen } from './components/AddProductScreen';
 import './MenuPage.css';
 
 interface MenuPageProps {
@@ -16,9 +17,10 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { t } = useTranslation('menu');
   const { items, categoryCounts } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
+  const [isAddingProduct, setIsAddingProduct] = useState(false);
 
   const handleAddItem = () => {
-    onShowToast(t('toasts.addItemNotice'), 'info');
+    setIsAddingProduct(true);
   };
 
   const handleSearchClick = () => {
@@ -44,6 +46,15 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const handleSelectCategory = (categoryId: MenuCategoryId) => {
     setActiveCategory(categoryId);
   };
+
+  if (isAddingProduct) {
+    return (
+      <AddProductScreen
+        onBack={() => setIsAddingProduct(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
 
   return (
     <div className="menu-page">
