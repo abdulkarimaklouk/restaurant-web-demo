@@ -80,7 +80,7 @@
   width: 36px;
   height: 36px;
   border-radius: 5px;
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,7 +172,7 @@
 }
 
 .status-badge.delivered {
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-muted);
   color: var(--color-text-secondary);
 }
 
@@ -248,7 +248,7 @@
 }
 
 .card-action-btn.none {
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-muted);
   color: var(--color-text-muted);
   cursor: default;
 }

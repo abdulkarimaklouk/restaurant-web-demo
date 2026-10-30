@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Palette, Sun, Moon, Check, Info } from 'lucide-react';
 import { ToastProps } from '../../../components/ui/Toast';
+import { useTheme, Theme } from '../../../data/themeStore';
 import './EditAppearance.css';
 
 export interface EditAppearanceProps {
@@ -14,14 +15,16 @@ export const EditAppearance: React.FC<EditAppearanceProps> = ({
   onShowToast,
 }) => {
   const { t } = useTranslation('settings');
+  const { theme, setTheme } = useTheme();
 
-  // Form local state initialized with Light Mode ('light') per specification
-  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark'>('light');
+  // Form local state initialized with currently applied theme
+  const [selectedTheme, setSelectedTheme] = useState<Theme>(theme);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // UI-only Phase 1: show feedback toast and return to Settings
+    // Persist and apply selected global theme
+    setTheme(selectedTheme);
     onShowToast(t('theme.saveSuccess'), 'success');
     onBack();
   };

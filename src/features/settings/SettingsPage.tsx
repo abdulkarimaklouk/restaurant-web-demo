@@ -19,6 +19,7 @@ import { ToastProps } from '../../components/ui/Toast';
 import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import { useWorkingHoursStore } from '../../data/workingHoursStore';
 import { useNotificationsStore } from '../../data/notificationsStore';
+import { useTheme } from '../../data/themeStore';
 import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import { EditWorkingHours } from './components/EditWorkingHours';
 import { EditRestaurantInfo } from './components/EditRestaurantInfo';
@@ -103,6 +104,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const { profile } = useRestaurantProfileStore();
   const { getEffectiveStatus, getTodaySummary } = useWorkingHoursStore();
   const { preferences: notificationPreferences } = useNotificationsStore();
+  const { theme } = useTheme();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
@@ -322,7 +324,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
               icon={<Palette size={17} strokeWidth={2} />}
               title={t('preferences.appearanceTitle')}
               subtitle={t('preferences.appearanceSubtitle')}
-              valueTag={t('preferences.appearanceBadge')}
+              valueTag={theme === 'dark' ? t('theme.darkBadge') : t('theme.lightBadge')}
               onClick={() => setIsEditingAppearance(true)}
             />
           </div>

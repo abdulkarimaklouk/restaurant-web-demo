@@ -13,8 +13,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: rgba(241, 245, 249, 0.6);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  background-color: var(--color-notice-bg);
+  border-bottom: 1px solid var(--color-notice-border);
   padding: 3px 16px;
   font-size: 10px;
   color: var(--color-text-muted);
@@ -219,9 +219,9 @@
 
 .form-text-input:focus {
   outline: none;
-  background-color: #ffffff;
-  border-color: var(--color-primary-dark);
-  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
+  background-color: var(--color-input-focus-bg);
+  border-color: var(--color-input-focus-border);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
 }
 
 .form-text-input::placeholder {
@@ -333,10 +333,11 @@
 }
 
 .btn-save-changes:hover {
-  background-color: #1e293b;
+  background-color: var(--color-primary-dark-hover);
 }
 
 .btn-save-changes:active {
+  background-color: var(--color-primary-dark-active);
   transform: scale(0.995);
 }
 

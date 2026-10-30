@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(15, 23, 42, 0.55);
+  background-color: var(--color-modal-overlay);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   z-index: 200;
@@ -15,14 +15,15 @@
 
 .summary-modal {
   width: 100%;
-  background-color: #ffffff;
+  background-color: var(--color-modal-bg);
   border-radius: 8px 8px 0 0;
   max-height: calc(100% - 16px);
   display: flex;
   flex-direction: column;
-  box-shadow: 0 -8px 24px rgba(15, 23, 42, 0.12);
+  box-shadow: var(--shadow-modal);
   animation: slideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  transition: background-color 0.2s ease;
 }
 
 .summary-modal.hidden-for-review {
@@ -109,7 +110,7 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-muted);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -119,7 +120,7 @@
 }
 
 .modal-close-btn:active {
-  background-color: #e2e8f0;
+  background-color: var(--color-border-subtle);
 }
 
 /* Modal Body */
@@ -147,7 +148,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-  background-color: #f8fafc;
+  background-color: var(--color-surface-subtle);
   padding: 12px;
   border-radius: var(--radius-btn);
   border: 1px solid var(--color-border);
@@ -207,7 +208,7 @@
   flex-direction: column;
   gap: 6px;
   padding: 10px 12px;
-  background-color: #f8fafc;
+  background-color: var(--color-surface-subtle);
   border-radius: var(--radius-btn);
   border: 1px solid var(--color-border);
 }
@@ -256,8 +257,9 @@
 .modal-footer {
   padding: 14px 20px 24px 20px;
   border-top: 1px solid var(--color-border);
-  background-color: #ffffff;
+  background-color: var(--color-modal-bg);
   flex-shrink: 0;
+  transition: background-color 0.2s ease;
 }
 
 .modal-primary-btn {
@@ -306,7 +308,7 @@
 }
 
 .modal-primary-btn.none {
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-muted);
   color: var(--color-text-muted);
   cursor: default;
 }
@@ -319,4 +321,42 @@
 @keyframes slideUp {
   from { transform: translateY(100%); }
   to { transform: translateY(0); }
+}
+
+/* Dark Theme Modal Badges & Notes */
+[data-theme="dark"] .modal-status-badge.new {
+  background-color: var(--color-blue-bg);
+  color: #93c5fd;
+  border-color: #1e40af;
+}
+
+[data-theme="dark"] .modal-status-badge.preparing {
+  background-color: var(--color-amber-bg);
+  color: #fde047;
+  border-color: #854d0e;
+}
+
+[data-theme="dark"] .modal-status-badge.ready {
+  background-color: var(--color-green-bg);
+  color: #86efac;
+  border-color: #166534;
+}
+
+[data-theme="dark"] .modal-status-badge.delivered {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-secondary);
+  border-color: var(--color-border);
+}
+
+[data-theme="dark"] .student-note-box {
+  background-color: var(--color-amber-bg);
+  border-color: var(--color-amber-border);
+}
+
+[data-theme="dark"] .note-label {
+  color: var(--color-amber);
+}
+
+[data-theme="dark"] .note-text {
+  color: #fde68a;
 }

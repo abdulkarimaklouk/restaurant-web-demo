@@ -13,8 +13,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: rgba(241, 245, 249, 0.6);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  background-color: var(--color-notice-bg);
+  border-bottom: 1px solid var(--color-notice-border);
   padding: 3px 16px;
   font-size: 10px;
   color: var(--color-text-muted);
@@ -175,6 +175,11 @@
   border-color: rgba(226, 232, 240, 0.8);
 }
 
+[data-theme="dark"] .day-card.disabled {
+  background-color: rgba(15, 23, 42, 0.6);
+  border-color: rgba(51, 65, 85, 0.6);
+}
+
 .day-header-row {
   display: flex;
   align-items: center;
@@ -210,7 +215,7 @@
 
 .day-status-badge.badge-closed {
   color: var(--color-text-muted);
-  background-color: rgba(241, 245, 249, 0.9);
+  background-color: var(--color-surface-muted);
 }
 
 /* Accessible Toggle Switch */
@@ -239,7 +244,7 @@
 }
 
 .day-toggle-switch.active:hover {
-  background-color: #1f2937;
+  background-color: var(--color-primary-dark-hover);
 }
 
 .day-toggle-knob {
@@ -376,7 +381,7 @@
 
 .edit-hours-view .btn-save-changes:hover,
 .btn-save-changes:hover {
-  background-color: #1f2937;
+  background-color: var(--color-primary-dark-hover);
 }
 
 .edit-hours-view .btn-save-changes:focus-visible,
@@ -387,7 +392,7 @@
 
 .edit-hours-view .btn-save-changes:active,
 .btn-save-changes:active {
-  background-color: #030712;
+  background-color: var(--color-primary-dark-active);
   transform: scale(0.995);
 }
 

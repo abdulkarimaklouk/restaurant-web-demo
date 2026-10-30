@@ -13,18 +13,18 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: rgba(241, 245, 249, 0.6);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  background-color: var(--color-notice-bg);
+  border-bottom: 1px solid var(--color-notice-border);
   padding: 3px 16px;
   font-size: 10px;
-  color: #94a3b8;
+  color: var(--color-text-muted);
   flex-shrink: 0;
   min-width: 0;
   width: 100%;
 }
 
 .notice-icon {
-  color: #94a3b8;
+  color: var(--color-text-muted);
   flex-shrink: 0;
 }
 

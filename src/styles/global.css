@@ -16,6 +16,7 @@ html, body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {
@@ -51,8 +52,16 @@ button {
   border-radius: 4px;
 }
 
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
 
 /* Frameless Mobile Application Canvas (strictly 390 CSS px wide) */
@@ -66,6 +75,7 @@ button {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  transition: background-color 0.2s ease;
 }
 
 /* Empty Settings Screen */

@@ -18,7 +18,7 @@
   width: 36px;
   height: 36px;
   border-radius: 5px;
-  background-color: #ffffff;
+  background-color: var(--color-card-bg);
   border: 1px solid var(--color-border-subtle);
   display: flex;
   align-items: center;
@@ -96,7 +96,7 @@
 }
 
 .header-action-btn:active {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: var(--color-surface-muted);
 }
 
 .bell-btn {

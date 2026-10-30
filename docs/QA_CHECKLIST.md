@@ -71,14 +71,20 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Cancel discards unsaved toggle changes.
 - [x] Full Arabic RTL and English LTR coverage verified with 0 console errors.
 
-## Appearance & Theme Settings (Phase 1)
+## Appearance & Theme Settings (Phase 1 & 2)
 
 - [x] Connected Settings row "Appearance & Theme" ("المظهر والسمة") to dedicated editing screen.
-- [x] Light Mode ("فاتح" / "Light") is selected by default on load.
+- [x] Light Mode ("فاتح" / "Light") is selected by default on initial application load.
 - [x] Dark Mode ("داكن" / "Dark") can be selected with clear active radio indicators and border highlights.
-- [x] Selection state is maintained strictly in local component state.
-- [x] Cancel button discards changes and navigates back to Settings.
-- [x] Save Changes triggers a localized success toast and returns to Settings.
-- [x] Constraints verified: Global theme tokens and document styles remain completely unmutated.
-- [x] Full Arabic RTL and English LTR translations with zero console errors.
+- [x] Selected theme is persisted in `localStorage` under key `app_theme`.
+- [x] Global theme attribute `data-theme="light"` / `data-theme="dark"` applied directly on document root without page reload.
+- [x] Theme restored synchronously on application launch and refresh before rendering to prevent FOUC.
+- [x] Cancel discards unsaved theme selections without modifying the applied theme.
+- [x] Reopening Settings displays the active theme badge on the Appearance row.
+- [x] Complete semantic tokens defined in `tokens.css` for both light and dark modes.
+- [x] Light mode remains 100% visually identical to original design.
+- [x] Dark mode verified across all surfaces: TopHeader, BottomNavigation, Orders, Cards, Tabs, SummaryModal, MockReceipt, Lightbox, Settings, and all Sub-pages.
+- [x] Arabic RTL and English LTR layouts verified across both themes.
+- [x] 0 console errors logged; production build passed with 0 errors.
+
 

@@ -13,8 +13,8 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  background-color: rgba(241, 245, 249, 0.6);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  background-color: var(--color-notice-bg);
+  border-bottom: 1px solid var(--color-notice-border);
   padding: 3px 16px;
   font-size: 10px;
   color: var(--color-text-muted);
@@ -111,7 +111,7 @@
   align-items: flex-start;
   gap: 10px;
   padding: 10px 12px;
-  background-color: rgba(241, 245, 249, 0.6);
+  background-color: var(--color-notice-bg);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-card);
 }
@@ -179,7 +179,7 @@
 }
 
 .theme-option-row:hover {
-  background-color: rgba(241, 245, 249, 0.6);
+  background-color: var(--color-surface-muted);
 }
 
 .theme-option-row:active {
@@ -187,7 +187,8 @@
 }
 
 .theme-option-row.selected {
-  background-color: rgba(241, 245, 249, 0.9);
+  background-color: var(--color-surface-muted);
+  border: 1px solid var(--color-border-subtle);
 }
 
 .theme-option-row:focus-visible {
@@ -277,7 +278,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 1.5px solid #cbd5e1;
+  border: 1.5px solid var(--color-border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -320,7 +321,7 @@
 
 .edit-appearance-view .btn-save-changes:hover,
 .btn-save-changes:hover {
-  background-color: #1f2937;
+  background-color: var(--color-primary-dark-hover);
 }
 
 .edit-appearance-view .btn-save-changes:focus-visible,
@@ -331,7 +332,7 @@
 
 .edit-appearance-view .btn-save-changes:active,
 .btn-save-changes:active {
-  background-color: #030712;
+  background-color: var(--color-primary-dark-active);
   transform: scale(0.995);
 }
 

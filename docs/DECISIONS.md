@@ -112,4 +112,15 @@ In accordance with Phase 1 requirements:
 - Global CSS custom properties (such as `--color-page-bg`) and active application appearance remain completely unmutated.
 - Saving triggers a localized success toast and returns to Settings; Cancel returns immediately without side effects.
 
+## D-018: Global Light and Dark Theme Architecture (Phase 2)
+
+To deliver a consistent, robust, and accessible light/dark theme system:
+- Centralized in `src/data/themeStore.ts` using an observable pattern matching existing stores.
+- Persisted in `localStorage` under `app_theme` (`'light' | 'dark'`), defaulting to `light`.
+- Applied immediately to the DOM via the document root attribute: `document.documentElement.setAttribute('data-theme', theme)`.
+- Imported eagerly in `main.tsx` to prevent theme flash (FOUC) on application startup or refresh.
+- Extended `tokens.css` with semantic CSS variables for page background, card surfaces, text hierarchy, borders/dividers, inputs, bottom navigation, modals, overlays, toasts, and badges for both `light` and `dark` themes.
+- Reused design tokens across all components so the original Light Theme remains 100% visually unchanged while Dark Theme provides high-contrast, accessible slate styling across all screens, cards, modals, and navigation.
+
+
 

@@ -43,9 +43,9 @@
   gap: 6px;
   padding: 6px 11px;
   border-radius: 5px;
-  background-color: #ffffff;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
   color: var(--color-text-secondary);
   font-size: 12.5px;
   font-weight: 600;
@@ -65,7 +65,7 @@
   font-weight: 700;
   padding: 1px 6px;
   border-radius: 4px;
-  background-color: #f1f5f9;
+  background-color: var(--color-surface-muted);
   color: var(--color-text-secondary);
   min-width: 18px;
   text-align: center;
@@ -135,4 +135,65 @@
 .order-tab-item.delivered.active .tab-count-badge {
   background-color: #e2e8f0;
   color: #1e293b;
+}
+
+/* Dark Theme Active Tab Tints */
+[data-theme="dark"] .order-tab-item.pending.active {
+  background-color: var(--color-crimson-light);
+  color: #fca5a5;
+}
+[data-theme="dark"] .order-tab-item.pending.active .tab-icon {
+  color: #fca5a5;
+}
+[data-theme="dark"] .order-tab-item.pending.active .tab-count-badge {
+  background-color: var(--color-crimson-badge);
+  color: #fecaca;
+}
+
+[data-theme="dark"] .order-tab-item.new.active {
+  background-color: var(--color-orange-status-bg);
+  color: #fdba74;
+}
+[data-theme="dark"] .order-tab-item.new.active .tab-icon {
+  color: #fdba74;
+}
+[data-theme="dark"] .order-tab-item.new.active .tab-count-badge {
+  background-color: #7c2d12;
+  color: #fed7aa;
+}
+
+[data-theme="dark"] .order-tab-item.preparing.active {
+  background-color: var(--color-blue-bg);
+  color: #93c5fd;
+}
+[data-theme="dark"] .order-tab-item.preparing.active .tab-icon {
+  color: #93c5fd;
+}
+[data-theme="dark"] .order-tab-item.preparing.active .tab-count-badge {
+  background-color: #1e3a8a;
+  color: #bae6fd;
+}
+
+[data-theme="dark"] .order-tab-item.ready.active {
+  background-color: var(--color-green-bg);
+  color: #86efac;
+}
+[data-theme="dark"] .order-tab-item.ready.active .tab-icon {
+  color: #86efac;
+}
+[data-theme="dark"] .order-tab-item.ready.active .tab-count-badge {
+  background-color: #14532d;
+  color: #bbf7d0;
+}
+
+[data-theme="dark"] .order-tab-item.delivered.active {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-main);
+}
+[data-theme="dark"] .order-tab-item.delivered.active .tab-icon {
+  color: var(--color-text-main);
+}
+[data-theme="dark"] .order-tab-item.delivered.active .tab-count-badge {
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text-secondary);
 }
