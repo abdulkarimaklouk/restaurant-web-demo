@@ -39,24 +39,26 @@
 
 /* Page Header */
 .orders-page-header {
-  padding: 6px 16px 6px 16px;
+  padding: 6px 16px 4px 16px;
   flex-shrink: 0;
   min-width: 0;
 }
 
 .orders-title {
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 21px;
+  font-weight: 700;
   color: var(--color-text-main);
-  letter-spacing: -0.4px;
+  letter-spacing: -0.3px;
 }
 
 /* Orders List Scroll */
 .orders-list-scroll {
   flex: 1;
   overflow-y: auto;
-  padding: 2px 16px 84px 16px; /* 84px clearance for floating bottom navigation */
+  overflow-x: hidden;
+  padding: 2px 16px calc(84px + env(safe-area-inset-bottom, 0px)) 16px;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
   min-width: 0;
   width: 100%;
 }

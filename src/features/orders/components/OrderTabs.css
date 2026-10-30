@@ -9,16 +9,32 @@
 .order-tabs-scroll {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   overflow-x: auto;
+  overflow-y: hidden;
   min-width: 0;
-  padding: 0 16px;
+  width: 100%;
+  padding: 2px 16px;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scroll-padding-inline: 16px;
 }
 
 .order-tabs-scroll::-webkit-scrollbar {
   display: none;
+}
+
+/* Trailing spacer to prevent the last tab from clipping in RTL horizontal scroll */
+.order-tabs-scroll::after {
+  content: '';
+  display: block;
+  width: 8px;
+  min-width: 8px;
+  height: 1px;
+  flex-shrink: 0;
 }
 
 .order-tab-item {
@@ -26,11 +42,12 @@
   align-items: center;
   gap: 6px;
   padding: 6px 11px;
-  border-radius: 10px;
+  border-radius: 5px;
   background-color: #ffffff;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   color: var(--color-text-secondary);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
@@ -44,78 +61,78 @@
 }
 
 .tab-count-badge {
-  font-size: 11px;
+  font-size: 10.5px;
   font-weight: 700;
-  padding: 1.5px 7px;
-  border-radius: 6px;
+  padding: 1px 6px;
+  border-radius: 4px;
   background-color: #f1f5f9;
   color: var(--color-text-secondary);
-  min-width: 20px;
+  min-width: 18px;
   text-align: center;
 }
 
-/* Active tab styles matching reference */
+/* Active tab styles - transparent borders, restrained background tints */
 .order-tab-item.pending.active {
-  border-color: var(--color-crimson-border);
-  background-color: var(--color-crimson-light);
-  color: var(--color-crimson);
+  border-color: transparent;
+  background-color: #fee2e2;
+  color: #991b1b;
 }
 .order-tab-item.pending.active .tab-icon {
-  color: var(--color-crimson);
+  color: #991b1b;
 }
 .order-tab-item.pending.active .tab-count-badge {
-  background-color: var(--color-crimson-badge);
-  color: var(--color-crimson);
+  background-color: #fecaca;
+  color: #991b1b;
 }
 
 .order-tab-item.new.active {
-  border-color: #fed7aa;
-  background-color: #fff7ed;
-  color: #ea580c;
+  border-color: transparent;
+  background-color: #ffedd5;
+  color: #9a3412;
 }
 .order-tab-item.new.active .tab-icon {
-  color: #ea580c;
+  color: #9a3412;
 }
 .order-tab-item.new.active .tab-count-badge {
-  background-color: #ffedd5;
-  color: #ea580c;
+  background-color: #fed7aa;
+  color: #9a3412;
 }
 
 .order-tab-item.preparing.active {
-  border-color: #bfdbfe;
-  background-color: var(--color-blue-bg);
-  color: var(--color-blue);
+  border-color: transparent;
+  background-color: #e0f2fe;
+  color: #0369a1;
 }
 .order-tab-item.preparing.active .tab-icon {
-  color: var(--color-blue);
+  color: #0369a1;
 }
 .order-tab-item.preparing.active .tab-count-badge {
-  background-color: #dbeafe;
-  color: #1d4ed8;
+  background-color: #bae6fd;
+  color: #0369a1;
 }
 
 .order-tab-item.ready.active {
-  border-color: #bbf7d0;
-  background-color: var(--color-green-bg);
-  color: var(--color-green);
+  border-color: transparent;
+  background-color: #dcfce7;
+  color: #15803d;
 }
 .order-tab-item.ready.active .tab-icon {
-  color: var(--color-green);
+  color: #15803d;
 }
 .order-tab-item.ready.active .tab-count-badge {
-  background-color: #dcfce7;
+  background-color: #bbf7d0;
   color: #15803d;
 }
 
 .order-tab-item.delivered.active {
-  border-color: #cbd5e1;
+  border-color: transparent;
   background-color: #f1f5f9;
-  color: var(--color-primary-dark);
+  color: #1e293b;
 }
 .order-tab-item.delivered.active .tab-icon {
-  color: var(--color-primary-dark);
+  color: #1e293b;
 }
 .order-tab-item.delivered.active .tab-count-badge {
   background-color: #e2e8f0;
-  color: var(--color-text-main);
+  color: #1e293b;
 }

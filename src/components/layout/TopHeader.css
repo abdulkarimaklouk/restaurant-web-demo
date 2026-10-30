@@ -15,15 +15,15 @@
 }
 
 .brand-logo-container {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  border-radius: 5px;
   background-color: #ffffff;
   border: 1px solid var(--color-border-subtle);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
 }
 
 .brand-icon {
@@ -43,7 +43,7 @@
 }
 
 .brand-name {
-  font-size: 15px;
+  font-size: 14.5px;
   font-weight: 700;
   color: var(--color-text-main);
   letter-spacing: -0.2px;
@@ -64,7 +64,6 @@
   height: 6.5px;
   border-radius: 50%;
   background-color: var(--color-green-dot);
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
 }
 
 .status-text {
@@ -82,7 +81,7 @@
 .header-action-btn {
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;

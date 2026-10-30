@@ -9,7 +9,7 @@
   height: calc(64px + env(safe-area-inset-bottom, 0px));
   background-color: #FFFFFF;
   border-top: 1px solid #E5E7EB;
-  box-shadow: 0 -2px 8px rgba(15, 23, 42, 0.05);
+  box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.02);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -37,9 +37,9 @@
 /* Centered icon container with balanced proportions and smooth transition */
 .nav-icon-wrap {
   position: relative;
-  width: 48px;
+  width: 40px;
   height: 38px;
-  border-radius: 6px;
+  border-radius: 0.15625rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -56,10 +56,11 @@
   transition: color 0.2s ease;
 }
 
-/* Active Button: dark background #111827, border-radius 6px, white icon */
+/* Active Button: dark background #111827, border-radius ~2.5px (0.15625rem), white icon, reduced shadow */
 .nav-item.active .nav-icon-wrap {
   background-color: #111827;
-  box-shadow: 0 2px 6px rgba(17, 24, 39, 0.18);
+  border-radius: 0.15625rem;
+  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.08);
 }
 
 .nav-item.active .nav-icon {
@@ -88,15 +89,15 @@
 /* Unread / New Orders Badge above Orders icon */
 .nav-orders-badge {
   position: absolute;
-  top: 1px;
-  right: 5px;
-  min-width: 15px;
-  height: 15px;
-  padding: 0 3.5px;
+  top: 2px;
+  right: 2px;
+  min-width: 12px;
+  height: 12px;
+  padding: 0 2.5px;
   border-radius: 9999px;
   background-color: var(--color-crimson, #ef233c);
   color: #ffffff;
-  font-size: 9.5px;
+  font-size: 8px;
   font-weight: 700;
   line-height: 1;
   display: flex;
@@ -104,5 +105,5 @@
   justify-content: center;
   border: 1.5px solid #ffffff;
   pointer-events: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
 }

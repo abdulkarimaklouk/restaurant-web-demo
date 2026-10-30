@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Clock, ChefHat, CheckCircle2, Package, Sparkles, LucideIcon } from 'lucide-react';
 import { OrderViewTab } from '../../../types/order';
 import './OrderTabs.css';
@@ -28,6 +28,18 @@ export const OrderTabs: React.FC<OrderTabsProps> = ({
   counts,
   onTabChange,
 }) => {
+  const activeTabRef = useRef<HTMLButtonElement | null>(null);
+
+  useEffect(() => {
+    if (activeTabRef.current) {
+      activeTabRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+  }, [activeTab]);
+
   return (
     <div className="order-tabs-wrapper" role="tablist" aria-label="أقسام الطلبات">
       <div className="order-tabs-scroll">
@@ -39,6 +51,7 @@ export const OrderTabs: React.FC<OrderTabsProps> = ({
           return (
             <button
               key={tab.key}
+              ref={isActive ? activeTabRef : undefined}
               type="button"
               role="tab"
               aria-selected={isActive}
