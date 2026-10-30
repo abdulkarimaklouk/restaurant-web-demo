@@ -66,6 +66,10 @@
   background-color: var(--color-green-dot);
 }
 
+.status-dot.closed {
+  background-color: var(--color-text-muted);
+}
+
 .status-text {
   font-size: 11px;
   color: var(--color-text-secondary);

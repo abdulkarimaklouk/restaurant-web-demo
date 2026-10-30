@@ -2,6 +2,8 @@
   "appTitle": "Restaurant Orders Dashboard",
   "brandName": "Good Food",
   "brandStatus": "Open • Closes 11:00 PM",
+  "brandStatusOpen": "Open • Closes 11:00 PM",
+  "brandStatusClosed": "Closed • Not receiving orders",
   "nav": {
     "orders": "Orders",
     "menu": "Menu",

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ArrowLeft, Store, ShieldCheck, Info } from 'lucide-react';
 import { ToastProps } from '../../../components/ui/Toast';
+import { useRestaurantProfileStore } from '../../../data/restaurantProfileStore';
 import './EditRestaurantProfile.css';
 
 export interface EditRestaurantProfileProps {
@@ -14,27 +15,36 @@ export const EditRestaurantProfile: React.FC<EditRestaurantProfileProps> = ({
   onShowToast,
 }) => {
   const { t } = useTranslation('settings');
+  const { profile, updateProfile } = useRestaurantProfileStore();
 
   // Form local state initialized with current restaurant values
-  const [restaurantName, setRestaurantName] = useState(t('profile.name'));
-  const [branchLocation, setBranchLocation] = useState(t('editProfile.initialBranch'));
-  const [isOpen, setIsOpen] = useState(true);
+  const [restaurantName, setRestaurantName] = useState(profile.name);
+  const [branchLocation, setBranchLocation] = useState(profile.branch);
+  const [isOpen, setIsOpen] = useState(profile.isOpen);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!restaurantName.trim()) {
+    const trimmedName = restaurantName.trim();
+    const trimmedBranch = branchLocation.trim();
+
+    if (!trimmedName) {
       onShowToast(t('editProfile.nameRequired'), 'warning');
       return;
     }
 
-    if (!branchLocation.trim()) {
+    if (!trimmedBranch) {
       onShowToast(t('editProfile.branchRequired'), 'warning');
       return;
     }
 
-    // Phase 1: UI implementation only. Notify user that full app-wide sync will be wired in Phase 2
-    onShowToast(t('editProfile.saveNotice'), 'info');
+    updateProfile({
+      name: trimmedName,
+      branch: trimmedBranch,
+      isOpen,
+    });
+
+    onShowToast(t('editProfile.saveSuccess'), 'success');
     onBack();
   };
 
@@ -68,7 +78,7 @@ export const EditRestaurantProfile: React.FC<EditRestaurantProfileProps> = ({
               <Store size={22} className="profile-store-icon" />
             </div>
             <div className="profile-identity-info">
-              <span className="profile-preview-name">{restaurantName || t('profile.name')}</span>
+              <span className="profile-preview-name">{restaurantName || profile.name}</span>
               <div className="verification-pill-badge">
                 <ShieldCheck size={13} className="shield-icon" />
                 <span>{t('editProfile.verificationBadge')}</span>

@@ -16,6 +16,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import { ToastProps } from '../../components/ui/Toast';
+import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import './SettingsPage.css';
 
@@ -93,6 +94,7 @@ interface SettingsPageProps {
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('settings');
+  const { profile } = useRestaurantProfileStore();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
 
   const handleItemClick = (message: string) => {
@@ -116,6 +118,8 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     );
   }
 
+  const statusPrefix = profile.isOpen ? t('profile.statusOpenPrefix') : t('profile.statusClosedPrefix');
+
   return (
     <main className="settings-page" aria-label={t('pageTitle')}>
       {/* Demo Notice Banner */}
@@ -132,24 +136,26 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
       {/* Settings Scrollable Content */}
       <div className="settings-scroll">
         {/* 1. Restaurant Profile */}
-        <section className="settings-section" aria-label={t('profile.name')}>
+        <section className="settings-section" aria-label={profile.name}>
           <button
             type="button"
             className="restaurant-profile-card"
             onClick={() => setIsEditingProfile(true)}
-            aria-label={t('profile.ariaLabel')}
+            aria-label={`${profile.name} - ${profile.branch}`}
           >
             <div className="profile-logo-wrap">
               <Store size={22} className="profile-store-icon" />
             </div>
             <div className="profile-info">
               <div className="profile-name-row">
-                <span className="profile-name">{t('profile.name')}</span>
+                <span className="profile-name">{profile.name}</span>
                 <span className="verified-badge">{t('profile.verified')}</span>
               </div>
               <div className="profile-sub-row">
-                <span className="status-dot"></span>
-                <span className="profile-status">{t('profile.status')}</span>
+                <span className={`status-dot ${profile.isOpen ? 'open' : 'closed'}`}></span>
+                <span className="profile-status">
+                  {statusPrefix} • {profile.branch}
+                </span>
               </div>
             </div>
             <div className="profile-action">

@@ -2,6 +2,8 @@
   "appTitle": "لوحة تحكم طلبات المطعم",
   "brandName": "مطعم الأطايب",
   "brandStatus": "مفتوح • يغلق 11:00 م",
+  "brandStatusOpen": "مفتوح • يغلق 11:00 م",
+  "brandStatusClosed": "مغلق • لا يستقبل طلبات حالياً",
   "nav": {
     "orders": "الطلبات",
     "menu": "القائمة",

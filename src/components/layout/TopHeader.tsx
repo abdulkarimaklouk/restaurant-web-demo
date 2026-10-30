@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Store, ChevronDown, Search, Bell } from 'lucide-react';
+import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import './TopHeader.css';
 
 interface TopHeaderProps {
@@ -15,6 +16,11 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   hasNotifications = false,
 }) => {
   const { t } = useTranslation('common');
+  const { profile } = useRestaurantProfileStore();
+
+  const statusText = profile.isOpen
+    ? t('brandStatusOpen', { defaultValue: t('brandStatus') })
+    : t('brandStatusClosed');
 
   return (
     <header className="top-header">
@@ -25,12 +31,12 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
         </div>
         <div className="brand-details">
           <div className="brand-title-row">
-            <span className="brand-name">{t('brandName')}</span>
+            <span className="brand-name">{profile.name}</span>
             <ChevronDown size={15} className="brand-chevron" />
           </div>
           <div className="brand-status-row">
-            <span className="status-dot"></span>
-            <span className="status-text">{t('brandStatus')}</span>
+            <span className={`status-dot ${profile.isOpen ? 'open' : 'closed'}`}></span>
+            <span className="status-text">{statusText}</span>
           </div>
         </div>
       </div>
