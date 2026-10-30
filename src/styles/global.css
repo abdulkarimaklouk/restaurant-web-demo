@@ -69,3 +69,11 @@ button {
   display: flex;
   flex-direction: column;
 }
+
+/* Empty Settings Screen */
+.settings-page {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  background-color: var(--color-page-bg);
+}

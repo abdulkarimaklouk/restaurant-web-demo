@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { MobileAppShell } from '../components/layout/MobileAppShell';
 import { TopHeader } from '../components/layout/TopHeader';
-import { BottomNavigation } from '../components/layout/BottomNavigation';
+import { BottomNavigation, NavTab } from '../components/layout/BottomNavigation';
 import { OrdersPage } from '../features/orders/OrdersPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
 import { useOrderStore } from '../data/mockStore';
@@ -25,6 +25,7 @@ export function getNotificationMessage(pendingCount: number): string {
 
 export function App() {
   const { counts } = useOrderStore();
+  const [activeTab, setActiveTab] = useState<NavTab>('orders');
   const [toast, setToast] = useState<{
     message: string;
     type?: ToastProps['type'];
@@ -51,11 +52,16 @@ export function App() {
         hasNotifications={counts.pending > 0}
       />
 
-      {/* Primary Approved Screen: Orders Dashboard */}
-      <OrdersPage onShowToast={showToast} />
+      {/* Primary Approved Screens */}
+      {activeTab === 'orders' && <OrdersPage onShowToast={showToast} />}
+      {activeTab === 'settings' && <main className="settings-page" aria-label="الإعدادات" />}
 
-      {/* Floating Bottom Navigation */}
-      <BottomNavigation onShowNotice={(msg) => showToast(msg, 'info')} />
+      {/* Full-width Edge-to-Edge Bottom Navigation */}
+      <BottomNavigation
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        onShowNotice={(msg) => showToast(msg, 'info')}
+      />
 
       {/* Floating Toast Notification */}
       {toast && (
