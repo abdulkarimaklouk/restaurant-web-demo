@@ -130,6 +130,22 @@
     "cancelBtn": "Cancel",
     "saveSuccess": "Restaurant information saved successfully"
   },
+  "notifications": {
+    "pageTitle": "Notifications & Alerts",
+    "backAria": "Back to Settings",
+    "infoCardTitle": "Notification Preferences",
+    "infoCardDesc": "Manage real-time alerts for incoming orders and verified payment confirmations as they arrive.",
+    "newOrdersTitle": "New Order Alerts",
+    "newOrdersDesc": "Receive an immediate notification whenever a student places a new order",
+    "paymentConfirmationsTitle": "Payment Confirmation Alerts",
+    "paymentConfirmationsDesc": "Receive an alert when payment is reviewed and confirmed via InstaPay",
+    "statusEnabled": "Enabled",
+    "statusDisabled": "Disabled",
+    "toggleAria": "Toggle {{title}}",
+    "saveBtn": "Save Changes",
+    "cancelBtn": "Cancel",
+    "saveSuccess": "Notification preferences saved successfully"
+  },
   "toasts": {
     "profile": "Restaurant Profile: Editing will be enabled in the next phase",
     "langAr": "App Language (Arabic): Set as active interface language",

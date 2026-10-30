@@ -21,6 +21,7 @@ import { useWorkingHoursStore } from '../../data/workingHoursStore';
 import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import { EditWorkingHours } from './components/EditWorkingHours';
 import { EditRestaurantInfo } from './components/EditRestaurantInfo';
+import { EditNotifications } from './components/EditNotifications';
 import './SettingsPage.css';
 
 interface SettingsRowProps {
@@ -102,6 +103,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
+  const [isEditingNotifications, setIsEditingNotifications] = useState(false);
 
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
@@ -137,6 +139,15 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     return (
       <EditRestaurantInfo
         onBack={() => setIsEditingInfo(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
+
+  if (isEditingNotifications) {
+    return (
+      <EditNotifications
+        onBack={() => setIsEditingNotifications(false)}
         onShowToast={onShowToast}
       />
     );
@@ -287,7 +298,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
               title={t('preferences.notificationsTitle')}
               subtitle={t('preferences.notificationsSubtitle')}
               valueTag={t('preferences.notificationsBadge')}
-              onClick={() => handleItemClick(t('toasts.notifications'))}
+              onClick={() => setIsEditingNotifications(true)}
             />
             <SettingsRow
               icon={<Palette size={17} strokeWidth={2} />}
