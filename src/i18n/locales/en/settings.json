@@ -47,6 +47,27 @@
     "systemName": "Campus Restaurant Management System",
     "version": "Version 1.0.0 • Demo Prototype"
   },
+  "editProfile": {
+    "pageTitle": "Edit Restaurant Profile",
+    "backAria": "Back to Settings",
+    "nameLabel": "Restaurant Name",
+    "namePlaceholder": "Enter restaurant name",
+    "nameRequired": "Restaurant name is required",
+    "branchLabel": "Branch / Location",
+    "branchPlaceholder": "e.g. Campus Branch",
+    "branchRequired": "Branch location is required",
+    "statusLabel": "Operational Status",
+    "statusOpen": "Open",
+    "statusClosed": "Closed",
+    "statusOpenSubtext": "Open for orders",
+    "statusClosedSubtext": "Temporarily closed",
+    "verificationBadge": "Verified Campus Partner",
+    "verificationNote": "Official university verification status cannot be changed",
+    "saveBtn": "Save Changes",
+    "cancelBtn": "Cancel",
+    "saveNotice": "Profile editing demo: changes will be applied in Phase 2",
+    "initialBranch": "Campus Branch"
+  },
   "toasts": {
     "profile": "Restaurant Profile: Editing will be enabled in the next phase",
     "langAr": "App Language (Arabic): Set as active interface language",

@@ -1,0 +1,368 @@
+.edit-profile-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Demo Notice Banner */
+.edit-profile-view .demo-notice-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(241, 245, 249, 0.6);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6);
+  padding: 3px 16px;
+  font-size: 10px;
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.edit-profile-view .notice-icon {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+}
+
+.edit-profile-view .notice-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Header */
+.edit-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 8px 16px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.edit-back-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-card-bg);
+  color: var(--color-text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.edit-back-btn:hover {
+  background-color: var(--color-page-bg);
+  border-color: var(--color-border-subtle);
+}
+
+.edit-back-btn:active {
+  background-color: var(--color-border);
+}
+
+/* RTL Arrow mirroring: In RTL, back points right (scaleX(-1)) */
+[dir="rtl"] .edit-back-icon {
+  transform: scaleX(-1);
+}
+
+.edit-profile-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+/* Scroll Area */
+.edit-profile-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 2px 16px calc(88px + env(safe-area-inset-bottom, 0px)) 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  min-width: 0;
+  width: 100%;
+}
+
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  width: 100%;
+}
+
+/* Identity Card */
+.profile-identity-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 12px 14px;
+}
+
+.profile-identity-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  flex: 1;
+}
+
+.profile-preview-name {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.25;
+}
+
+.verification-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-green);
+  background-color: var(--color-green-bg);
+  padding: 1.5px 6px;
+  border-radius: var(--radius-badge);
+  line-height: 1.3;
+}
+
+.verification-pill-badge .shield-icon {
+  color: var(--color-green);
+  flex-shrink: 0;
+}
+
+.verification-caption {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--color-text-muted);
+  padding: 0 4px;
+  margin-top: -6px;
+  margin-bottom: 2px;
+  line-height: 1.3;
+}
+
+.verification-caption .caption-icon {
+  flex-shrink: 0;
+}
+
+/* Form Fields Card */
+.edit-form-card {
+  background-color: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.form-field-label {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.field-required-mark {
+  color: var(--color-crimson);
+  font-weight: 700;
+}
+
+.form-text-input {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  background-color: var(--color-page-bg);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-btn);
+  padding: 0 12px;
+  font-size: 13.5px;
+  color: var(--color-text-main);
+  font-family: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.form-text-input:focus {
+  outline: none;
+  background-color: #ffffff;
+  border-color: var(--color-primary-dark);
+  box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.08);
+}
+
+.form-text-input::placeholder {
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+}
+
+/* Status Segmented Toggle */
+.status-toggle-card {
+  display: flex;
+  gap: 6px;
+  background-color: var(--color-page-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  padding: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.status-option-btn {
+  flex: 1;
+  min-height: 46px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: start;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.status-option-btn:hover:not(.selected) {
+  background-color: rgba(226, 232, 240, 0.4);
+}
+
+.status-option-btn.selected {
+  background-color: var(--color-card-bg);
+  border-color: var(--color-border-subtle);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.status-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: transform 0.15s ease;
+}
+
+.status-indicator-dot.open-dot {
+  background-color: var(--color-green-dot);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.status-indicator-dot.closed-dot {
+  background-color: var(--color-text-muted);
+}
+
+.status-option-btn.selected .status-indicator-dot {
+  transform: scale(1.15);
+}
+
+.status-option-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.status-option-title {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-text-main);
+  line-height: 1.2;
+}
+
+.status-option-sub {
+  font-size: 10.5px;
+  color: var(--color-text-muted);
+  line-height: 1.2;
+}
+
+/* Actions Container */
+.edit-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-save-changes {
+  width: 100%;
+  height: 44px;
+  background-color: var(--color-primary-dark);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.btn-save-changes:hover {
+  background-color: #1e293b;
+}
+
+.btn-save-changes:active {
+  transform: scale(0.995);
+}
+
+.btn-cancel-edit {
+  width: 100%;
+  height: 42px;
+  background-color: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-btn);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-cancel-edit:hover {
+  background-color: var(--color-page-bg);
+  border-color: #cbd5e1;
+  color: var(--color-text-main);
+}
+
+.btn-cancel-edit:active {
+  background-color: var(--color-border);
+}
+

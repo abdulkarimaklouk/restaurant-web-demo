@@ -47,6 +47,27 @@
     "systemName": "منظومة إدارة مطاعم الحرم الجامعي",
     "version": "الإصدار 1.0.0 • نسخة عرض تجريبية"
   },
+  "editProfile": {
+    "pageTitle": "تعديل بيانات المطعم",
+    "backAria": "العودة للإعدادات",
+    "nameLabel": "اسم المطعم",
+    "namePlaceholder": "أدخل اسم المطعم",
+    "nameRequired": "اسم المطعم مطلوب",
+    "branchLabel": "الفرع / الموقع",
+    "branchPlaceholder": "مثال: فرع الحرم الجامعي",
+    "branchRequired": "موقع الفرع مطلوب",
+    "statusLabel": "الحالة التشغيلية",
+    "statusOpen": "مفتوح",
+    "statusClosed": "مغلق",
+    "statusOpenSubtext": "مفتوح لاستقبال الطلبات",
+    "statusClosedSubtext": "مغلق مؤقتاً",
+    "verificationBadge": "شريك جامعي موثق",
+    "verificationNote": "حالة التوثيق الجامعي الرسمية غير قابلة للتعديل",
+    "saveBtn": "حفظ التغييرات",
+    "cancelBtn": "إلغاء",
+    "saveNotice": "واجهة تجريبية: سيتم تفعيل حفظ البيانات الشامل في المرحلة القادمة",
+    "initialBranch": "فرع الحرم الجامعي"
+  },
   "toasts": {
     "profile": "الملف التعريفي للمطعم: سيتم تفعيل تعديل البيانات في المرحلة التالية",
     "langAr": "لغة التطبيق (العربية): تم تعيينها كلغة افتراضية",

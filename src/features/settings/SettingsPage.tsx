@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Store,
@@ -16,6 +16,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import { ToastProps } from '../../components/ui/Toast';
+import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import './SettingsPage.css';
 
 interface SettingsRowProps {
@@ -92,6 +93,7 @@ interface SettingsPageProps {
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('settings');
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
 
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
@@ -104,6 +106,15 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     if (currentLang === lang) return;
     i18n.changeLanguage(lang);
   };
+
+  if (isEditingProfile) {
+    return (
+      <EditRestaurantProfile
+        onBack={() => setIsEditingProfile(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
 
   return (
     <main className="settings-page" aria-label={t('pageTitle')}>
@@ -125,7 +136,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
           <button
             type="button"
             className="restaurant-profile-card"
-            onClick={() => handleItemClick(t('toasts.profile'))}
+            onClick={() => setIsEditingProfile(true)}
             aria-label={t('profile.ariaLabel')}
           >
             <div className="profile-logo-wrap">
