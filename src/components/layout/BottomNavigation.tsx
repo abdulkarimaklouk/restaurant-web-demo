@@ -25,9 +25,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
     unreadOrdersCount !== undefined ? unreadOrdersCount : counts.pending + counts.new;
 
   const handleNavClick = (dest: NavTab) => {
-    if (dest === 'menu') {
-      onShowNotice(t('nav.menuNotice'));
-    } else if (dest === 'analytics') {
+    if (dest === 'analytics') {
       onShowNotice(t('nav.analyticsNotice'));
     } else {
       onTabChange(dest);

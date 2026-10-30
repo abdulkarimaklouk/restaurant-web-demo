@@ -1,0 +1,42 @@
+{
+  "title": "Menu",
+  "demoNotice": "Demo Prototype • Restaurant Menu Management",
+  "addItem": "Add Item",
+  "searchPlaceholder": "Search menu...",
+  "filterAria": "Filter menu",
+  "categories": {
+    "all": "All",
+    "main": "Main Dishes",
+    "appetizers": "Appetizers",
+    "drinks": "Drinks"
+  },
+  "items": {
+    "beefBurger": "Beef Burger",
+    "grilledChicken": "Grilled Chicken",
+    "pastaAlfredo": "Pasta Alfredo",
+    "frenchFries": "French Fries",
+    "caesarSalad": "Caesar Salad",
+    "cocaCola": "Coca Cola",
+    "orangeJuice": "Orange Juice"
+  },
+  "status": {
+    "available": "Available",
+    "unavailable": "Unavailable"
+  },
+  "actions": {
+    "edit": "Edit",
+    "more": "More options",
+    "toggleAvailabilityAria": "Toggle availability for {{name}}",
+    "editItemAria": "Edit {{name}}",
+    "moreActionsAria": "More actions for {{name}}"
+  },
+  "toasts": {
+    "addItemNotice": "Adding new items will be available in a later phase.",
+    "filterNotice": "Menu filtering will be available in a later phase.",
+    "searchNotice": "Menu search will be available in a later phase.",
+    "toggleNotice": "Availability toggle updates will be available in a later phase.",
+    "editNotice": "Editing item details will be available in a later phase.",
+    "moreNotice": "Additional item options will be available in a later phase."
+  }
+}
+

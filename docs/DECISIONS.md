@@ -122,5 +122,18 @@ To deliver a consistent, robust, and accessible light/dark theme system:
 - Extended `tokens.css` with semantic CSS variables for page background, card surfaces, text hierarchy, borders/dividers, inputs, bottom navigation, modals, overlays, toasts, and badges for both `light` and `dark` themes.
 - Reused design tokens across all components so the original Light Theme remains 100% visually unchanged while Dark Theme provides high-contrast, accessible slate styling across all screens, cards, modals, and navigation.
 
+## D-019: Menu Management Dashboard Interface (Phase 1)
+
+To deliver the main Menu Dashboard interface in accordance with reference specifications:
+- **Navigation Integration**: Activated the existing `menu` icon in `BottomNavigation.tsx` so clicking it switches the view directly to the new `MenuPage` rather than showing a notice toast.
+- **Page Header**: Features the page title ("القائمة" / "Menu") aligned with a primary "+ إضافة عنصر" ("+ Add Item") action button styled with `var(--color-primary-dark)`.
+- **Horizontal Category Tabs**: Horizontally scrollable category pills with count badges ("الكل" [7], "أطباق رئيسية" [3], "المقبلات" [2], "المشروبات" [2]). Touch-friendly with hidden scrollbars and zero page-level horizontal overflow.
+- **Search & Filter Bar**: Search input with magnifying glass icon and placeholder alongside a dedicated Filter button with sliders icon.
+- **Seven Presentation Products**: Seeded with 7 mock items (Beef Burger 120 EGP, Grilled Chicken 110 EGP, Pasta Alfredo 95 EGP, French Fries 40 EGP, Caesar Salad 65 EGP Unavailable, Coca Cola 25 EGP, Orange Juice 30 EGP).
+- **Card Anatomy & States**: Each card includes category, title, formatted price in EGP, status badge with check icon when available, toggle switch, Edit button, and More actions button. Caesar Salad features dimmed opacity and gray "غير متوفر" badge.
+- **Phase 1 UI Scope & Feedback**: Item creation, editing, deletion, filtering, and persistence are reserved for Phase 2. Localized feedback toasts inform the user when interacting with Add Item, Search, Filter, Toggle, Edit, and More controls.
+- **Theming & Localization**: Seamlessly supports Light and Dark themes via semantic CSS custom properties and provides natural Arabic RTL and English LTR translations.
+
+
 
 

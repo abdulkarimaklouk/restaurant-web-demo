@@ -1,0 +1,42 @@
+{
+  "title": "القائمة",
+  "demoNotice": "نسخة تجريبية • إدارة قائمة الطعام للمطعم",
+  "addItem": "إضافة عنصر",
+  "searchPlaceholder": "ابحث في القائمة...",
+  "filterAria": "تصفية القائمة",
+  "categories": {
+    "all": "الكل",
+    "main": "أطباق رئيسية",
+    "appetizers": "المقبلات",
+    "drinks": "المشروبات"
+  },
+  "items": {
+    "beefBurger": "برجر لحم",
+    "grilledChicken": "دجاج مشوي",
+    "pastaAlfredo": "باستا ألفريدو",
+    "frenchFries": "بطاطس مقلية",
+    "caesarSalad": "سلطة سيزر",
+    "cocaCola": "كوكاكولا",
+    "orangeJuice": "عصير برتقال"
+  },
+  "status": {
+    "available": "متوفر",
+    "unavailable": "غير متوفر"
+  },
+  "actions": {
+    "edit": "تعديل",
+    "more": "خيارات إضافية",
+    "toggleAvailabilityAria": "تبديل توفر {{name}}",
+    "editItemAria": "تعديل {{name}}",
+    "moreActionsAria": "خيارات إضافية لـ {{name}}"
+  },
+  "toasts": {
+    "addItemNotice": "خاصية إضافة عنصر جديد ستتوفر في مرحلة قادمة.",
+    "filterNotice": "خاصية تصفية القائمة ستتوفر في مرحلة قادمة.",
+    "searchNotice": "خاصية البحث في القائمة ستتوفر في مرحلة قادمة.",
+    "toggleNotice": "تعديل حالة التوفر سيتوفر في مرحلة قادمة.",
+    "editNotice": "تعديل بيانات العنصر سيتوفر في مرحلة قادمة.",
+    "moreNotice": "خيارات إضافية ستتوفر في مرحلة قادمة."
+  }
+}
+

@@ -24,11 +24,25 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Payment reference and receipt preview are clearly fictional.
 - [x] Empty states are present for every order tab.
 
-## Menu
+## Menu (Phase 1 Dashboard UI)
 
-- [ ] Categories and seed items are displayed in the intended order and style.
-- [ ] The unavailable seed item is visibly dimmed and labelled.
-- [ ] Availability changes immediately.
+- [x] Dedicated Menu page connected to Bottom Navigation without page reloads.
+- [x] Page header displays title "القائمة" / "Menu" and primary "+ إضافة عنصر" ("+ Add Item") button.
+- [x] Category tabs (All [7], Main Dishes [3], Appetizers [2], Drinks [2]) render with live product counts.
+- [x] Horizontal category scrolling functions smoothly without page-level overflow.
+- [x] Search input box renders with magnifying glass icon and localized placeholder.
+- [x] Filter trigger button renders with sliders icon.
+- [x] All 7 mock presentation products are displayed with accurate prices, categories, and availability.
+- [x] Caesar Salad is visibly dimmed (`opacity: 0.72`) and labeled with "غير متوفر" status badge.
+- [x] Available products display green check status badge and active toggle switch.
+- [x] Phase 1 interactions trigger localized placeholder toasts for Add Item, Search, Filter, Toggle, Edit, and More actions.
+- [x] Seamless Dark Theme and Light Theme compatibility across all cards, inputs, tabs, and action buttons.
+- [x] Complete bilingual support with Arabic RTL and English LTR layouts.
+- [x] Zero console errors; production build (`tsc && vite build`) passed with 0 errors.
+
+## Menu (Phase 2 Full CRUD & Mutations — Upcoming)
+
+- [ ] Availability changes immediately mutate in-memory menu state.
 - [ ] Unavailable items are excluded from simulated orders.
 - [ ] Add and edit forms validate required fields and positive numeric prices.
 - [ ] Existing order item snapshots do not change when a menu item is edited.
