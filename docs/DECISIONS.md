@@ -102,3 +102,14 @@ To provide realistic in-app notification controls without backend/push dependenc
 - In accordance with non-blocking enterprise UX standards, disabling notifications suppresses only UI notification presentation (toasts, bell icon dot indicator); it never blocks order progression, payment confirmations, or error alerts.
 - In the static demo environment, incoming orders are currently initial seed states; therefore, `newOrdersEnabled` controls presentation on the header bell notification action and dot badge, while `paymentConfirmationsEnabled` controls payment confirmation toasts upon state transition.
 
+## D-017: Appearance & Theme Settings Phase 1 (UI-Only Implementation)
+
+In accordance with Phase 1 requirements:
+- The Appearance & Theme row in Settings opens a dedicated view (`EditAppearance.tsx`).
+- Offers two explicit theme options: Light Mode ("الوضع الفاتح" / "فاتح") and Dark Mode ("الوضع الداكن" / "داكن").
+- Light Mode is initialized as the selected state by default.
+- Selection is maintained exclusively within local component state for Phase 1.
+- Global CSS custom properties (such as `--color-page-bg`) and active application appearance remain completely unmutated.
+- Saving triggers a localized success toast and returns to Settings; Cancel returns immediately without side effects.
+
+

@@ -23,6 +23,7 @@ import { EditRestaurantProfile } from './components/EditRestaurantProfile';
 import { EditWorkingHours } from './components/EditWorkingHours';
 import { EditRestaurantInfo } from './components/EditRestaurantInfo';
 import { EditNotifications } from './components/EditNotifications';
+import { EditAppearance } from './components/EditAppearance';
 import './SettingsPage.css';
 
 interface SettingsRowProps {
@@ -106,6 +107,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const [isEditingHours, setIsEditingHours] = useState(false);
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [isEditingNotifications, setIsEditingNotifications] = useState(false);
+  const [isEditingAppearance, setIsEditingAppearance] = useState(false);
 
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
@@ -150,6 +152,15 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     return (
       <EditNotifications
         onBack={() => setIsEditingNotifications(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
+
+  if (isEditingAppearance) {
+    return (
+      <EditAppearance
+        onBack={() => setIsEditingAppearance(false)}
         onShowToast={onShowToast}
       />
     );
@@ -312,7 +323,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
               title={t('preferences.appearanceTitle')}
               subtitle={t('preferences.appearanceSubtitle')}
               valueTag={t('preferences.appearanceBadge')}
-              onClick={() => handleItemClick(t('toasts.appearance'))}
+              onClick={() => setIsEditingAppearance(true)}
             />
           </div>
         </section>

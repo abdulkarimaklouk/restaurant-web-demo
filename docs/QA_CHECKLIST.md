@@ -70,3 +70,15 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Both preferences persist independently across page reloads.
 - [x] Cancel discards unsaved toggle changes.
 - [x] Full Arabic RTL and English LTR coverage verified with 0 console errors.
+
+## Appearance & Theme Settings (Phase 1)
+
+- [x] Connected Settings row "Appearance & Theme" ("المظهر والسمة") to dedicated editing screen.
+- [x] Light Mode ("فاتح" / "Light") is selected by default on load.
+- [x] Dark Mode ("داكن" / "Dark") can be selected with clear active radio indicators and border highlights.
+- [x] Selection state is maintained strictly in local component state.
+- [x] Cancel button discards changes and navigates back to Settings.
+- [x] Save Changes triggers a localized success toast and returns to Settings.
+- [x] Constraints verified: Global theme tokens and document styles remain completely unmutated.
+- [x] Full Arabic RTL and English LTR translations with zero console errors.
+

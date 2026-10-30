@@ -146,6 +146,21 @@
     "cancelBtn": "Cancel",
     "saveSuccess": "Notification preferences saved successfully"
   },
+  "theme": {
+    "pageTitle": "Appearance & Theme",
+    "backAria": "Back to Settings",
+    "infoCardTitle": "Interface & Theme",
+    "infoCardDesc": "Select your preferred interface appearance. Colors and contrast are tailored for restaurant lighting environments.",
+    "lightTitle": "Light Mode",
+    "lightSubtitle": "Default bright appearance suitable for daytime work",
+    "lightBadge": "Light",
+    "darkTitle": "Dark Mode",
+    "darkSubtitle": "Eye-friendly appearance designed for low-light environments",
+    "darkBadge": "Dark",
+    "saveBtn": "Save Changes",
+    "cancelBtn": "Cancel",
+    "saveSuccess": "Appearance preferences saved successfully"
+  },
   "toasts": {
     "profile": "Restaurant Profile: Editing will be enabled in the next phase",
     "langAr": "App Language (Arabic): Set as active interface language",
