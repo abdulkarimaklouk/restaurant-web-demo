@@ -30,6 +30,8 @@ interface SettingsRowProps {
   ariaLabel?: string;
   className?: string;
   isDanger?: boolean;
+  role?: string;
+  ariaChecked?: boolean;
 }
 
 const SettingsRow: React.FC<SettingsRowProps> = ({
@@ -44,10 +46,14 @@ const SettingsRow: React.FC<SettingsRowProps> = ({
   ariaLabel,
   className = '',
   isDanger = false,
+  role,
+  ariaChecked,
 }) => {
   return (
     <button
       type="button"
+      role={role}
+      aria-checked={ariaChecked}
       className={`settings-row-btn ${isDanger ? 'logout-btn' : ''} ${className}`.trim()}
       onClick={onClick}
       aria-label={ariaLabel || `${title}${subtitle ? ` - ${subtitle}` : ''}`}
@@ -91,7 +97,13 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     onShowToast(message, 'info');
   };
 
-  const isArabic = i18n.language === 'ar';
+  const isArabic = (i18n.resolvedLanguage || i18n.language || 'ar').startsWith('ar');
+
+  const handleLanguageSelect = (lang: 'ar' | 'en') => {
+    const currentLang = (i18n.resolvedLanguage || i18n.language || 'ar').startsWith('ar') ? 'ar' : 'en';
+    if (currentLang === lang) return;
+    i18n.changeLanguage(lang);
+  };
 
   return (
     <main className="settings-page" aria-label={t('pageTitle')}>
@@ -142,8 +154,10 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
             <Globe size={13.5} className="section-title-icon" />
             {t('language.sectionTitle')}
           </h2>
-          <div className="settings-card">
+          <div className="settings-card" role="radiogroup" aria-label={t('language.sectionTitle')}>
             <SettingsRow
+              role="radio"
+              ariaChecked={isArabic}
               icon={<span className="lang-code-text">ع</span>}
               iconWrapClassName="lang-icon-wrap"
               title={t('language.arTitle')}
@@ -159,11 +173,13 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
                   <div className="radio-indicator" aria-hidden="true" />
                 )
               }
-              onClick={() => handleItemClick(t('toasts.langAr'))}
-              ariaLabel={t('language.arAria')}
+              onClick={() => handleLanguageSelect('ar')}
+              ariaLabel={`${t('language.arTitle')}${isArabic ? ` - ${t('language.currentBadge')}` : ''}`}
               className={`lang-option ${isArabic ? 'active' : ''}`}
             />
             <SettingsRow
+              role="radio"
+              ariaChecked={!isArabic}
               icon={<span className="lang-code-text">EN</span>}
               iconWrapClassName="lang-icon-wrap"
               title={t('language.enTitle')}
@@ -179,8 +195,8 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
                   <div className="radio-indicator" aria-hidden="true" />
                 )
               }
-              onClick={() => handleItemClick(t('toasts.langEn'))}
-              ariaLabel={t('language.enAria')}
+              onClick={() => handleLanguageSelect('en')}
+              ariaLabel={`${t('language.enTitle')}${!isArabic ? ` - ${t('language.currentBadge')}` : ''}`}
               className={`lang-option ${!isArabic ? 'active' : ''}`}
             />
           </div>

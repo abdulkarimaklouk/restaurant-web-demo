@@ -25,8 +25,8 @@ export function getInitialLanguage(): AppLanguage {
 
 export function applyDocumentLanguageDirection(lang: string): void {
   if (typeof document !== 'undefined') {
-    const isArabic = lang === 'ar';
-    document.documentElement.lang = lang;
+    const isArabic = lang.startsWith('ar');
+    document.documentElement.lang = isArabic ? 'ar' : 'en';
     document.documentElement.dir = isArabic ? 'rtl' : 'ltr';
   }
 }
