@@ -40,7 +40,22 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Complete bilingual support with Arabic RTL and English LTR layouts.
 - [x] Zero console errors; production build (`tsc && vite build`) passed with 0 errors.
 
-## Menu (Phase 2 Full CRUD & Mutations — Upcoming)
+## Menu (Phase 2 Data Model, Store & Persistence)
+
+- [x] Strongly typed data models in `src/types/menu.ts` supporting `id`, bilingual `name: { ar, en }`, `category`, `price`, `currency`, `imageType`, and `isAvailable`.
+- [x] Product names decoupled from UI translation files into dynamic domain objects.
+- [x] Centralized observable store in `src/data/menuStore.ts` with React hook `useMenuStore()`.
+- [x] Initial seed products moved into single source of truth in `src/data/menuStore.ts`.
+- [x] Initial launch initializes store and persists 7 products to `localStorage['menu_items']`.
+- [x] Subsequent launches restore saved menu data without overwriting valid items.
+- [x] Malformed or corrupt storage payloads handled safely with defensive fallback.
+- [x] Category badge counts derived dynamically from live store menu data.
+- [x] Product cards consume store items and display localized names based on active language.
+- [x] Switching language does not mutate stored menu data.
+- [x] Zero regression on Orders, Settings, Working Hours, Notifications, and Themes.
+- [x] 0 console errors; production build succeeded.
+
+## Menu (Phase 3 Full CRUD & Mutations — Upcoming)
 
 - [ ] Availability changes immediately mutate in-memory menu state.
 - [ ] Unavailable items are excluded from simulated orders.

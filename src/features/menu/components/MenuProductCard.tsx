@@ -19,8 +19,16 @@ export const MenuProductCard: React.FC<MenuProductCardProps> = ({
   onEditItem,
   onMoreActions,
 }) => {
-  const { t } = useTranslation('menu');
-  const productName = t(`items.${item.nameKey}`);
+  const { t, i18n } = useTranslation('menu');
+  const currentLang = i18n.resolvedLanguage || i18n.language || 'ar';
+  const isEn = currentLang.startsWith('en');
+  const productName = item.name
+    ? isEn
+      ? item.name.en || item.name.ar
+      : item.name.ar || item.name.en
+    : item.nameKey
+      ? t(`items.${item.nameKey}`)
+      : '';
   const categoryName = t(`categories.${item.category}`);
 
   return (

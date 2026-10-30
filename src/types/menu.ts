@@ -1,12 +1,29 @@
-export type MenuCategoryId = 'all' | 'main' | 'appetizers' | 'drinks';
+export type MenuCategoryType = 'main' | 'appetizers' | 'drinks';
+export type MenuCategoryId = 'all' | MenuCategoryType;
+
+export type MenuProductImageType =
+  | 'burger'
+  | 'chicken'
+  | 'pasta'
+  | 'fries'
+  | 'salad'
+  | 'cola'
+  | 'juice';
+
+export interface LocalizedName {
+  ar: string;
+  en: string;
+}
 
 export interface MenuItem {
   id: string;
-  nameKey: string;
-  category: MenuCategoryId;
+  name: LocalizedName;
+  category: MenuCategoryType;
   price: number;
+  currency: string;
+  imageType: MenuProductImageType;
   isAvailable: boolean;
-  imageType: 'burger' | 'chicken' | 'pasta' | 'fries' | 'salad' | 'cola' | 'juice';
+  nameKey?: string;
 }
 
 export interface CategoryInfo {
@@ -14,4 +31,3 @@ export interface CategoryInfo {
   labelKey: string;
   count: number;
 }
-

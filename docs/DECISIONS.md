@@ -134,6 +134,17 @@ To deliver the main Menu Dashboard interface in accordance with reference specif
 - **Phase 1 UI Scope & Feedback**: Item creation, editing, deletion, filtering, and persistence are reserved for Phase 2. Localized feedback toasts inform the user when interacting with Add Item, Search, Filter, Toggle, Edit, and More controls.
 - **Theming & Localization**: Seamlessly supports Light and Dark themes via semantic CSS custom properties and provides natural Arabic RTL and English LTR translations.
 
+## D-020: Menu Data Model, Centralized Store & LocalStorage Persistence (Phase 2)
+
+To establish the central data foundation for Menu Management:
+- **Decoupled Bilingual Product Model**: Product names are stored directly as `{ ar: string; en: string }` on domain objects rather than UI translation strings. This enables user-managed product data persistence and future creation/editing workflows without touching translation dictionaries.
+- **Centralized Observable Store**: Created `src/data/menuStore.ts` following the repository's observable singleton pattern (`subscribe`, `notify`, `getItems`, `updateItems`, `updateItem`, `resetToDefault`) and exposing the `useMenuStore()` hook.
+- **Single Source of Truth**: Seed items are defined exclusively in `src/data/menuStore.ts`. Legacy `src/features/menu/data/mockMenu.ts` acts as a re-export proxy to prevent duplication.
+- **Persistence (`menu_items`)**: On first launch, the 7 default products are initialized and persisted to `localStorage['menu_items']`. On subsequent visits, data is restored faithfully.
+- **Defensive Parsing & Validation**: Implemented robust schema validation (`validateMenuItem`) for IDs, bilingual names, categories, positive prices, currencies, image types, and availability booleans. Malformed or invalid storage payloads fall back gracefully to the initial seed without throwing runtime errors.
+- **UI Integration**: Updated `MenuPage.tsx` and `MenuProductCard.tsx` to subscribe to the store, dynamically compute category badge counts, and display the appropriate localized product name based on the active language while preserving all Phase 1 visual styling, tokens, and non-blocking placeholder interactions.
+
+
 
 
 

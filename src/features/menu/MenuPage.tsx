@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Info, Plus } from 'lucide-react';
 import { MenuCategoryId, MenuItem } from '../../types/menu';
-import { INITIAL_MENU_ITEMS, getCategoryCounts } from './data/mockMenu';
+import { useMenuStore } from '../../data/menuStore';
 import { CategoryTabs } from './components/CategoryTabs';
 import { SearchAndFilterBar } from './components/SearchAndFilterBar';
 import { MenuProductCard } from './components/MenuProductCard';
@@ -14,8 +14,8 @@ interface MenuPageProps {
 
 export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { t } = useTranslation('menu');
+  const { items, categoryCounts } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
-  const categories = getCategoryCounts(INITIAL_MENU_ITEMS);
 
   const handleAddItem = () => {
     onShowToast(t('toasts.addItemNotice'), 'info');
@@ -69,7 +69,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
 
       {/* 3. Category Navigation Tabs */}
       <CategoryTabs
-        categories={categories}
+        categories={categoryCounts}
         activeCategory={activeCategory}
         onSelectCategory={handleSelectCategory}
       />
@@ -83,7 +83,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
       {/* 5. Scrollable Menu Products List */}
       <main className="menu-list-scroll">
         <div className="menu-cards-container">
-          {INITIAL_MENU_ITEMS.map((item) => (
+          {items.map((item) => (
             <MenuProductCard
               key={item.id}
               item={item}
