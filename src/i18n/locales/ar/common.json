@@ -3,6 +3,8 @@
   "brandName": "مطعم الأطايب",
   "brandStatus": "مفتوح • يغلق 11:00 م",
   "brandStatusOpen": "مفتوح • يغلق 11:00 م",
+  "brandStatusOpenDynamic": "مفتوح • يغلق {{time}}",
+  "brandStatusOutsideHours": "مغلق • خارج أوقات العمل",
   "brandStatusClosed": "مغلق • لا يستقبل طلبات حالياً",
   "nav": {
     "orders": "الطلبات",

@@ -58,7 +58,7 @@
 
 /* Active Button: dark background #111827, border-radius ~2.5px (0.15625rem), white icon, reduced shadow */
 .nav-item.active .nav-icon-wrap {
-  background-color: #111827;
+  background-color: var(--color-primary-dark, #111827);
   border-radius: 0.15625rem;
   box-shadow: 0 1px 3px rgba(17, 24, 39, 0.08);
 }

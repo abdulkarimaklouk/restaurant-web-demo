@@ -71,6 +71,43 @@
     "saveSuccess": "Restaurant profile updated successfully",
     "initialBranch": "Campus Branch"
   },
+  "workingHours": {
+    "pageTitle": "Opening Hours",
+    "backAria": "Back to Settings",
+    "infoCardTitle": "Weekly Working Hours Schedule",
+    "infoCardDesc": "This schedule defines automatic restaurant opening hours for each day of the week when ordering is enabled.",
+    "days": {
+      "saturday": "Saturday",
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday"
+    },
+    "status": {
+      "open": "Open",
+      "closed": "Closed",
+      "closedAllDay": "Closed all day",
+      "closedToday": "Closed today",
+      "overnightBadge": "Extends to next day (until {{time}})"
+    },
+    "labels": {
+      "openTime": "Opening Time",
+      "closeTime": "Closing Time",
+      "toggleAria": "Toggle {{day}} schedule"
+    },
+    "actions": {
+      "save": "Save Changes",
+      "cancel": "Cancel"
+    },
+    "validation": {
+      "openRequired": "Opening time is required for {{day}}",
+      "closeRequired": "Closing time is required for {{day}}",
+      "sameTime": "Opening and closing times cannot be identical for {{day}}"
+    },
+    "saveSuccess": "Opening hours updated successfully"
+  },
   "toasts": {
     "profile": "Restaurant Profile: Editing will be enabled in the next phase",
     "langAr": "App Language (Arabic): Set as active interface language",

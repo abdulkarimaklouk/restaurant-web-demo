@@ -3,6 +3,8 @@
   "brandName": "Good Food",
   "brandStatus": "Open • Closes 11:00 PM",
   "brandStatusOpen": "Open • Closes 11:00 PM",
+  "brandStatusOpenDynamic": "Open • Closes {{time}}",
+  "brandStatusOutsideHours": "Closed • Outside working hours",
   "brandStatusClosed": "Closed • Not receiving orders",
   "nav": {
     "orders": "Orders",

@@ -51,3 +51,12 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Browser console contains no uncaught errors during the primary flow.
 - [x] Screenshots were captured for each implemented reference screen.
 - [x] Remaining issues are recorded honestly in the handover.
+
+## Working Hours & Design System Tokens
+
+- [x] Shared `--color-primary-dark` design token in `src/styles/tokens.css` unified with the active footer button (`#111827` / `rgb(17, 24, 39)`).
+- [x] Save Changes button in Working Hours reuses `var(--color-primary-dark)` for its background.
+- [x] Active state of daily working-hours toggle switches reuses `var(--color-primary-dark)`.
+- [x] Changing `--color-primary-dark` dynamically propagates to the active footer button, Save Changes button, and active daily toggles in unison.
+- [x] Blue accents on info icon and input focus border remain unaffected.
+- [x] Save button hover, active, focus, and disabled states verified across RTL Arabic and LTR English.

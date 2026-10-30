@@ -17,7 +17,9 @@ import {
 } from 'lucide-react';
 import { ToastProps } from '../../components/ui/Toast';
 import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
+import { useWorkingHoursStore } from '../../data/workingHoursStore';
 import { EditRestaurantProfile } from './components/EditRestaurantProfile';
+import { EditWorkingHours } from './components/EditWorkingHours';
 import './SettingsPage.css';
 
 interface SettingsRowProps {
@@ -95,7 +97,9 @@ interface SettingsPageProps {
 export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('settings');
   const { profile } = useRestaurantProfileStore();
+  const { getEffectiveStatus, getTodaySummary } = useWorkingHoursStore();
   const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [isEditingHours, setIsEditingHours] = useState(false);
 
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
@@ -118,7 +122,20 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     );
   }
 
-  const statusPrefix = profile.isOpen ? t('profile.statusOpenPrefix') : t('profile.statusClosedPrefix');
+  if (isEditingHours) {
+    return (
+      <EditWorkingHours
+        onBack={() => setIsEditingHours(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
+
+  const effectiveStatus = getEffectiveStatus(profile.isOpen);
+  const statusPrefix = effectiveStatus.isEffectiveOpen
+    ? t('profile.statusOpenPrefix')
+    : t('profile.statusClosedPrefix');
+  const todayHoursSummary = getTodaySummary(isArabic);
 
   return (
     <main className="settings-page" aria-label={t('pageTitle')}>
@@ -152,7 +169,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
                 <span className="verified-badge">{t('profile.verified')}</span>
               </div>
               <div className="profile-sub-row">
-                <span className={`status-dot ${profile.isOpen ? 'open' : 'closed'}`}></span>
+                <span className={`status-dot ${effectiveStatus.isEffectiveOpen ? 'open' : 'closed'}`}></span>
                 <span className="profile-status">
                   {statusPrefix} • {profile.branch}
                 </span>
@@ -229,8 +246,8 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
             <SettingsRow
               icon={<Clock size={17} strokeWidth={2} />}
               title={t('restaurant.hoursTitle')}
-              subtitle={t('restaurant.hoursSubtitle')}
-              onClick={() => handleItemClick(t('toasts.hours'))}
+              subtitle={todayHoursSummary}
+              onClick={() => setIsEditingHours(true)}
             />
             <SettingsRow
               icon={<Building2 size={17} strokeWidth={2} />}

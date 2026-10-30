@@ -86,3 +86,11 @@ In targeted refinement for the Orders Dashboard:
 3. **InstaPay Mock Receipt Preview**: A clearly fictional InstaPay receipt section is embedded in the review modal for pending orders, complete with a transfer reference number, student handle, mock amount, and full-screen lightbox preview.
 4. **Payment Confirmation**: The bottom-sheet modal contains a pinned primary action ("تأكيد الدفع") that executes the payment confirmation transition, moving the order from `pendingConfirmation` to `newOrder` and updating live tab counters.
 
+## D-015: Shared Primary Dark Design Token Reuse
+
+To maintain design system consistency across the mobile interface without duplicating hardcoded dark values:
+- The existing primary dark token `--color-primary-dark` defined in `src/styles/tokens.css` is aligned to `#111827` (`rgb(17, 24, 39)`).
+- The active Bottom Navigation button (`.nav-item.active .nav-icon-wrap`) references `var(--color-primary-dark, #111827)`.
+- In the Working Hours feature (`EditWorkingHours.css`), both the Save Changes button background (`.btn-save-changes`) and the active state of daily toggle switches (`.day-toggle-switch.active`) reuse `var(--color-primary-dark)`.
+- Dynamically updating `--color-primary-dark` instantly and synchronously updates all three interface elements in unison.
+
