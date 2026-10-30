@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   Store,
   ChevronLeft,
@@ -84,50 +85,52 @@ interface SettingsPageProps {
 }
 
 export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
+  const { t, i18n } = useTranslation('settings');
+
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
   };
 
+  const isArabic = i18n.language === 'ar';
+
   return (
-    <main className="settings-page" aria-label="صفحة الإعدادات">
+    <main className="settings-page" aria-label={t('pageTitle')}>
       {/* Demo Notice Banner */}
       <div className="demo-notice-bar" role="status">
         <Info size={11} className="notice-icon" aria-hidden="true" />
-        <span className="notice-text">نسخة عرض تجريبية • واجهة الإعدادات الأولية للمطعم</span>
+        <span className="notice-text">{t('demoNotice')}</span>
       </div>
 
       {/* Main Title Header */}
       <header className="settings-page-header">
-        <h1 className="settings-title">الإعدادات</h1>
+        <h1 className="settings-title">{t('pageTitle')}</h1>
       </header>
 
       {/* Settings Scrollable Content */}
       <div className="settings-scroll">
         {/* 1. Restaurant Profile */}
-        <section className="settings-section" aria-label="الملف التعريفي للمطعم">
+        <section className="settings-section" aria-label={t('profile.name')}>
           <button
             type="button"
             className="restaurant-profile-card"
-            onClick={() =>
-              handleItemClick('الملف التعريفي للمطعم: سيتم تفعيل تعديل البيانات في المرحلة التالية')
-            }
-            aria-label="الملف التعريفي: مطعم الأطايب، فرع الجامعة الرئيسي"
+            onClick={() => handleItemClick(t('toasts.profile'))}
+            aria-label={t('profile.ariaLabel')}
           >
             <div className="profile-logo-wrap">
               <Store size={22} className="profile-store-icon" />
             </div>
             <div className="profile-info">
               <div className="profile-name-row">
-                <span className="profile-name">مطعم الأطايب</span>
-                <span className="verified-badge">موثق</span>
+                <span className="profile-name">{t('profile.name')}</span>
+                <span className="verified-badge">{t('profile.verified')}</span>
               </div>
               <div className="profile-sub-row">
                 <span className="status-dot"></span>
-                <span className="profile-status">مفتوح • فرع الحرم الجامعي</span>
+                <span className="profile-status">{t('profile.status')}</span>
               </div>
             </div>
             <div className="profile-action">
-              <span className="edit-label">تعديل</span>
+              <span className="edit-label">{t('profile.edit')}</span>
               <ChevronLeft size={16} className="settings-chevron" />
             </div>
           </button>
@@ -137,38 +140,48 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
         <section className="settings-section" aria-labelledby="section-language">
           <h2 id="section-language" className="settings-section-title">
             <Globe size={13.5} className="section-title-icon" />
-            لغة التطبيق
+            {t('language.sectionTitle')}
           </h2>
           <div className="settings-card">
             <SettingsRow
               icon={<span className="lang-code-text">ع</span>}
               iconWrapClassName="lang-icon-wrap"
-              title="العربية"
-              subtitle="اللغة الافتراضية للواجهة"
-              valueTag="الحالية"
+              title={t('language.arTitle')}
+              subtitle={t('language.arSubtitle')}
+              valueTag={isArabic ? t('language.currentBadge') : undefined}
               valueTagClassName="active-tag"
               trailing={
-                <div className="radio-indicator active" aria-hidden="true">
-                  <Check size={12} strokeWidth={2.8} />
-                </div>
+                isArabic ? (
+                  <div className="radio-indicator active" aria-hidden="true">
+                    <Check size={12} strokeWidth={2.8} />
+                  </div>
+                ) : (
+                  <div className="radio-indicator" aria-hidden="true" />
+                )
               }
-              onClick={() =>
-                handleItemClick('لغة التطبيق (العربية): سيتم تفعيل التبديل في المرحلة التالية')
-              }
-              ariaLabel="اللغة العربية - نشط حالياً"
-              className="lang-option active"
+              onClick={() => handleItemClick(t('toasts.langAr'))}
+              ariaLabel={t('language.arAria')}
+              className={`lang-option ${isArabic ? 'active' : ''}`}
             />
             <SettingsRow
               icon={<span className="lang-code-text">EN</span>}
               iconWrapClassName="lang-icon-wrap"
-              title="English"
-              subtitle="English interface"
-              trailing={<div className="radio-indicator" aria-hidden="true" />}
-              onClick={() =>
-                handleItemClick('لغة التطبيق (English): سيتم تفعيل التبديل في المرحلة التالية')
+              title={t('language.enTitle')}
+              subtitle={t('language.enSubtitle')}
+              valueTag={!isArabic ? t('language.currentBadge') : undefined}
+              valueTagClassName="active-tag"
+              trailing={
+                !isArabic ? (
+                  <div className="radio-indicator active" aria-hidden="true">
+                    <Check size={12} strokeWidth={2.8} />
+                  </div>
+                ) : (
+                  <div className="radio-indicator" aria-hidden="true" />
+                )
               }
-              ariaLabel="English - الإنجليزية"
-              className="lang-option"
+              onClick={() => handleItemClick(t('toasts.langEn'))}
+              ariaLabel={t('language.enAria')}
+              className={`lang-option ${!isArabic ? 'active' : ''}`}
             />
           </div>
         </section>
@@ -177,32 +190,26 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
         <section className="settings-section" aria-labelledby="section-restaurant">
           <h2 id="section-restaurant" className="settings-section-title">
             <Store size={13.5} className="section-title-icon" />
-            إعدادات المطعم
+            {t('restaurant.sectionTitle')}
           </h2>
           <div className="settings-card">
             <SettingsRow
               icon={<Clock size={17} strokeWidth={2} />}
-              title="أوقات العمل"
-              subtitle="مفتوح • 09:00 ص - 11:00 م"
-              onClick={() =>
-                handleItemClick('أوقات العمل: سيتم تفعيل تعديل المواعيد في المرحلة التالية')
-              }
+              title={t('restaurant.hoursTitle')}
+              subtitle={t('restaurant.hoursSubtitle')}
+              onClick={() => handleItemClick(t('toasts.hours'))}
             />
             <SettingsRow
               icon={<Building2 size={17} strokeWidth={2} />}
-              title="بيانات المطعم"
-              subtitle="العنوان، بيانات التواصل، والترخيص"
-              onClick={() =>
-                handleItemClick('بيانات المطعم: سيتم تفعيل تحديث البيانات في المرحلة التالية')
-              }
+              title={t('restaurant.infoTitle')}
+              subtitle={t('restaurant.infoSubtitle')}
+              onClick={() => handleItemClick(t('toasts.info'))}
             />
             <SettingsRow
               icon={<UtensilsCrossed size={17} strokeWidth={2} />}
-              title="إعدادات القائمة"
-              subtitle="التصنيفات، التوفر التلقائي، والتسعير"
-              onClick={() =>
-                handleItemClick('إعدادات القائمة: سيتم تفعيل هذا القسم في المرحلة التالية')
-              }
+              title={t('restaurant.menuTitle')}
+              subtitle={t('restaurant.menuSubtitle')}
+              onClick={() => handleItemClick(t('toasts.menu'))}
             />
           </div>
         </section>
@@ -211,26 +218,22 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
         <section className="settings-section" aria-labelledby="section-preferences">
           <h2 id="section-preferences" className="settings-section-title">
             <SlidersHorizontal size={13.5} className="section-title-icon" />
-            تفضيلات التطبيق
+            {t('preferences.sectionTitle')}
           </h2>
           <div className="settings-card">
             <SettingsRow
               icon={<Bell size={17} strokeWidth={2} />}
-              title="التنبيهات والإشعارات"
-              subtitle="إشعارات الطلبات وتأكيدات الدفع"
-              valueTag="مفعلة"
-              onClick={() =>
-                handleItemClick('إعدادات الإشعارات: سيتم تفعيل التخصيص في المرحلة التالية')
-              }
+              title={t('preferences.notificationsTitle')}
+              subtitle={t('preferences.notificationsSubtitle')}
+              valueTag={t('preferences.notificationsBadge')}
+              onClick={() => handleItemClick(t('toasts.notifications'))}
             />
             <SettingsRow
               icon={<Palette size={17} strokeWidth={2} />}
-              title="المظهر والسمة"
-              subtitle="الوضع الفاتح الافتراضي"
-              valueTag="فاتح"
-              onClick={() =>
-                handleItemClick('مظهر التطبيق: سيتم تفعيل تخصيص السمات في المرحلة التالية')
-              }
+              title={t('preferences.appearanceTitle')}
+              subtitle={t('preferences.appearanceSubtitle')}
+              valueTag={t('preferences.appearanceBadge')}
+              onClick={() => handleItemClick(t('toasts.appearance'))}
             />
           </div>
         </section>
@@ -239,33 +242,29 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
         <section className="settings-section" aria-labelledby="section-account">
           <h2 id="section-account" className="settings-section-title">
             <Lock size={13.5} className="section-title-icon" />
-            الحساب والأمان
+            {t('account.sectionTitle')}
           </h2>
           <div className="settings-card">
             <SettingsRow
               icon={<Lock size={17} strokeWidth={2} />}
-              title="تغيير كلمة المرور"
-              subtitle="تحديث رمز الدخول وكلمة المرور"
-              onClick={() =>
-                handleItemClick('تغيير كلمة المرور: سيتم تفعيل هذه الميزة في المرحلة التالية')
-              }
+              title={t('account.passwordTitle')}
+              subtitle={t('account.passwordSubtitle')}
+              onClick={() => handleItemClick(t('toasts.password'))}
             />
             <SettingsRow
               icon={<LogOut size={17} strokeWidth={2} />}
-              title="تسجيل الخروج"
-              subtitle="إنهاء الجلسة الحالية لهذا الجهاز"
+              title={t('account.logoutTitle')}
+              subtitle={t('account.logoutSubtitle')}
               isDanger
-              onClick={() =>
-                handleItemClick('تسجيل الخروج: سيتم تفعيل تسجيل الخروج في المرحلة التالية')
-              }
+              onClick={() => handleItemClick(t('toasts.logout'))}
             />
           </div>
         </section>
 
         {/* System Version Footer */}
         <footer className="settings-version-footer">
-          <span className="version-name">منظومة إدارة مطاعم الحرم الجامعي</span>
-          <span className="version-number">الإصدار 1.0.0 • نسخة عرض تجريبية</span>
+          <span className="version-name">{t('footer.systemName')}</span>
+          <span className="version-number">{t('footer.version')}</span>
         </footer>
       </div>
     </main>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { MobileAppShell } from '../components/layout/MobileAppShell';
 import { TopHeader } from '../components/layout/TopHeader';
 import { BottomNavigation, NavTab } from '../components/layout/BottomNavigation';
@@ -6,25 +7,32 @@ import { OrdersPage } from '../features/orders/OrdersPage';
 import { SettingsPage } from '../features/settings/SettingsPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
 import { useOrderStore } from '../data/mockStore';
+import i18n from '../i18n';
 import '../styles/global.css';
 
-export function getNotificationMessage(pendingCount: number): string {
+export function getNotificationMessage(
+  pendingCount: number,
+  translate?: (key: string, opts?: any) => string
+): string {
+  const t = translate || ((key: string, opts?: any) => String(i18n.t(key, opts)));
+
   if (pendingCount <= 0) {
-    return 'لا توجد إشعارات جديدة';
+    return String(t('common:notifications.none'));
   }
   if (pendingCount === 1) {
-    return 'مركز التنبيهات: لديك طلب واحد جديد بانتظار تأكيد الدفع';
+    return String(t('common:notifications.one'));
   }
   if (pendingCount === 2) {
-    return 'مركز التنبيهات: لديك طلبان جديدان بانتظار تأكيد الدفع';
+    return String(t('common:notifications.two'));
   }
   if (pendingCount >= 3 && pendingCount <= 10) {
-    return `مركز التنبيهات: لديك ${pendingCount} طلبات جديدة بانتظار تأكيد الدفع`;
+    return String(t('common:notifications.few', { count: pendingCount }));
   }
-  return `مركز التنبيهات: لديك ${pendingCount} طلباً جديداً بانتظار تأكيد الدفع`;
+  return String(t('common:notifications.many', { count: pendingCount }));
 }
 
 export function App() {
+  const { t } = useTranslation('common');
   const { counts } = useOrderStore();
   const [activeTab, setActiveTab] = useState<NavTab>('orders');
   const [toast, setToast] = useState<{
@@ -37,11 +45,11 @@ export function App() {
   };
 
   const handleSearchClick = () => {
-    showToast('خاصية البحث السريع ستتوفر مع استكمال بقية الشاشات', 'info');
+    showToast(t('header.searchNotice'), 'info');
   };
 
   const handleNotificationsClick = () => {
-    showToast(getNotificationMessage(counts.pending), 'info');
+    showToast(getNotificationMessage(counts.pending, (k, o) => String(t(k, o))), 'info');
   };
 
   return (

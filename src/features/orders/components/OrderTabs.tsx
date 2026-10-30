@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Clock, ChefHat, CheckCircle2, Package, Sparkles, LucideIcon } from 'lucide-react';
 import { OrderViewTab } from '../../../types/order';
 import './OrderTabs.css';
@@ -9,18 +10,17 @@ interface OrderTabsProps {
   onTabChange: (tab: OrderViewTab) => void;
 }
 
-interface TabConfig {
+interface TabDef {
   key: OrderViewTab;
-  label: string;
   icon: LucideIcon;
 }
 
-const tabs: TabConfig[] = [
-  { key: 'pending', label: 'بانتظار الدفع', icon: Clock },
-  { key: 'new', label: 'طلبات جديدة', icon: Sparkles },
-  { key: 'preparing', label: 'قيد التحضير', icon: ChefHat },
-  { key: 'ready', label: 'جاهز للاستلام', icon: CheckCircle2 },
-  { key: 'delivered', label: 'تم التسليم', icon: Package },
+const tabDefs: TabDef[] = [
+  { key: 'pending', icon: Clock },
+  { key: 'new', icon: Sparkles },
+  { key: 'preparing', icon: ChefHat },
+  { key: 'ready', icon: CheckCircle2 },
+  { key: 'delivered', icon: Package },
 ];
 
 export const OrderTabs: React.FC<OrderTabsProps> = ({
@@ -28,6 +28,7 @@ export const OrderTabs: React.FC<OrderTabsProps> = ({
   counts,
   onTabChange,
 }) => {
+  const { t } = useTranslation('orders');
   const activeTabRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
@@ -41,12 +42,13 @@ export const OrderTabs: React.FC<OrderTabsProps> = ({
   }, [activeTab]);
 
   return (
-    <div className="order-tabs-wrapper" role="tablist" aria-label="أقسام الطلبات">
+    <div className="order-tabs-wrapper" role="tablist" aria-label={t('tabs.ariaLabel')}>
       <div className="order-tabs-scroll">
-        {tabs.map((tab) => {
+        {tabDefs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.key;
           const count = counts[tab.key] || 0;
+          const label = t(`tabs.${tab.key}`);
 
           return (
             <button
@@ -59,7 +61,7 @@ export const OrderTabs: React.FC<OrderTabsProps> = ({
               onClick={() => onTabChange(tab.key)}
             >
               <Icon size={16} className="tab-icon" />
-              <span className="tab-label">{tab.label}</span>
+              <span className="tab-label">{label}</span>
               <span className="tab-count-badge">{count}</span>
             </button>
           );

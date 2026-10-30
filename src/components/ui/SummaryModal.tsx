@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { X, ShoppingBag, Coins, Clock, CheckCircle2, ChefHat, Package, Check } from 'lucide-react';
 import { Order } from '../../types/order';
 import { formatCurrency } from '../../utils/formatCurrency';
 import { getModalActionInfo } from '../../features/orders/orderTransitions';
+import { getLocalizedItemName, getLocalizedStudentName, getLocalizedStudentNote } from '../../utils/localizeOrder';
 import { MockReceipt, ReceiptReviewModal } from './MockReceipt';
 import './SummaryModal.css';
 
@@ -17,8 +19,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
   onClose,
   onAction,
 }) => {
-  if (!order) return null;
-
+  const { t } = useTranslation(['orders', 'common']);
   const [isReceiptReviewActive, setIsReceiptReviewActive] = useState(false);
   const modalBodyRef = useRef<HTMLDivElement>(null);
   const scrollPosRef = useRef(0);
@@ -26,14 +27,16 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
   // Reset review modal if order changes
   useEffect(() => {
     setIsReceiptReviewActive(false);
-  }, [order.id]);
+  }, [order?.id]);
 
-  const modalAction = getModalActionInfo(order);
+  if (!order) return null;
+
+  const modalAction = getModalActionInfo(order, (k) => t(k as any));
 
   const handleActionClick = () => {
     if (!modalAction.disabled) {
       onAction(order);
-      onClose(); // Close modal after successful state advancement
+      onClose();
     }
   };
 
@@ -46,7 +49,6 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
 
   const handleCloseReceiptReview = () => {
     setIsReceiptReviewActive(false);
-    // Restore previous scroll position
     requestAnimationFrame(() => {
       if (modalBodyRef.current) {
         modalBodyRef.current.scrollTop = scrollPosRef.current;
@@ -59,7 +61,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
       return (
         <span className="modal-status-badge pending">
           <Clock size={12} />
-          <span>بانتظار تأكيد الدفع</span>
+          <span>{t('orders:modal.status.pending')}</span>
         </span>
       );
     }
@@ -69,28 +71,28 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
         return (
           <span className="modal-status-badge new">
             <CheckCircle2 size={12} />
-            <span>طلب جديد • الدفع مؤكد</span>
+            <span>{t('orders:modal.status.new')}</span>
           </span>
         );
       case 'preparing':
         return (
           <span className="modal-status-badge preparing">
             <ChefHat size={12} />
-            <span>قيد التحضير في المطبخ</span>
+            <span>{t('orders:modal.status.preparing')}</span>
           </span>
         );
       case 'ready':
         return (
           <span className="modal-status-badge ready">
             <CheckCircle2 size={12} />
-            <span>جاهز للاستلام الفوري</span>
+            <span>{t('orders:modal.status.ready')}</span>
           </span>
         );
       case 'delivered':
         return (
           <span className="modal-status-badge delivered">
             <Package size={12} />
-            <span>تم تسليم الطلب بنجاح</span>
+            <span>{t('orders:modal.status.delivered')}</span>
           </span>
         );
     }
@@ -113,6 +115,10 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
   };
 
   const totalItemsCount = order.items.reduce((s, it) => s + it.quantity, 0);
+  const itemsUnit =
+    totalItemsCount === 1
+      ? t('common:units.itemCount_one')
+      : t('common:units.itemCount_other', { count: totalItemsCount });
 
   return (
     <div className="modal-backdrop" onClick={onClose} role="dialog" aria-modal="true">
@@ -121,7 +127,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
         className={`summary-modal ${isReceiptReviewActive ? 'hidden-for-review' : ''}`}
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Modal Header - Hidden while receipt review is active */}
+        {/* Modal Header */}
         {!isReceiptReviewActive && (
           <div className="modal-header">
             <div className="modal-title-group">
@@ -129,14 +135,17 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
                 <span className="modal-order-number">{order.orderNumber}</span>
                 {renderStatusBadge()}
               </div>
-              {/* Student name without faculty or academic specialization */}
-              <span className="modal-student-name">الطالب: {order.studentName}</span>
+              <span className="modal-student-name">
+                {t('orders:modal.student', {
+                  name: getLocalizedStudentName(order.studentName, t),
+                })}
+              </span>
             </div>
             <button
               type="button"
               className="modal-close-btn"
               onClick={onClose}
-              aria-label="إغلاق مراجعة الطلب"
+              aria-label={t('orders:modal.closeAria')}
             >
               <X size={20} />
             </button>
@@ -148,7 +157,11 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
           {/* Order Items Heading */}
           <div className="summary-section-title">
             <ShoppingBag size={16} />
-            <span>عناصر الطلب ({totalItemsCount} {totalItemsCount === 1 ? 'عنصر' : 'عناصر'})</span>
+            <span>
+              {t('orders:modal.itemsTitle', {
+                countText: itemsUnit,
+              })}
+            </span>
           </div>
 
           {/* Line items list */}
@@ -156,7 +169,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
             {order.items.map((it) => (
               <div key={it.id} className="item-row">
                 <div className="item-info">
-                  <span className="item-name">{it.name}</span>
+                  <span className="item-name">{getLocalizedItemName(it, t)}</span>
                   <span className="item-qty-price">
                     {it.quantity} × {formatCurrency(it.unitPrice)}
                   </span>
@@ -169,23 +182,25 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
           {/* Student Preparation Note */}
           {order.studentNote && (
             <div className="student-note-box">
-              <span className="note-label">ملاحظات التحضير من الطالب:</span>
-              <p className="note-text">{order.studentNote}</p>
+              <span className="note-label">{t('orders:modal.studentNote')}</span>
+              <p className="note-text">{getLocalizedStudentNote(order.studentNote, t)}</p>
             </div>
           )}
 
           {/* Order Totals & Coins */}
           <div className="modal-totals">
             <div className="total-row">
-              <span className="total-label">الإجمالي المطلوب:</span>
+              <span className="total-label">{t('orders:modal.totalRequired')}</span>
               <span className="total-value">{formatCurrency(order.total)}</span>
             </div>
             <div className="coins-row">
               <span className="coins-label">
                 <Coins size={14} className="coin-icon" />
-                <span>العملات المكتسبة للطالب:</span>
+                <span>{t('orders:modal.coinsEarned')}</span>
               </span>
-              <span className="coins-value">+{order.coins} عملة</span>
+              <span className="coins-value">
+                {t('common:units.coins', { count: order.coins })}
+              </span>
             </div>
           </div>
 
@@ -193,7 +208,7 @@ export const SummaryModal: React.FC<SummaryModalProps> = ({
           <MockReceipt order={order} onOpenReview={handleOpenReceiptReview} />
         </div>
 
-        {/* Modal Fixed Footer Action - Hidden while receipt review is active */}
+        {/* Modal Fixed Footer Action */}
         {!isReceiptReviewActive && (
           <div className="modal-footer">
             <button

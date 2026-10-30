@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Order, OrderViewTab } from '../../types/order';
 import { useOrderStore } from '../../data/mockStore';
 import { OrderTabs } from './components/OrderTabs';
@@ -13,6 +14,7 @@ interface OrdersPageProps {
 }
 
 export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
+  const { t } = useTranslation('orders');
   const { getOrdersByTab, counts, advanceOrder } = useOrderStore();
   const [activeTab, setActiveTab] = useState<OrderViewTab>('pending');
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
@@ -26,13 +28,25 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
     const result = advanceOrder(order.id);
     if (result.success) {
       if (prevPayment === 'pendingConfirmation') {
-        onShowToast(`تم تأكيد دفع الطلب ${order.orderNumber} بنجاح وتم نقله إلى الطلبات الجديدة`, 'success');
+        onShowToast(
+          t('toasts.paymentConfirmed', { orderNumber: order.orderNumber }),
+          'success'
+        );
       } else if (prevOperational === 'newOrder') {
-        onShowToast(`تم بدء تحضير الطلب ${order.orderNumber} في المطبخ`, 'success');
+        onShowToast(
+          t('toasts.prepStarted', { orderNumber: order.orderNumber }),
+          'success'
+        );
       } else if (prevOperational === 'preparing') {
-        onShowToast(`أصبح الطلب ${order.orderNumber} جاهزاً للاستلام الآن`, 'success');
+        onShowToast(
+          t('toasts.orderReady', { orderNumber: order.orderNumber }),
+          'success'
+        );
       } else if (prevOperational === 'ready') {
-        onShowToast(`تم تسليم الطلب ${order.orderNumber} للطالب بنجاح`, 'success');
+        onShowToast(
+          t('toasts.orderDelivered', { orderNumber: order.orderNumber }),
+          'success'
+        );
       }
     } else if (result.errorMessage) {
       onShowToast(result.errorMessage, 'warning');
@@ -46,16 +60,14 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
   return (
     <div className="orders-page">
       {/* Demo Notice Banner per WEB_DEMO_SPEC */}
-      <aside className="demo-notice-bar" aria-label="تنبيه النسخة التجريبية">
+      <aside className="demo-notice-bar" aria-label={t('demoNotice')}>
         <Info size={14} className="notice-icon" />
-        <span className="notice-text">
-          نسخة تجريبية لجامعة المستقبل • جميع بيانات الطلاب والمدفوعات افتراضية
-        </span>
+        <span className="notice-text">{t('demoNotice')}</span>
       </aside>
 
       {/* Main Page Title */}
       <div className="orders-page-header">
-        <h1 className="orders-title">الطلبات</h1>
+        <h1 className="orders-title">{t('pageTitle')}</h1>
       </div>
 
       {/* Status Filter Tabs */}
@@ -92,4 +104,3 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
     </div>
   );
 };
-

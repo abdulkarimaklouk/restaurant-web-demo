@@ -1,4 +1,5 @@
 import { Order, PaymentStatus, OperationalStatus } from '../../types/order';
+import i18n from '../../i18n';
 
 export interface TransitionResult {
   success: boolean;
@@ -9,23 +10,27 @@ export interface TransitionResult {
 /**
  * Determines whether an order can advance to the next state, and returns the updated order.
  */
-export function advanceOrderStatus(order: Order): TransitionResult {
+export function advanceOrderStatus(
+  order: Order,
+  translate?: (key: string) => string
+): TransitionResult {
+  const t = translate || ((key: string) => i18n.t(key));
+
   // Step 1: If payment is pending confirmation, advance to confirmed (moves to 'newOrder')
   if (order.paymentStatus === 'pendingConfirmation') {
     const updated: Order = {
       ...order,
       paymentStatus: 'confirmed' as PaymentStatus,
-      // Operational status stays newOrder
       operationalStatus: 'newOrder' as OperationalStatus,
     };
     return { success: true, order: updated };
   }
 
-  // Guard: If payment is somehow not confirmed, disallow operational progress
+  // Guard: If payment is not confirmed, disallow operational progress
   if (order.paymentStatus !== 'confirmed') {
     return {
       success: false,
-      errorMessage: 'لا يمكن بدء التحضير قبل تأكيد استلام الدفع.',
+      errorMessage: t('orders:toasts.cannotPrepare'),
     };
   }
 
@@ -59,23 +64,27 @@ export function advanceOrderStatus(order: Order): TransitionResult {
   // Already delivered
   return {
     success: false,
-    errorMessage: 'تم تسليم هذا الطلب بالفعل.',
+    errorMessage: t('orders:toasts.alreadyDelivered'),
   };
 }
 
 /**
  * Returns the action button label and styling variant for an order card on the dashboard.
- * For pending payment, card displays "مراجعة الإيصال" which opens the review modal.
  */
-export function getCardActionInfo(order: Order): {
+export function getCardActionInfo(
+  order: Order,
+  translate?: (key: string) => string
+): {
   label: string;
   variant: 'crimson' | 'primary' | 'green' | 'dark' | 'none';
   disabled: boolean;
   opensModal: boolean;
 } {
+  const t = translate || ((key: string) => i18n.t(key));
+
   if (order.paymentStatus === 'pendingConfirmation') {
     return {
-      label: 'مراجعة الإيصال',
+      label: t('orders:card.actions.reviewReceipt'),
       variant: 'crimson',
       disabled: false,
       opensModal: true,
@@ -85,28 +94,28 @@ export function getCardActionInfo(order: Order): {
   switch (order.operationalStatus) {
     case 'newOrder':
       return {
-        label: 'بدء التحضير',
+        label: t('orders:card.actions.startPreparing'),
         variant: 'primary',
         disabled: false,
         opensModal: false,
       };
     case 'preparing':
       return {
-        label: 'جاهز للاستلام',
+        label: t('orders:card.actions.markReady'),
         variant: 'green',
         disabled: false,
         opensModal: false,
       };
     case 'ready':
       return {
-        label: 'تسليم الطلب',
+        label: t('orders:card.actions.markDelivered'),
         variant: 'dark',
         disabled: false,
         opensModal: false,
       };
     case 'delivered':
       return {
-        label: 'تم التسليم',
+        label: t('orders:card.actions.delivered'),
         variant: 'none',
         disabled: true,
         opensModal: false,
@@ -116,17 +125,20 @@ export function getCardActionInfo(order: Order): {
 
 /**
  * Returns the primary action button label and styling inside the Order Review Modal.
- * For pending payment, displays "تأكيد الدفع".
- * For already confirmed payment, displays the next operational step.
  */
-export function getModalActionInfo(order: Order): {
+export function getModalActionInfo(
+  order: Order,
+  translate?: (key: string) => string
+): {
   label: string;
   variant: 'crimson' | 'primary' | 'green' | 'dark' | 'none';
   disabled: boolean;
 } {
+  const t = translate || ((key: string) => i18n.t(key));
+
   if (order.paymentStatus === 'pendingConfirmation') {
     return {
-      label: 'تأكيد الدفع',
+      label: t('orders:modal.confirmPayment'),
       variant: 'crimson',
       disabled: false,
     };
@@ -135,30 +147,30 @@ export function getModalActionInfo(order: Order): {
   switch (order.operationalStatus) {
     case 'newOrder':
       return {
-        label: 'بدء التحضير',
+        label: t('orders:card.actions.startPreparing'),
         variant: 'primary',
         disabled: false,
       };
     case 'preparing':
       return {
-        label: 'جاهز للاستلام',
+        label: t('orders:card.actions.markReady'),
         variant: 'green',
         disabled: false,
       };
     case 'ready':
       return {
-        label: 'تسليم الطلب',
+        label: t('orders:card.actions.markDelivered'),
         variant: 'dark',
         disabled: false,
       };
     case 'delivered':
       return {
-        label: 'تم تسليم الطلب',
+        label: t('orders:card.actions.delivered'),
         variant: 'none',
         disabled: true,
       };
   }
 }
 
-// Backward compatibility alias if needed
+// Backward compatibility alias
 export const getOrderActionInfo = getCardActionInfo;

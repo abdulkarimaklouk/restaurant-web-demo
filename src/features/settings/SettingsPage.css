@@ -114,7 +114,7 @@
   gap: 10px;
   width: 100%;
   padding: 12px 14px;
-  text-align: right;
+  text-align: start;
   cursor: pointer;
   user-select: none;
   transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
@@ -222,7 +222,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
-  text-align: right;
+  text-align: start;
   user-select: none;
   position: relative;
   transition: background-color 0.15s ease;
@@ -317,8 +317,16 @@
   transition: transform 0.15s ease;
 }
 
-.settings-row-btn:hover .settings-chevron {
+[dir="rtl"] .settings-row-btn:hover .settings-chevron {
   transform: translateX(-2px);
+}
+
+[dir="ltr"] .settings-chevron {
+  transform: scaleX(-1);
+}
+
+[dir="ltr"] .settings-row-btn:hover .settings-chevron {
+  transform: scaleX(-1) translateX(-2px);
 }
 
 /* Value Status Tags */
@@ -339,7 +347,7 @@
   background-color: var(--color-green-bg);
   padding: 1.5px 6px;
   border-radius: var(--radius-badge);
-  margin-left: 2px;
+  margin-inline-start: 2px;
 }
 
 .radio-indicator {

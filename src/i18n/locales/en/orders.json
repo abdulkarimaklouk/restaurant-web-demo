@@ -38,7 +38,7 @@
       "ready": "Ready for Immediate Pickup",
       "delivered": "Order Delivered Successfully"
     },
-    "itemsTitle": "Order Items ({{count}} {{unit}})",
+    "itemsTitle": "Order Items ({{countText}})",
     "studentNote": "Student Preparation Note:",
     "totalRequired": "Total Required:",
     "coinsEarned": "Student Loyalty Coins:",
@@ -86,6 +86,35 @@
     "cannotPrepare": "Preparation cannot start before payment is confirmed.",
     "alreadyDelivered": "This order has already been delivered.",
     "orderNotFound": "Order not found."
+  },
+  "mockData": {
+    "items": {
+      "m-1": "Koshari Meal",
+      "m-2": "Grilled Chicken Meal",
+      "m-3": "Baked Bechamel Pasta",
+      "s-1": "Chicken Shawarma",
+      "s-3": "Foul & Falafel",
+      "s-4": "Cheese Fries",
+      "d-1": "Fresh Orange Juice",
+      "d-2": "Hot Tea",
+      "d-3": "Mineral Water",
+      "ds-1": "Chocolate Cake"
+    },
+    "students": {
+      "يوسف أحمد": "Youssef Ahmed",
+      "سارة إبراهيم": "Sara Ibrahim",
+      "علي محمود": "Ali Mahmoud",
+      "عمر خالد": "Omar Khaled",
+      "منى أحمد": "Mona Ahmed",
+      "كريم طارق": "Kareem Tarek",
+      "نور الدين": "Nour El-Deen",
+      "سلمى حسن": "Salma Hassan",
+      "محمود عادل": "Mahmoud Adel",
+      "هدى مصطفى": "Hoda Mostafa"
+    },
+    "notes": {
+      "الرجاء تسليم الأكل ساخناً": "Please serve food hot",
+      "بدون شطة من فضلك": "No spicy sauce please"
+    }
   }
 }
-

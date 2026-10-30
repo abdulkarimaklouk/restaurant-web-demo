@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Order, OrderViewTab } from '../types/order';
 import { getInitialOrders } from './seedOrders';
 import { advanceOrderStatus, TransitionResult } from '../features/orders/orderTransitions';
+import i18n from '../i18n';
 
 class MockOrderStore {
   private orders: Order[] = getInitialOrders();
@@ -64,7 +65,12 @@ class MockOrderStore {
   public advanceOrder(orderId: string): TransitionResult {
     const targetOrder = this.orders.find((o) => o.id === orderId);
     if (!targetOrder) {
-      return { success: false, errorMessage: 'الطلب غير موجود.' };
+      return {
+        success: false,
+        errorMessage: i18n.t('orders:toasts.orderNotFound', {
+          defaultValue: 'الطلب غير موجود.',
+        }),
+      };
     }
 
     const result = advanceOrderStatus(targetOrder);

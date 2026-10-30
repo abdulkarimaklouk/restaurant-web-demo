@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { ClipboardList, UtensilsCrossed, SlidersHorizontal, Settings } from 'lucide-react';
 import { useOrderStore } from '../../data/mockStore';
 import './BottomNavigation.css';
@@ -18,34 +19,38 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   onShowNotice,
   unreadOrdersCount,
 }) => {
+  const { t } = useTranslation('common');
   const { counts } = useOrderStore();
   const unreadCount =
     unreadOrdersCount !== undefined ? unreadOrdersCount : counts.pending + counts.new;
 
   const handleNavClick = (dest: NavTab) => {
     if (dest === 'menu') {
-      onShowNotice('سيتم تفعيل قسم إدارة القائمة في المرحلة التالية');
+      onShowNotice(t('nav.menuNotice'));
     } else if (dest === 'analytics') {
-      onShowNotice('سيتم تفعيل قسم أدوات العرض التوضيحي في المرحلة التالية');
+      onShowNotice(t('nav.analyticsNotice'));
     } else {
       onTabChange(dest);
     }
   };
 
   return (
-    <footer className="bottom-nav-footer" aria-label="شريط التنقل الرئيسي">
+    <footer className="bottom-nav-footer" aria-label={t('nav.mainNavAria')}>
       {/* 1. Orders */}
       <button
         type="button"
         className={`nav-item ${activeTab === 'orders' ? 'active' : ''}`}
         onClick={() => handleNavClick('orders')}
-        aria-label="الطلبات"
+        aria-label={t('nav.orders')}
         aria-current={activeTab === 'orders' ? 'page' : undefined}
       >
         <span className="nav-icon-wrap">
           <ClipboardList size={22} strokeWidth={2} className="nav-icon" />
           {unreadCount > 0 && (
-            <span className="nav-orders-badge" aria-label={`${unreadCount} طلبات جديدة`}>
+            <span
+              className="nav-orders-badge"
+              aria-label={t('nav.newOrdersBadge', { count: unreadCount })}
+            >
               {unreadCount > 9 ? '9+' : unreadCount}
             </span>
           )}
@@ -57,7 +62,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         type="button"
         className={`nav-item ${activeTab === 'menu' ? 'active' : ''}`}
         onClick={() => handleNavClick('menu')}
-        aria-label="القائمة"
+        aria-label={t('nav.menu')}
         aria-current={activeTab === 'menu' ? 'page' : undefined}
       >
         <span className="nav-icon-wrap">
@@ -70,7 +75,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         type="button"
         className={`nav-item ${activeTab === 'analytics' ? 'active' : ''}`}
         onClick={() => handleNavClick('analytics')}
-        aria-label="التحليلات"
+        aria-label={t('nav.analytics')}
         aria-current={activeTab === 'analytics' ? 'page' : undefined}
       >
         <span className="nav-icon-wrap">
@@ -83,7 +88,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         type="button"
         className={`nav-item ${activeTab === 'settings' ? 'active' : ''}`}
         onClick={() => handleNavClick('settings')}
-        aria-label="الإعدادات"
+        aria-label={t('nav.settings')}
         aria-current={activeTab === 'settings' ? 'page' : undefined}
       >
         <span className="nav-icon-wrap">
