@@ -193,6 +193,18 @@ To establish an accessible, mobile-first product deletion entry point and confir
 - **Phase 3E Non-Mutation Scope**: In compliance with UI-only requirements, clicking Confirm Delete validates the product existence, shows an informative localized placeholder toast (`deleteProduct.placeholderSuccess`), and closes the dialog without mutating `menuStore` or `localStorage['menu_items']`. Actual item removal from memory and storage is deferred to Phase 3F.
 - **Theming & Localization**: Seamlessly supports Light and Dark modes via semantic CSS tokens (`--color-modal-bg`, `--color-modal-overlay`, `--color-crimson`, etc.) and full RTL Arabic and LTR English layouts without horizontal overflow on mobile viewports.
 
+## D-026: Product Deletion Logic, Store API & Persistence (Phase 3F)
+
+To connect the Delete Product confirmation interface to the centralized `menuStore` and support irreversible removal:
+- **Centralized Deletion Method (`deleteItem`)**: Implemented `menuStore.deleteItem(id: string): boolean` in `src/data/menuStore.ts`. Validates product ID string, identifies the index of the target item, filters it out from the array (`filter((i) => i.id !== trimmedId)`), serializes the updated array to `localStorage['menu_items']`, updates in-memory `items`, and notifies reactive listeners.
+- **Atomic Failure Handling & Safety**: If serialization fails or the item does not exist, `deleteItem()` rejects the mutation safely and returns `false`, ensuring that the menu state is not partially modified.
+- **Dynamic Category Count Recalculation**: Removing an item updates `useMenuStore()` state, causing `getCategoryCounts(items)` to recalculate badge counts synchronously across all category tabs (`all`, `main`, `appetizers`, `drinks`).
+- **Immediate Dashboard Card Removal**: The deleted card is removed immediately from the React DOM tree without page refresh. Other items and their stable IDs remain intact in their original display order.
+- **Dialog & Sheet Lifecycle**: On confirmation, both `DeleteProductDialog` and `ProductActionsSheet` are closed cleanly (`null`). A localized success toast (`deleteProduct.deleteSuccessWithName` / `deleteProduct.deleteSuccess`) informs the user of successful removal.
+- **Non-Mutation on Dismissal**: Closing via Cancel button, backdrop click, or `Escape` key closes the dialog without triggering `deleteItem()`, leaving the product present in memory and `localStorage`.
+- **Persistence Across Sessions**: Changes are persisted directly to `localStorage['menu_items']`. On hard page reload or browser restart, deleted products do not reappear. Empty menu state (`[]`) is defensively supported in `readFromStorage()`.
+
+
 
 
 

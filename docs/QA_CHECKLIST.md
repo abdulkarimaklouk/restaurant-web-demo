@@ -210,6 +210,25 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] 0 uncaught console errors.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 3F: Implement Actual Product Deletion Logic
+
+- [x] Implement `deleteItem(id)` in `src/data/menuStore.ts` with strict ID validation.
+- [x] Connect `DeleteProductDialog` confirmation to `menuStore.deleteItem(id)`.
+- [x] Deletion removes only the selected product and preserves all other products and their IDs.
+- [x] Deletion updates `localStorage['menu_items']` immediately.
+- [x] Dashboard card disappears immediately upon deletion confirmation without page refresh.
+- [x] Category tabs count badges recalculate automatically across all categories.
+- [x] Action sheet and confirmation dialog close immediately after deletion.
+- [x] Localized success toast displays product name after deletion.
+- [x] Cancel, backdrop click, or Escape dismisses dialog without mutating store or storage.
+- [x] Handling of invalid or missing product IDs rejects safely without partial modification.
+- [x] Deleting an original seed product verified.
+- [x] Deleting a user-created product verified.
+- [x] Refreshing the browser verifies persistent deletion in `localStorage`.
+- [x] Verified across Arabic RTL, English LTR, Light Theme, and Dark Theme.
+- [x] 0 uncaught console errors.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
 
 
 

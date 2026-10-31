@@ -122,6 +122,9 @@
     "warningNote": "This action will permanently remove the product from the menu.",
     "confirmBtn": "Delete Product",
     "cancelBtn": "Cancel",
+    "deleteSuccess": "Product removed successfully from the menu.",
+    "deleteSuccessWithName": "\"{{name}}\" removed successfully from the menu.",
+    "deleteError": "Failed to delete product, or product no longer exists.",
     "placeholderSuccess": "Demo • Deletion request for \"{{name}}\" confirmed successfully (actual deletion will be executed in next phase)."
   }
 }

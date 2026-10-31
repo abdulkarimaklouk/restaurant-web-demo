@@ -214,7 +214,7 @@ class MenuStore {
       }
 
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length > 0) {
+      if (Array.isArray(parsed)) {
         const validated: MenuItem[] = [];
         for (const item of parsed) {
           const validItem = validateMenuItem(item);
@@ -223,7 +223,7 @@ class MenuStore {
           }
         }
 
-        if (validated.length > 0) {
+        if (parsed.length === 0 || validated.length > 0) {
           return validated;
         }
       }
@@ -367,6 +367,31 @@ class MenuStore {
     return true;
   }
 
+  public deleteItem(id: string): boolean {
+    if (!id || typeof id !== 'string' || !id.trim()) {
+      console.warn('Cannot delete item: invalid ID provided');
+      return false;
+    }
+
+    const trimmedId = id.trim();
+    const index = this.items.findIndex((i) => i.id === trimmedId);
+    if (index === -1) {
+      console.warn(`Item with id "${trimmedId}" not found`);
+      return false;
+    }
+
+    const nextItems = this.items.filter((i) => i.id !== trimmedId);
+    try {
+      this.writeToStorage(nextItems);
+      this.items = nextItems;
+      this.notify();
+      return true;
+    } catch (e) {
+      console.error(`Failed to persist menu items after deleting "${trimmedId}":`, e);
+      return false;
+    }
+  }
+
   public resetToDefault(): void {
     this.items = cloneMenuItems(INITIAL_MENU_ITEMS);
     this.writeToStorage(this.items);
@@ -413,6 +438,7 @@ export function useMenuStore() {
     addItem: (input: CreateMenuItemInput) => menuStore.addItem(input),
     updateItems: (newItems: MenuItem[]) => menuStore.updateItems(newItems),
     updateItem: (id: string, updates: Partial<MenuItem>) => menuStore.updateItem(id, updates),
+    deleteItem: (id: string) => menuStore.deleteItem(id),
     resetToDefault: () => menuStore.resetToDefault(),
   };
 }

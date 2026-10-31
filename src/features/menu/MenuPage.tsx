@@ -18,7 +18,7 @@ interface MenuPageProps {
 
 export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('menu');
-  const { items, categoryCounts } = useMenuStore();
+  const { items, categoryCounts, deleteItem } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
@@ -55,7 +55,12 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   };
 
   const handleConfirmDelete = (item: MenuItem) => {
-    if (!item || !item.id) return;
+    if (!item || !item.id) {
+      onShowToast(t('deleteProduct.deleteError'), 'warning');
+      setDeleteConfirmProduct(null);
+      return;
+    }
+
     const currentLang = i18n.resolvedLanguage || i18n.language || 'ar';
     const isEn = currentLang.startsWith('en');
     const productName = item.name
@@ -66,9 +71,20 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
         ? t(`items.${item.nameKey}`)
         : '';
 
-    // Phase 3E: UI implementation only. Actual deletion is deferred to Phase 3F.
-    onShowToast(t('deleteProduct.placeholderSuccess', { name: productName }), 'info');
+    const success = deleteItem(item.id);
+    if (success) {
+      onShowToast(
+        productName
+          ? t('deleteProduct.deleteSuccessWithName', { name: productName })
+          : t('deleteProduct.deleteSuccess'),
+        'success'
+      );
+    } else {
+      onShowToast(t('deleteProduct.deleteError'), 'warning');
+    }
+
     setDeleteConfirmProduct(null);
+    setActionMenuProduct(null);
   };
 
   const handleSelectCategory = (categoryId: MenuCategoryId) => {
