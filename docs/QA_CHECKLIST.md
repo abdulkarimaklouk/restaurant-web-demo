@@ -72,14 +72,6 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Light and Dark theme compatibility via design system tokens.
 - [x] Production build succeeded with zero errors.
 
-## Menu (Phase 3B Product Creation & Mutations — Upcoming)
-
-- [ ] Product creation mutates in-memory menu state and assigns stable IDs.
-- [ ] Availability changes immediately mutate in-memory menu state.
-- [ ] Unavailable items are excluded from simulated orders.
-- [ ] Existing order item snapshots do not change when a menu item is edited.
-- [ ] Item deletion is not present.
-
 ## Demo Tools
 
 - [ ] Simulating an order creates a pending-payment order with valid mock data.
@@ -270,8 +262,19 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] 0 uncaught console errors.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 6: Menu Integration & Visual QA
 
-
-
-
-
+- [x] Workflow A: Product creation ("فطيرة دجاج كريسبي" / "Crispy Chicken Pie"), category count increment (All: 8, Main: 4), Arabic & English search.
+- [x] Workflow B: Editing product (renaming to "Crunchy Chicken Wrap", category migration to Appetizers, price update), old keyword no longer matches, new keyword searchable, category counts update (Main: 3, Apps: 3).
+- [x] Workflow C: Availability management (toggling to unavailable updates badge/switch, Available-only filter hides item, Unavailable-only filter displays item, toggling back in-place dynamically unmounts it).
+- [x] Workflow D: Product deletion & cancellation (cancel keeps product in memory/storage, confirm permanently deletes item, counts decrement back to 7).
+- [x] Workflow E: Persistence across hard browser reload (all 7 seed products retain values and sequence, deleted product remains deleted, no corrupted records).
+- [x] Regression: Multi-axis concurrent filters (Category + Availability + Search).
+- [x] Regression: Empty search state and Reset All button.
+- [x] Regression: Zero-product empty menu state with "+ Add Product" action.
+- [x] Visual QA: Mobile viewport (390 × 844 CSS px) verified with 0 horizontal overflow.
+- [x] Visual QA: Desktop viewport (1280 × 800 CSS px) renders mobile shell as centered frame without layout breakage.
+- [x] Visual QA: Arabic RTL and English LTR layouts and typography.
+- [x] Visual QA: Light and Dark theme styling across all Menu views and dialogs.
+- [x] 0 uncaught console errors.
+- [x] Production build (`npm run build`) succeeded with 0 errors.

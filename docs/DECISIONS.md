@@ -227,6 +227,13 @@ To implement live search, multi-axis filtering, and dedicated empty states witho
   - *No Matches Found* (`items.length > 0 && filteredItems.length === 0`): Displays `SearchX` graphic, informative description with search query context, and a primary action button to reset all filters (`handleResetAllFilters`).
 - **Reactive Synchronization**: When products are added, edited, deleted, or toggled in `menuStore`, `filteredItems` re-evaluates immediately without full reload.
 
+## D-029: Menu Filter Sheet Positioning & Frame Containment (Phase 6)
+
+During desktop review verification (1280 × 800 CSS viewport) of the centered mobile phone shell:
+- `MenuFilterSheet.css` backdrop was updated from `position: fixed; inset: 0;` to `position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 150;` to ensure it is cleanly contained within `.shell-container`, aligning with the containment pattern established for `ProductActionsSheet` and `DeleteProductDialog`.
+- Added safe-area padding-bottom (`calc(16px + env(safe-area-inset-bottom, 8px))`) and normalized the top border-radius to 16px to prevent bottom-clipping on modern mobile viewports.
+
+
 
 
 
