@@ -61,10 +61,17 @@
   /* Blue (Preparing View & Badges) */
   --color-blue: #1d4ed8;
   --color-blue-bg: #eff6ff;
+  --color-primary-blue: #2563eb;
+  --color-primary-blue-hover: #1d4ed8;
+  --color-primary-blue-active: #1e40af;
+  --color-primary-blue-bg: #eff6ff;
+  --color-primary-blue-border: #bfdbfe;
+  --color-primary-blue-badge: #dbeafe;
 
   /* Green (Ready View & Store Open Dot) */
   --color-green: #15803d;
   --color-green-bg: #ecfdf5;
+  --color-green-border: #bbf7d0;
   --color-green-dot: #10b981;
 
   /* Corner Radii - Restrained enterprise ~5px */
@@ -148,10 +155,17 @@
   /* Blue (Preparing View & Badges) */
   --color-blue: #60a5fa;
   --color-blue-bg: #1e3a8a;
+  --color-primary-blue: #3b82f6;
+  --color-primary-blue-hover: #60a5fa;
+  --color-primary-blue-active: #2563eb;
+  --color-primary-blue-bg: rgba(37, 99, 235, 0.16);
+  --color-primary-blue-border: rgba(59, 130, 246, 0.35);
+  --color-primary-blue-badge: rgba(59, 130, 246, 0.25);
 
   /* Green (Ready View & Store Open Dot) */
   --color-green: #4ade80;
   --color-green-bg: #064e3b;
+  --color-green-border: rgba(74, 222, 128, 0.35);
   --color-green-dot: #34d399;
 
   /* Shadows - Elevated contrast for dark surface */

@@ -13,15 +13,16 @@
 .menu-page .demo-notice-bar {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   background-color: var(--color-notice-bg);
   border-bottom: 1px solid var(--color-notice-border);
-  padding: 3px 16px;
-  font-size: 10px;
+  padding: 3.5px 16px;
+  font-size: 10.5px;
   color: var(--color-text-muted);
   flex-shrink: 0;
   min-width: 0;
   width: 100%;
+  opacity: 0.85;
 }
 
 .menu-page .notice-icon {
@@ -40,7 +41,7 @@
 
 /* Page Header with Title and Add Item Action */
 .menu-page-header {
-  padding: 6px 16px 4px 16px;
+  padding: 10px 16px 8px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,45 +50,47 @@
 }
 
 .menu-page-title {
-  font-size: 21px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 800;
   color: var(--color-text-main);
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   line-height: 1.2;
+  margin: 0;
 }
 
-/* Primary "Add Item" Button */
+/* Prominent Primary "Add Item" Button */
 .btn-add-item {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  background-color: var(--color-primary-dark);
+  gap: 6px;
+  background-color: var(--color-primary-blue);
   color: #ffffff;
   border: none;
-  border-radius: var(--radius-btn, 8px);
-  padding: 6px 11px;
-  font-size: 12.5px;
+  border-radius: var(--radius-btn, 5px);
+  padding: 7px 13px;
+  font-size: 13px;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
-  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.12);
+  transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+  box-shadow: 0 2px 6px rgba(37, 99, 235, 0.22);
   line-height: 1;
   flex-shrink: 0;
 }
 
 .btn-add-item:hover {
-  background-color: var(--color-primary-dark-hover);
+  background-color: var(--color-primary-blue-hover);
+  box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
 }
 
 .btn-add-item:active {
-  background-color: var(--color-primary-dark-active);
+  background-color: var(--color-primary-blue-active);
   transform: scale(0.97);
 }
 
 .btn-add-item:focus-visible {
-  outline: 2px solid var(--color-primary-dark);
+  outline: 2px solid var(--color-primary-blue);
   outline-offset: 2px;
 }
 
@@ -114,7 +117,7 @@
 .menu-cards-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   min-width: 0;
   width: 100%;
 }

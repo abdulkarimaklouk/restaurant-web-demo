@@ -330,19 +330,40 @@
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
+.form-text-input.price-input,
 .price-input {
-  padding-inline-end: 46px;
+  width: 100%;
+  padding-inline-start: 12px !important;
+  padding-inline-end: 54px !important;
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Hide native number input spinners across all browsers */
+.price-input::-webkit-outer-spin-button,
+.price-input::-webkit-inner-spin-button,
+.form-text-input[type="number"]::-webkit-outer-spin-button,
+.form-text-input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  display: none;
 }
 
 .price-currency-suffix {
   position: absolute;
-  inset-inline-end: 12px;
-  font-size: 12px;
+  inset-inline-end: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   pointer-events: none;
+  user-select: none;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
 }
 
 /* Image Type Selector Grid */
@@ -432,23 +453,60 @@
   margin: 0;
 }
 
+/* Isolated Accessible Availability Toggle Switch */
+.menu-toggle-switch.add-toggle,
 .add-toggle {
   width: 42px;
   height: 24px;
+  border-radius: 9999px;
+  background-color: var(--color-border-subtle);
+  position: relative;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  direction: ltr !important;
+  unicode-bidi: isolate;
+  box-sizing: border-box;
   flex-shrink: 0;
+  outline: none;
+}
+
+[data-theme="dark"] .menu-toggle-switch.add-toggle,
+[data-theme="dark"] .add-toggle {
+  background-color: var(--color-surface-muted);
+}
+
+.menu-toggle-switch.add-toggle:focus-visible,
+.add-toggle:focus-visible {
+  outline: 2px solid var(--color-primary-blue);
+  outline-offset: 2px;
+}
+
+/* Blue Active State */
+.menu-toggle-switch.add-toggle.active,
+.add-toggle.active {
+  background-color: var(--color-primary-blue);
 }
 
 .add-toggle .menu-toggle-knob {
   width: 20px;
   height: 20px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  transform: translateX(0); /* OFF: physical left */
 }
 
-[dir="rtl"] .add-toggle.active .menu-toggle-knob {
-  transform: translateX(-18px);
-}
-
-[dir="ltr"] .add-toggle.active .menu-toggle-knob {
-  transform: translateX(18px);
+/* ON: Physical right translation across all directions (LTR isolated) */
+.menu-toggle-switch.add-toggle.active .menu-toggle-knob,
+.add-toggle.active .menu-toggle-knob {
+  transform: translateX(18px); /* ON: physical right */
 }
 
 /* Action Buttons */

@@ -278,3 +278,31 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Visual QA: Light and Dark theme styling across all Menu views and dialogs.
 - [x] 0 uncaught console errors.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Menu Management — Phase 7: Menu UI Visual Refinement
+
+- [x] Overall visual direction aligns with Reference Image 1 (clean, bright, modern, subtle borders, soft shadows, blue primary actions).
+- [x] Header refined with stronger visual hierarchy for restaurant brand, green status dot glow, and improved spacing.
+- [x] Demo notice strip refined to be visually secondary without omitting useful information.
+- [x] Prominent "+ Add Item" header button styled with primary blue tokens (`#2563eb`), clear icon, and hover/active states.
+- [x] Category tabs redesigned with meaningful icons (`LayoutGrid`, `Utensils`, `Salad`, `CupSoda`) and clear count badges.
+- [x] Selected category tab displays light blue background (`#eff6ff`), blue text/icon, and blue badge styling.
+- [x] Inactive category tabs maintain neutral styling with subtle borders.
+- [x] Search input box expanded to spacious 42px height with subtle borders, clear icon, and soft focus ring.
+- [x] Filter trigger styled as separate outlined square button (42x42px) with active-filter blue dot and state.
+- [x] Product cards redesigned as cohesive horizontal compositions without disconnected bottom action rows.
+- [x] Arabic RTL product cards: thumbnail on right, details beside it, switch and action buttons aligned together on opposite side (left).
+- [x] English LTR product cards: naturally mirrored layout.
+- [x] Consistent 64x64px image thumbnail dimensions with culinary icon themes.
+- [x] Strong product name typography, muted category text, and prominent price in EGP.
+- [x] Compact green availability status badge with checkmark icon when available, gray badge when unavailable.
+- [x] Blue active availability toggle switch with standardized physical left/right translation.
+- [x] Subtle outlined Edit and More Actions buttons with touch-friendly hit areas.
+- [x] Bottom navigation displays both icons and text labels across all 4 tabs.
+- [x] Bottom navigation active tab features soft light-blue background and blue primary icon and label.
+- [x] Bottom navigation inactive tabs remain muted with preserved order, badges, and navigation behavior.
+- [x] Zero horizontal overflow verified at 390x844 CSS px mobile baseline.
+- [x] Desktop centered mobile canvas verified at 1280x800 CSS px.
+- [x] Verified across Arabic Light, Arabic Dark, English Light, and English Dark themes.
+- [x] Full regression test suite passed with 0 console errors.
+- [x] Production build (`npm run build`) succeeded with 0 errors.

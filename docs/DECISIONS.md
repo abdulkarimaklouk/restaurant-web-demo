@@ -33,6 +33,7 @@ When a reference image does not reveal a behavior, choose the simplest behavior 
 ## D-008: Reconciliation of order tabs (4 visible vs. 5 required)
 
 The reference screenshot displays 4 filter tabs ("New", "Preparing", "Ready", "Delivered"). However, `WEB_DEMO_SPEC.md` (§6, §8) mandates 5 logical views:
+
 1. Pending payment confirmation (`pendingConfirmation`)
 2. New orders with confirmed payment (`newOrder`)
 3. Preparing (`preparing`)
@@ -44,6 +45,7 @@ We adopt all 5 views to satisfy the functional specification. Visually, each tab
 ## D-009: Reconciliation of bottom navigation (2 visible vs. 3 required)
 
 The reference screenshot shows only 2 tabs ("Orders", "Menu"). `WEB_DEMO_SPEC.md` (§5) requires 3 primary destinations:
+
 1. Orders (الطلبات)
 2. Menu management (قائمة الطعام)
 3. Demo tools (أدوات العرض)
@@ -53,6 +55,7 @@ We implement the 3 required destinations within the floating bottom pill navigat
 ## D-010: Reconciliation of badge counts and initial seed orders
 
 The reference screenshot shows arbitrary static counts (New: 4, Preparing: 6, Ready: 2, Delivered: 12; total 24). In contrast, `WEB_DEMO_SPEC.md` (§10) requires exactly 10 seeded orders at startup:
+
 - 2 awaiting payment confirmation
 - 2 new with confirmed payment
 - 2 preparing
@@ -64,6 +67,7 @@ The application will strictly seed these 10 orders per specification. Badge pill
 ## D-011: Reconciliation of payment buttons and state transitions
 
 The reference screenshot displays identical red "Verify Payment" buttons across all cards shown. Per `WEB_DEMO_SPEC.md` (§6, §7, §8), payment status is strictly decoupled from operational status:
+
 - "Verify Payment" ("تأكيد الدفع") in solid red appears only for orders in `pendingConfirmation`.
 - Confirming payment transitions the order to `newOrder` (payment confirmed). Preparation is prohibited before payment is confirmed.
 - Subsequent forward transitions use contextually appropriate primary action buttons ("بدء التحضير" / Start Preparing, "جاهز للاستلام" / Mark Ready, "تسليم الطلب" / Mark Delivered).
@@ -81,6 +85,7 @@ To ensure high performance, zero build complexity, and exact fidelity to the ref
 ## D-014: Order card simplification and payment review modal workflow
 
 In targeted refinement for the Orders Dashboard:
+
 1. **Student Academic Info**: Faculty/major details were removed from all order cards and the modal header. Only the student name and relevant order details are displayed.
 2. **Unified Review Action**: For pending-payment orders, both tapping the card and tapping the primary button ("مراجعة الإيصال") open the same bottom-sheet Order Review Modal without prematurely confirming payment.
 3. **InstaPay Mock Receipt Preview**: A clearly fictional InstaPay receipt section is embedded in the review modal for pending orders, complete with a transfer reference number, student handle, mock amount, and full-screen lightbox preview.
@@ -89,6 +94,7 @@ In targeted refinement for the Orders Dashboard:
 ## D-015: Shared Primary Dark Design Token Reuse
 
 To maintain design system consistency across the mobile interface without duplicating hardcoded dark values:
+
 - The existing primary dark token `--color-primary-dark` defined in `src/styles/tokens.css` is aligned to `#111827` (`rgb(17, 24, 39)`).
 - The active Bottom Navigation button (`.nav-item.active .nav-icon-wrap`) references `var(--color-primary-dark, #111827)`.
 - In the Working Hours feature (`EditWorkingHours.css`), both the Save Changes button background (`.btn-save-changes`) and the active state of daily toggle switches (`.day-toggle-switch.active`) reuse `var(--color-primary-dark)`.
@@ -97,6 +103,7 @@ To maintain design system consistency across the mobile interface without duplic
 ## D-016: Notifications & Alerts Preferences Architecture
 
 To provide realistic in-app notification controls without backend/push dependencies:
+
 - Notification preferences are encapsulated in `src/data/notificationsStore.ts` under `notification_preferences` in `localStorage`.
 - Two independent preferences: `newOrdersEnabled` (defaults to true) and `paymentConfirmationsEnabled` (defaults to true).
 - In accordance with non-blocking enterprise UX standards, disabling notifications suppresses only UI notification presentation (toasts, bell icon dot indicator); it never blocks order progression, payment confirmations, or error alerts.
@@ -105,6 +112,7 @@ To provide realistic in-app notification controls without backend/push dependenc
 ## D-017: Appearance & Theme Settings Phase 1 (UI-Only Implementation)
 
 In accordance with Phase 1 requirements:
+
 - The Appearance & Theme row in Settings opens a dedicated view (`EditAppearance.tsx`).
 - Offers two explicit theme options: Light Mode ("الوضع الفاتح" / "فاتح") and Dark Mode ("الوضع الداكن" / "داكن").
 - Light Mode is initialized as the selected state by default.
@@ -115,6 +123,7 @@ In accordance with Phase 1 requirements:
 ## D-018: Global Light and Dark Theme Architecture (Phase 2)
 
 To deliver a consistent, robust, and accessible light/dark theme system:
+
 - Centralized in `src/data/themeStore.ts` using an observable pattern matching existing stores.
 - Persisted in `localStorage` under `app_theme` (`'light' | 'dark'`), defaulting to `light`.
 - Applied immediately to the DOM via the document root attribute: `document.documentElement.setAttribute('data-theme', theme)`.
@@ -125,6 +134,7 @@ To deliver a consistent, robust, and accessible light/dark theme system:
 ## D-019: Menu Management Dashboard Interface (Phase 1)
 
 To deliver the main Menu Dashboard interface in accordance with reference specifications:
+
 - **Navigation Integration**: Activated the existing `menu` icon in `BottomNavigation.tsx` so clicking it switches the view directly to the new `MenuPage` rather than showing a notice toast.
 - **Page Header**: Features the page title ("القائمة" / "Menu") aligned with a primary "+ إضافة عنصر" ("+ Add Item") action button styled with `var(--color-primary-dark)`.
 - **Horizontal Category Tabs**: Horizontally scrollable category pills with count badges ("الكل" [7], "أطباق رئيسية" [3], "المقبلات" [2], "المشروبات" [2]). Touch-friendly with hidden scrollbars and zero page-level horizontal overflow.
@@ -137,6 +147,7 @@ To deliver the main Menu Dashboard interface in accordance with reference specif
 ## D-020: Menu Data Model, Centralized Store & LocalStorage Persistence (Phase 2)
 
 To establish the central data foundation for Menu Management:
+
 - **Decoupled Bilingual Product Model**: Product names are stored directly as `{ ar: string; en: string }` on domain objects rather than UI translation strings. This enables user-managed product data persistence and future creation/editing workflows without touching translation dictionaries.
 - **Centralized Observable Store**: Created `src/data/menuStore.ts` following the repository's observable singleton pattern (`subscribe`, `notify`, `getItems`, `updateItems`, `updateItem`, `resetToDefault`) and exposing the `useMenuStore()` hook.
 - **Single Source of Truth**: Seed items are defined exclusively in `src/data/menuStore.ts`. Legacy `src/features/menu/data/mockMenu.ts` acts as a re-export proxy to prevent duplication.
@@ -147,6 +158,7 @@ To establish the central data foundation for Menu Management:
 ## D-021: Add New Product Editing Interface (Phase 3A)
 
 To provide an intuitive, accessible Add Product editing experience:
+
 - **Sub-page Navigation**: Replaced the Add Item placeholder toast in `MenuPage.tsx` with dedicated view state (`isAddingProduct`). Header Back button (with RTL mirror) and Cancel button discard input and return to the Menu dashboard.
 - **Form Architecture**: Local component state encapsulates Arabic name, English name, category, price, image type, and availability toggle.
 - **Bilingual Inputs**: Distinct fields for Arabic (`dir="rtl"`) and English (`dir="ltr"`) product names with explicit required markers and validation.
@@ -158,6 +170,7 @@ To provide an intuitive, accessible Add Product editing experience:
 ## D-022: Menu Product Creation Logic & Persistence (Phase 3B)
 
 To connect the Add Product form to the centralized `menuStore` and support full product creation:
+
 - **Centralized Creation Method (`addItem`)**: Implemented `addItem(input: CreateMenuItemInput): MenuItem | null` in `src/data/menuStore.ts`. It securely validates candidate products, assigns next IDs, appends to store state, writes immediately to `localStorage['menu_items']`, and notifies reactive subscribers.
 - **Deterministic ID Generation (`generateNextId`)**: Parses numeric suffixes (`menu-item-(\d+)`) from all existing products, finds the current maximum integer (e.g. 7 for initial seed items), and increments it safely (`menu-item-8`, `menu-item-9`, etc.). Includes a timestamp fallback in the event of collisions.
 - **Strict Domain Validation**: Stricter schema enforcement in `validateMenuItem` checks that both Arabic and English names are present and non-empty, category matches allowed values (`'main' | 'appetizers' | 'drinks'`), price is numeric and strictly greater than zero (`price > 0`), and image type is one of the supported 7 types (`'burger' | 'chicken' | 'pasta' | 'fries' | 'salad' | 'cola' | 'juice'`). Invalid payloads are cleanly rejected without throwing or polluting storage.
@@ -168,6 +181,7 @@ To connect the Add Product form to the centralized `menuStore` and support full 
 ## D-023: Edit Product Interface & State Architecture (Phase 3C)
 
 To provide a consistent, accessible Edit Product experience using the existing Menu Management architecture:
+
 - **Sub-page Navigation Integration**: In `MenuPage.tsx`, replaced the Edit placeholder toast with dedicated `editingItem: MenuItem | null` state. Clicking the Edit button (`btn-edit-item`) on any `MenuProductCard` passes the selected item to `setEditingItem(item)`. Rendered with `key={editingItem.id}` to cleanly initialize fresh local state and prevent state leakage across different products.
 - **Accurate Initial State Pre-population**: Unlike the Add Product screen, `EditProductScreen.tsx` populates all fields directly from the passed `item` (Arabic and English names, category, price, image type, and initial availability status). Tested across all seven seed items including initially unavailable items (`menu-item-5` Caesar Salad) and distinct category types.
 - **Reactive Live Preview Synchronization**: Incorporates an interactive preview card matching the dashboard card anatomy. Real-time changes to Arabic/English names, category, price, image type, or availability immediately update the live preview without submitting the form.
@@ -178,6 +192,7 @@ To provide a consistent, accessible Edit Product experience using the existing M
 ## D-024: Product Update Mutation & Persistence Logic (Phase 3D)
 
 To connect the Edit Product form to the centralized `menuStore` and support full product updates:
+
 - **Centralized Update Method (`updateItem`)**: Enhanced `menuStore.updateItem(id: string, updates: Partial<MenuItem>): boolean` in `src/data/menuStore.ts`. It strictly locks the original `id` (`id: current.id`) so product identifiers cannot be modified, safely handles numeric conversions for prices, executes schema validation against `validateMenuItem`, updates the item in place preserving card sequence, writes immediately to `localStorage['menu_items']`, and notifies reactive subscribers.
 - **Form Submission Flow in `EditProductScreen.tsx`**: Submitting a valid form validates all fields and calls `updateItem(item.id, ...)`. On success, presents a localized success toast (`editProduct.editSuccess`: "تم تعديل بيانات العنصر بنجاح." / "Product updated successfully."), resets state, and calls `onBack()` to return to the dashboard. On failure, preserves user-entered values in the form and surfaces a localized error toast (`editProduct.editError`).
 - **Real-time Dashboard & Count Synchronization**: When an item's category changes, `useMenuStore()` automatically triggers recalculation in `CategoryTabs` via `getCategoryCounts(items)`, updating category badge counts and dashboard cards synchronously without full page reload.
@@ -187,6 +202,7 @@ To connect the Edit Product form to the centralized `menuStore` and support full
 ## D-025: Product Deletion Confirmation UI & Actions Architecture (Phase 3E)
 
 To establish an accessible, mobile-first product deletion entry point and confirmation flow:
+
 - **Two-Step Action Flow**: Connected the existing More Actions button (`btn-more-actions`) in `MenuProductCard.tsx` to `ProductActionsSheet.tsx`. Clicking More Actions opens a touch-friendly bottom sheet displaying the product preview with "Edit Product Details" and "Delete Product" actions. Selecting "Delete Product" dismisses the sheet and opens `DeleteProductDialog.tsx`.
 - **Accessible Confirmation Dialog Anatomy**: Designed according to WCAG/ARIA guidelines with `role="alertdialog"`, `aria-modal="true"`, `aria-labelledby`, and `aria-describedby`. Displays a crimson trash badge (`var(--color-crimson)`), prominent dialog title, product visual preview box with thumbnail and category/price, clear explanatory warning explaining that students will no longer be able to order the item, a destructive Confirm Delete action button, and a Cancel button.
 - **Dismissal & Accessibility Handlers**: Both the bottom sheet and confirmation dialog dismiss cleanly upon clicking the backdrop, pressing the `Escape` key, or clicking the Cancel button.
@@ -196,6 +212,7 @@ To establish an accessible, mobile-first product deletion entry point and confir
 ## D-026: Product Deletion Logic, Store API & Persistence (Phase 3F)
 
 To connect the Delete Product confirmation interface to the centralized `menuStore` and support irreversible removal:
+
 - **Centralized Deletion Method (`deleteItem`)**: Implemented `menuStore.deleteItem(id: string): boolean` in `src/data/menuStore.ts`. Validates product ID string, identifies the index of the target item, filters it out from the array (`filter((i) => i.id !== trimmedId)`), serializes the updated array to `localStorage['menu_items']`, updates in-memory `items`, and notifies reactive listeners.
 - **Atomic Failure Handling & Safety**: If serialization fails or the item does not exist, `deleteItem()` rejects the mutation safely and returns `false`, ensuring that the menu state is not partially modified.
 - **Dynamic Category Count Recalculation**: Removing an item updates `useMenuStore()` state, causing `getCategoryCounts(items)` to recalculate badge counts synchronously across all category tabs (`all`, `main`, `appetizers`, `drinks`).
@@ -207,6 +224,7 @@ To connect the Delete Product confirmation interface to the centralized `menuSto
 ## D-027: Product Availability Management & Persistence (Phase 4)
 
 To deliver real-time, persistent availability management from the Menu dashboard:
+
 - **Reuse Existing Store Mutation (`menuStore.updateItem`)**: Rather than creating a separate store or custom persistence path, the availability toggle calls `updateItem(item.id, { isAvailable: !item.isAvailable })`.
 - **Targeted Property Mutation**: Only the target item's `isAvailable` boolean is toggled; all other properties (unique `id`, bilingual `name`, `category`, `price`, `currency`, `imageType`) are strictly locked and preserved.
 - **Reactive UI Synchronization**: Because `MenuProductCard` derives its visual state (toggle switch `.menu-toggle-switch.active`, status badge `.product-status-badge.available`/`.unavailable`, card dimming `.menu-product-card.unavailable`, thumbnail style) directly from `item.isAvailable`, store notification triggers an immediate synchronous DOM re-render without page refresh.
@@ -216,35 +234,32 @@ To deliver real-time, persistent availability management from the Menu dashboard
 ## D-028: Live Product Search, Category & Availability Filtering Architecture (Phase 5)
 
 To implement live search, multi-axis filtering, and dedicated empty states without redesigning the screen:
+
 - **Client-Side Derived State**: Filtered products (`filteredItems`) are derived via `useMemo` from `useMenuStore().items` rather than duplicating product collections in local component state.
 - **Combined Filtering Pipeline**:
-  1. *Category Filter*: When `activeCategory !== 'all'`, filters strictly by `item.category === activeCategory`.
-  2. *Availability Filter*: Handled through `MenuFilterSheet.tsx` with options `'all'`, `'available'` (`isAvailable === true`), and `'unavailable'` (`isAvailable === false`).
-  3. *Bilingual Case-Insensitive Search*: Checks if trimmed, lowercased query substrings match either Arabic (`item.name.ar`) or English (`item.name.en`) product names. Works uniformly regardless of current active UI language.
+  1. _Category Filter_: When `activeCategory !== 'all'`, filters strictly by `item.category === activeCategory`.
+  2. _Availability Filter_: Handled through `MenuFilterSheet.tsx` with options `'all'`, `'available'` (`isAvailable === true`), and `'unavailable'` (`isAvailable === false`).
+  3. _Bilingual Case-Insensitive Search_: Checks if trimmed, lowercased query substrings match either Arabic (`item.name.ar`) or English (`item.name.en`) product names. Works uniformly regardless of current active UI language.
 - **Independent State Persistence Across Filters**: Adjusting category does not clear search or availability; opening and applying availability options preserves the active search query and category.
 - **Two-Tier Empty States (`MenuEmptyState.tsx`)**:
-  - *No Products in Menu* (`items.length === 0`): Prompts user to add their first product (`+ Add Item`).
-  - *No Matches Found* (`items.length > 0 && filteredItems.length === 0`): Displays `SearchX` graphic, informative description with search query context, and a primary action button to reset all filters (`handleResetAllFilters`).
+  - _No Products in Menu_ (`items.length === 0`): Prompts user to add their first product (`+ Add Item`).
+  - _No Matches Found_ (`items.length > 0 && filteredItems.length === 0`): Displays `SearchX` graphic, informative description with search query context, and a primary action button to reset all filters (`handleResetAllFilters`).
 - **Reactive Synchronization**: When products are added, edited, deleted, or toggled in `menuStore`, `filteredItems` re-evaluates immediately without full reload.
 
 ## D-029: Menu Filter Sheet Positioning & Frame Containment (Phase 6)
 
 During desktop review verification (1280 × 800 CSS viewport) of the centered mobile phone shell:
+
 - `MenuFilterSheet.css` backdrop was updated from `position: fixed; inset: 0;` to `position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 150;` to ensure it is cleanly contained within `.shell-container`, aligning with the containment pattern established for `ProductActionsSheet` and `DeleteProductDialog`.
 - Added safe-area padding-bottom (`calc(16px + env(safe-area-inset-bottom, 8px))`) and normalized the top border-radius to 16px to prevent bottom-clipping on modern mobile viewports.
 
+## D-030: Menu Dashboard UI Visual Refinement (Phase 7)
 
+To align the Menu Dashboard with the visual hierarchy, polish, and modern aesthetic of Reference Image 1:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+- **Card Composition**: Reworked `MenuProductCard` from a vertical two-row layout with divider line into a cohesive horizontal composition. In Arabic RTL, the culinary thumbnail ($64 \times 64\text{px}$) is on the right, title/category/price/compact status badge are in the middle, and the blue availability toggle switch and outlined action buttons (`Edit` and `More Actions`) are clustered on the opposite side (left in RTL, right in LTR).
+- **Toggle Switch Orientation**: Enforced `direction: ltr` on `.menu-toggle-switch` so the physical switch knob rests consistently on the left when inactive and translates $+16\text{px}$ to the right with blue track when active across both RTL and LTR languages.
+- **Category Tabs**: Added meaningful category icons (`LayoutGrid`, `Utensils`, `Salad`, `CupSoda`), refined tab proportions, and applied soft light-blue background (`#eff6ff`), blue text/icon, and blue badge styling for the active tab per Reference Image 1.
+- **Search & Filter Controls**: Expanded search input to $42\text{px}$ height with subtle borders and soft focus ring, and styled the filter trigger as a standalone $42 \times 42\text{px}$ outlined square button with blue active state and indicator dot.
+- **Bottom Navigation**: Refined the shared bottom navigation bar to display both icons and text labels. Active tab features a soft light-blue rounded pill container with blue primary icon and label; inactive tabs remain muted with generous $44\text{px}$ touch targets.
+- **Header & Action Prominence**: Refined restaurant brand typography, status dot glow, and styled the "+ Add Item" header button with prominent blue styling (`#2563eb`) and hover/active states.

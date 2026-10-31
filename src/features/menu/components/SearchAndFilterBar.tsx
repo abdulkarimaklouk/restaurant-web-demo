@@ -45,7 +45,7 @@ export const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
     <div className="search-filter-container">
       {/* Search Input Box */}
       <div className="search-input-box" onClick={onSearchClick}>
-        <Search size={16} className="search-field-icon" aria-hidden="true" />
+        <Search size={18} className="search-field-icon" aria-hidden="true" />
         <input
           type="text"
           className="search-field-input"
@@ -62,19 +62,19 @@ export const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
             onClick={handleClear}
             aria-label={t('clearSearch', { defaultValue: 'Clear search' })}
           >
-            <X size={14} />
+            <X size={15} />
           </button>
         )}
       </div>
 
-      {/* Filter Button */}
+      {/* Outlined Square Filter Button */}
       <button
         type="button"
         className={`btn-filter-trigger ${isFilterActive ? 'active' : ''}`}
         onClick={onFilterClick}
         aria-label={t('filterAria')}
       >
-        <SlidersHorizontal size={17} strokeWidth={2} className="filter-icon" />
+        <SlidersHorizontal size={18} strokeWidth={2} className="filter-icon" />
         {isFilterActive && <span className="filter-active-dot" aria-hidden="true" />}
       </button>
     </div>

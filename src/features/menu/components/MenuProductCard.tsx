@@ -36,39 +36,35 @@ export const MenuProductCard: React.FC<MenuProductCardProps> = ({
       className={`menu-product-card ${item.isAvailable ? 'available' : 'unavailable'}`}
       aria-label={productName}
     >
-      {/* Top Main Section: Image + Details + Badge/Price */}
-      <div className="product-card-main">
-        {/* Product Image Thumbnail */}
-        <MenuProductImage
-          type={item.imageType}
-          name={productName}
-          isAvailable={item.isAvailable}
-        />
+      <div className="product-card-body">
+        {/* Right side (in RTL): Image + Details */}
+        <div className="product-main-content">
+          {/* Product Image Thumbnail */}
+          <MenuProductImage
+            type={item.imageType}
+            name={productName}
+            isAvailable={item.isAvailable}
+          />
 
-        {/* Product Information */}
-        <div className="product-info-col">
-          <span className="product-category-text">{categoryName}</span>
-          <h2 className="product-name-text">{productName}</h2>
-          <div className="product-price-row">
-            <span className="product-price-value">{formatCurrency(item.price)}</span>
+          {/* Product Information */}
+          <div className="product-info-col">
+            <span className="product-category-text">{categoryName}</span>
+            <h2 className="product-name-text" title={productName}>{productName}</h2>
+            <div className="product-price-badge-row">
+              <span className="product-price-value">{formatCurrency(item.price)}</span>
+              <span
+                className={`product-status-badge ${item.isAvailable ? 'available' : 'unavailable'}`}
+              >
+                {item.isAvailable && <Check size={10} strokeWidth={3} className="status-badge-icon" />}
+                <span>{item.isAvailable ? t('status.available') : t('status.unavailable')}</span>
+              </span>
+            </div>
           </div>
         </div>
 
-        {/* Status Badge */}
-        <div className="product-status-col">
-          <span
-            className={`product-status-badge ${item.isAvailable ? 'available' : 'unavailable'}`}
-          >
-            {item.isAvailable && <Check size={11} strokeWidth={3} className="status-badge-icon" />}
-            <span>{item.isAvailable ? t('status.available') : t('status.unavailable')}</span>
-          </span>
-        </div>
-      </div>
-
-      {/* Bottom Actions Row: Divider + Toggle Switch + Edit + More */}
-      <div className="product-card-actions">
-        {/* Availability Toggle Control */}
-        <div className="availability-toggle-group">
+        {/* Opposite side (Left in RTL, Right in LTR): Switch + Action Buttons */}
+        <div className="product-actions-col">
+          {/* Availability Toggle Switch (Blue active per Reference Image 1) */}
           <button
             type="button"
             role="switch"
@@ -79,34 +75,31 @@ export const MenuProductCard: React.FC<MenuProductCardProps> = ({
           >
             <span className="menu-toggle-knob" />
           </button>
-          <span className="toggle-label-text">
-            {item.isAvailable ? t('status.available') : t('status.unavailable')}
-          </span>
-        </div>
 
-        {/* Action Buttons: Edit and More */}
-        <div className="card-buttons-group">
-          <button
-            type="button"
-            className="btn-card-action btn-edit-item"
-            onClick={() => onEditItem(item)}
-            aria-label={t('actions.editItemAria', { name: productName })}
-          >
-            <Edit3 size={14} className="action-icon" />
-            <span className="action-label">{t('actions.edit')}</span>
-          </button>
+          {/* Subtle Outlined Action Buttons */}
+          <div className="card-buttons-group">
+            <button
+              type="button"
+              className="btn-card-action btn-edit-item"
+              onClick={() => onEditItem(item)}
+              aria-label={t('actions.editItemAria', { name: productName })}
+              title={t('actions.edit')}
+            >
+              <Edit3 size={15} className="action-icon" />
+            </button>
 
-          <button
-            type="button"
-            className="btn-card-action btn-more-actions"
-            onClick={() => onMoreActions(item)}
-            aria-label={t('actions.moreActionsAria', { name: productName })}
-          >
-            <MoreVertical size={16} className="action-icon" />
-          </button>
+            <button
+              type="button"
+              className="btn-card-action btn-more-actions"
+              onClick={() => onMoreActions(item)}
+              aria-label={t('actions.moreActionsAria', { name: productName })}
+              title={t('actions.more')}
+            >
+              <MoreVertical size={15} className="action-icon" />
+            </button>
+          </div>
         </div>
       </div>
     </article>
   );
 };
-

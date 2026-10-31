@@ -42,16 +42,19 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         aria-label={t('nav.orders')}
         aria-current={activeTab === 'orders' ? 'page' : undefined}
       >
-        <span className="nav-icon-wrap">
-          <ClipboardList size={22} strokeWidth={2} className="nav-icon" />
-          {unreadCount > 0 && (
-            <span
-              className="nav-orders-badge"
-              aria-label={t('nav.newOrdersBadge', { count: unreadCount })}
-            >
-              {unreadCount > 9 ? '9+' : unreadCount}
-            </span>
-          )}
+        <span className="nav-pill-content">
+          <span className="nav-icon-wrap">
+            <ClipboardList size={20} strokeWidth={2.2} className="nav-icon" />
+            {unreadCount > 0 && (
+              <span
+                className="nav-orders-badge"
+                aria-label={t('nav.newOrdersBadge', { count: unreadCount })}
+              >
+                {unreadCount > 9 ? '9+' : unreadCount}
+              </span>
+            )}
+          </span>
+          <span className="nav-label">{t('nav.orders')}</span>
         </span>
       </button>
 
@@ -63,8 +66,11 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         aria-label={t('nav.menu')}
         aria-current={activeTab === 'menu' ? 'page' : undefined}
       >
-        <span className="nav-icon-wrap">
-          <UtensilsCrossed size={22} strokeWidth={2} className="nav-icon" />
+        <span className="nav-pill-content">
+          <span className="nav-icon-wrap">
+            <UtensilsCrossed size={20} strokeWidth={2.2} className="nav-icon" />
+          </span>
+          <span className="nav-label">{t('nav.menu')}</span>
         </span>
       </button>
 
@@ -76,8 +82,11 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         aria-label={t('nav.analytics')}
         aria-current={activeTab === 'analytics' ? 'page' : undefined}
       >
-        <span className="nav-icon-wrap">
-          <SlidersHorizontal size={22} strokeWidth={2} className="nav-icon" />
+        <span className="nav-pill-content">
+          <span className="nav-icon-wrap">
+            <SlidersHorizontal size={20} strokeWidth={2.2} className="nav-icon" />
+          </span>
+          <span className="nav-label">{t('nav.analytics')}</span>
         </span>
       </button>
 
@@ -89,8 +98,11 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
         aria-label={t('nav.settings')}
         aria-current={activeTab === 'settings' ? 'page' : undefined}
       >
-        <span className="nav-icon-wrap">
-          <Settings size={22} strokeWidth={2} className="nav-icon" />
+        <span className="nav-pill-content">
+          <span className="nav-icon-wrap">
+            <Settings size={20} strokeWidth={2.2} className="nav-icon" />
+          </span>
+          <span className="nav-label">{t('nav.settings')}</span>
         </span>
       </button>
     </footer>

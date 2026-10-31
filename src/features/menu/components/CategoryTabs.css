@@ -40,24 +40,29 @@
 .category-tab-item {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  border-radius: var(--radius-btn);
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: var(--radius-btn, 5px);
   background-color: var(--color-card-bg);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-card);
+  border: 1px solid var(--color-border-subtle);
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
   color: var(--color-text-secondary);
   font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
   flex-shrink: 0;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: all 0.15s ease;
   user-select: none;
   cursor: pointer;
 }
 
 .category-tab-item:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
+}
+
+.category-tab-icon {
+  flex-shrink: 0;
+  color: inherit;
 }
 
 .category-tab-label {
@@ -65,31 +70,35 @@
 }
 
 .category-count-badge {
-  font-size: 10.5px;
+  font-size: 11px;
   font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 4px;
+  padding: 1.5px 6.5px;
+  border-radius: var(--radius-badge, 4px);
   background-color: var(--color-surface-muted);
   color: var(--color-text-secondary);
   min-width: 18px;
   text-align: center;
-  line-height: 1.25;
+  line-height: 1.2;
+  transition: all 0.15s ease;
 }
 
-/* Active Category Tab Styling */
+/* Selected Category Tab (Light blue background and blue text/icon per Reference Image 1) */
 .category-tab-item.active {
-  background-color: var(--color-primary-dark);
-  border-color: var(--color-primary-dark);
-  color: #ffffff;
-  box-shadow: 0 1px 3px rgba(17, 24, 39, 0.15);
+  background-color: var(--color-primary-blue-bg);
+  border-color: var(--color-primary-blue-border);
+  color: var(--color-primary-blue);
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.12);
+}
+
+.category-tab-item.active .category-tab-icon {
+  color: var(--color-primary-blue);
 }
 
 .category-tab-item.active .category-count-badge {
-  background-color: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
+  background-color: var(--color-primary-blue-badge);
+  color: var(--color-primary-blue);
 }
 
 [data-theme="dark"] .category-tab-item.active {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
 }
-
