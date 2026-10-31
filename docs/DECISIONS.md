@@ -204,6 +204,16 @@ To connect the Delete Product confirmation interface to the centralized `menuSto
 - **Non-Mutation on Dismissal**: Closing via Cancel button, backdrop click, or `Escape` key closes the dialog without triggering `deleteItem()`, leaving the product present in memory and `localStorage`.
 - **Persistence Across Sessions**: Changes are persisted directly to `localStorage['menu_items']`. On hard page reload or browser restart, deleted products do not reappear. Empty menu state (`[]`) is defensively supported in `readFromStorage()`.
 
+## D-027: Product Availability Management & Persistence (Phase 4)
+
+To deliver real-time, persistent availability management from the Menu dashboard:
+- **Reuse Existing Store Mutation (`menuStore.updateItem`)**: Rather than creating a separate store or custom persistence path, the availability toggle calls `updateItem(item.id, { isAvailable: !item.isAvailable })`.
+- **Targeted Property Mutation**: Only the target item's `isAvailable` boolean is toggled; all other properties (unique `id`, bilingual `name`, `category`, `price`, `currency`, `imageType`) are strictly locked and preserved.
+- **Reactive UI Synchronization**: Because `MenuProductCard` derives its visual state (toggle switch `.menu-toggle-switch.active`, status badge `.product-status-badge.available`/`.unavailable`, card dimming `.menu-product-card.unavailable`, thumbnail style) directly from `item.isAvailable`, store notification triggers an immediate synchronous DOM re-render without page refresh.
+- **Persistence (`localStorage['menu_items']`)**: The updated items array is serialized immediately to localStorage under `menu_items`, ensuring the availability status survives page reloads, tab navigation, and browser restarts.
+- **Bilingual Context-Aware Toast Feedback**: Successful availability changes trigger localized feedback toasts specifying both the item's name and whether it is now available or temporarily unavailable (`toasts.availabilityAvailable` / `toasts.availabilityUnavailable`), supported in Arabic and English.
+
+
 
 
 

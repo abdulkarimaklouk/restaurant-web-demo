@@ -229,6 +229,23 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] 0 uncaught console errors.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 4: Product Availability Management
+
+- [x] Connect availability toggle switch (`.menu-toggle-switch`) to `menuStore.updateItem(item.id, { isAvailable })`.
+- [x] Toggling an available product to unavailable immediately updates card state (switch turns inactive, badge updates to "غير متوفر" / "Unavailable", card dims).
+- [x] Toggling an unavailable product back to available immediately restores card state (switch turns active, badge updates to "متوفر" / "Available" with checkmark, opacity restored).
+- [x] Updating only the selected product and leaving all other products unmutated.
+- [x] Multiple consecutive toggles on the same card function reliably and keep state consistent.
+- [x] Toggling multiple different products preserves their independent states.
+- [x] Changes persist to `localStorage['menu_items']` immediately.
+- [x] Full page reload preserves the toggled availability state.
+- [x] Localized feedback toast confirms availability status change in Arabic (`toasts.availabilityAvailable` / `toasts.availabilityUnavailable`).
+- [x] Localized feedback toast confirms availability status change in English.
+- [x] Verified across Light and Dark themes.
+- [x] Verified across 390×844 mobile viewport with zero horizontal overflow.
+- [x] 0 uncaught console errors.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
 
 
 

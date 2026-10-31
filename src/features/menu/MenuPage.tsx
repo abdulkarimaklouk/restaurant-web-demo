@@ -18,7 +18,7 @@ interface MenuPageProps {
 
 export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('menu');
-  const { items, categoryCounts, deleteItem } = useMenuStore();
+  const { items, categoryCounts, updateItem, deleteItem } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
@@ -37,8 +37,28 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
     onShowToast(t('toasts.filterNotice'), 'info');
   };
 
-  const handleToggleAvailability = (_item: MenuItem) => {
-    onShowToast(t('toasts.toggleNotice'), 'info');
+  const handleToggleAvailability = (item: MenuItem) => {
+    if (!item || !item.id) return;
+    const nextAvailability = !item.isAvailable;
+    const currentLang = i18n.resolvedLanguage || i18n.language || 'ar';
+    const isEn = currentLang.startsWith('en');
+    const productName = item.name
+      ? isEn
+        ? item.name.en || item.name.ar
+        : item.name.ar || item.name.en
+      : item.nameKey
+        ? t(`items.${item.nameKey}`)
+        : '';
+
+    const success = updateItem(item.id, { isAvailable: nextAvailability });
+    if (success) {
+      const toastKey = nextAvailability
+        ? 'toasts.availabilityAvailable'
+        : 'toasts.availabilityUnavailable';
+      onShowToast(t(toastKey, { name: productName }), 'success');
+    } else {
+      onShowToast(t('toasts.availabilityError'), 'warning');
+    }
   };
 
   const handleEditItem = (item: MenuItem) => {

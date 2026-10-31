@@ -36,7 +36,10 @@
     "searchNotice": "Menu search will be available in a later phase.",
     "toggleNotice": "Availability toggle updates will be available in a later phase.",
     "editNotice": "Editing item details will be available in a later phase.",
-    "moreNotice": "Additional item options will be available in a later phase."
+    "moreNotice": "Additional item options will be available in a later phase.",
+    "availabilityAvailable": "\"{{name}}\" is now marked as available.",
+    "availabilityUnavailable": "\"{{name}}\" is now marked as unavailable.",
+    "availabilityError": "Failed to update product availability."
   },
   "addProduct": {
     "pageTitle": "Add New Product",
