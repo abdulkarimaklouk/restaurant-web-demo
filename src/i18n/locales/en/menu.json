@@ -129,5 +129,31 @@
     "deleteSuccessWithName": "\"{{name}}\" removed successfully from the menu.",
     "deleteError": "Failed to delete product, or product no longer exists.",
     "placeholderSuccess": "Demo • Deletion request for \"{{name}}\" confirmed successfully (actual deletion will be executed in next phase)."
+  },
+  "clearSearch": "Clear search",
+  "filter": {
+    "title": "Filter Menu",
+    "availabilitySection": "Availability Status",
+    "allProducts": "All Items",
+    "allProductsDesc": "Show all menu items",
+    "availableOnly": "Available Only",
+    "availableOnlyDesc": "Show only items ready to order",
+    "unavailableOnly": "Unavailable Only",
+    "unavailableOnlyDesc": "Show currently unavailable items",
+    "applyBtn": "Apply Filter",
+    "resetBtn": "Reset",
+    "closeAria": "Close filter sheet"
+  },
+  "emptySearch": {
+    "title": "No Matching Items Found",
+    "desc": "We couldn't find any products matching your current search or filter criteria.",
+    "descWithQuery": "No products matched \"{{query}}\".",
+    "resetBtn": "Reset Search & Filters",
+    "clearSearchBtn": "Clear Search"
+  },
+  "emptyMenu": {
+    "title": "Menu is Empty",
+    "desc": "No products have been added to the menu yet.",
+    "addItemBtn": "Add New Product"
   }
 }

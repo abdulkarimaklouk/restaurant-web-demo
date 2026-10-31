@@ -51,6 +51,27 @@
   font-size: 12.5px;
 }
 
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-muted);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.15s ease, background-color 0.15s ease;
+  padding: 0;
+}
+
+.search-clear-btn:hover {
+  color: var(--color-text-main);
+  background-color: var(--color-border);
+}
+
 /* Filter Button */
 .btn-filter-trigger {
   width: 38px;
@@ -65,7 +86,23 @@
   justify-content: center;
   flex-shrink: 0;
   cursor: pointer;
+  position: relative;
   transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+}
+
+.btn-filter-trigger.active {
+  border-color: var(--color-primary-dark);
+  background-color: var(--color-surface-muted);
+}
+
+.filter-active-dot {
+  position: absolute;
+  top: 7px;
+  inset-inline-end: 7px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-primary-dark);
 }
 
 .btn-filter-trigger:hover {

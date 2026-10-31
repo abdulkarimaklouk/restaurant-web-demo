@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Info, Plus } from 'lucide-react';
 import { MenuCategoryId, MenuItem } from '../../types/menu';
@@ -10,6 +10,8 @@ import { AddProductScreen } from './components/AddProductScreen';
 import { EditProductScreen } from './components/EditProductScreen';
 import { ProductActionsSheet } from './components/ProductActionsSheet';
 import { DeleteProductDialog } from './components/DeleteProductDialog';
+import { MenuFilterSheet, AvailabilityFilterOption } from './components/MenuFilterSheet';
+import { MenuEmptyState } from './components/MenuEmptyState';
 import './MenuPage.css';
 
 interface MenuPageProps {
@@ -20,6 +22,9 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('menu');
   const { items, categoryCounts, updateItem, deleteItem } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [availabilityFilter, setAvailabilityFilter] = useState<AvailabilityFilterOption>('all');
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false);
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const [actionMenuProduct, setActionMenuProduct] = useState<MenuItem | null>(null);
@@ -29,13 +34,56 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
     setIsAddingProduct(true);
   };
 
-  const handleSearchClick = () => {
-    onShowToast(t('toasts.searchNotice'), 'info');
+  const handleFilterClick = () => {
+    setIsFilterSheetOpen(true);
   };
 
-  const handleFilterClick = () => {
-    onShowToast(t('toasts.filterNotice'), 'info');
+  const handleResetAllFilters = () => {
+    setSearchQuery('');
+    setActiveCategory('all');
+    setAvailabilityFilter('all');
   };
+
+  const handleClearSearch = () => {
+    setSearchQuery('');
+  };
+
+  // Derive filtered items from menuStore data (never mutating original collection)
+  const filteredItems = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+
+    return items.filter((item) => {
+      // 1. Category Filter
+      if (activeCategory !== 'all' && item.category !== activeCategory) {
+        return false;
+      }
+
+      // 2. Availability Filter
+      if (availabilityFilter === 'available' && !item.isAvailable) {
+        return false;
+      }
+      if (availabilityFilter === 'unavailable' && item.isAvailable) {
+        return false;
+      }
+
+      // 3. Search Query (Arabic & English, case-insensitive, trimmed)
+      if (query) {
+        const arName = (item.name?.ar || '').toLowerCase();
+        const enName = (item.name?.en || '').toLowerCase();
+        const fallbackName = item.nameKey ? t(`items.${item.nameKey}`).toLowerCase() : '';
+
+        const matchesAr = arName.includes(query);
+        const matchesEn = enName.includes(query);
+        const matchesFallback = fallbackName.includes(query);
+
+        if (!matchesAr && !matchesEn && !matchesFallback) {
+          return false;
+        }
+      }
+
+      return true;
+    });
+  }, [items, activeCategory, availabilityFilter, searchQuery, t]);
 
   const handleToggleAvailability = (item: MenuItem) => {
     if (!item || !item.id) return;
@@ -162,22 +210,38 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
 
       {/* 4. Search and Filter Bar */}
       <SearchAndFilterBar
-        onSearchClick={handleSearchClick}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
         onFilterClick={handleFilterClick}
+        isFilterActive={availabilityFilter !== 'all'}
       />
 
       {/* 5. Scrollable Menu Products List */}
       <main className="menu-list-scroll">
         <div className="menu-cards-container">
-          {items.map((item) => (
-            <MenuProductCard
-              key={item.id}
-              item={item}
-              onToggleAvailability={handleToggleAvailability}
-              onEditItem={handleEditItem}
-              onMoreActions={handleMoreActions}
+          {items.length === 0 ? (
+            <MenuEmptyState
+              type="no-items"
+              onAddItem={handleAddItem}
             />
-          ))}
+          ) : filteredItems.length === 0 ? (
+            <MenuEmptyState
+              type="no-matches"
+              searchQuery={searchQuery}
+              onResetFilters={handleResetAllFilters}
+              onClearSearch={searchQuery ? handleClearSearch : undefined}
+            />
+          ) : (
+            filteredItems.map((item) => (
+              <MenuProductCard
+                key={item.id}
+                item={item}
+                onToggleAvailability={handleToggleAvailability}
+                onEditItem={handleEditItem}
+                onMoreActions={handleMoreActions}
+              />
+            ))
+          )}
         </div>
       </main>
 
@@ -199,6 +263,14 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
         isOpen={Boolean(deleteConfirmProduct)}
         onClose={() => setDeleteConfirmProduct(null)}
         onConfirmDelete={handleConfirmDelete}
+      />
+
+      {/* 8. Availability Filter Sheet */}
+      <MenuFilterSheet
+        isOpen={isFilterSheetOpen}
+        currentFilter={availabilityFilter}
+        onApply={(filter) => setAvailabilityFilter(filter)}
+        onClose={() => setIsFilterSheetOpen(false)}
       />
     </div>
   );

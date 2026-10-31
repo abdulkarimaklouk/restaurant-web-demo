@@ -246,6 +246,30 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] 0 uncaught console errors.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 5: Menu Search & Filters
+
+- [x] Arabic name search (e.g. "برجر", "دجاج").
+- [x] English name search while the interface is Arabic (e.g. "burger", "chicken").
+- [x] Arabic name search while the interface is English.
+- [x] Case-insensitive English search ("bUrGeR", "BURGER", "burger").
+- [x] Leading and trailing whitespace trimming ("  burger  ").
+- [x] Category filtering for all tabs: All, Main Dishes, Appetizers, Drinks.
+- [x] Available-only filtering via filter sheet.
+- [x] Unavailable-only filtering via filter sheet.
+- [x] Combined search, category, and availability filters work together concurrently.
+- [x] Clearing the search via clear button or empty input restores results.
+- [x] Resetting all filters from empty state restores all menu items.
+- [x] Empty results state with localized messaging and reset action.
+- [x] Correct category counts on horizontal tabs reflecting actual store data.
+- [x] Newly created products appear in matching search/filter results immediately.
+- [x] Edited product names are searchable immediately.
+- [x] Deleted products disappear from search/filter results immediately.
+- [x] Availability changes immediately affect filtered results.
+- [x] Arabic RTL and English LTR layouts verified.
+- [x] Light and Dark themes supported on filter sheet, empty state, and search controls.
+- [x] 0 uncaught console errors.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
 
 
 

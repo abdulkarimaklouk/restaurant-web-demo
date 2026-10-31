@@ -213,6 +213,21 @@ To deliver real-time, persistent availability management from the Menu dashboard
 - **Persistence (`localStorage['menu_items']`)**: The updated items array is serialized immediately to localStorage under `menu_items`, ensuring the availability status survives page reloads, tab navigation, and browser restarts.
 - **Bilingual Context-Aware Toast Feedback**: Successful availability changes trigger localized feedback toasts specifying both the item's name and whether it is now available or temporarily unavailable (`toasts.availabilityAvailable` / `toasts.availabilityUnavailable`), supported in Arabic and English.
 
+## D-028: Live Product Search, Category & Availability Filtering Architecture (Phase 5)
+
+To implement live search, multi-axis filtering, and dedicated empty states without redesigning the screen:
+- **Client-Side Derived State**: Filtered products (`filteredItems`) are derived via `useMemo` from `useMenuStore().items` rather than duplicating product collections in local component state.
+- **Combined Filtering Pipeline**:
+  1. *Category Filter*: When `activeCategory !== 'all'`, filters strictly by `item.category === activeCategory`.
+  2. *Availability Filter*: Handled through `MenuFilterSheet.tsx` with options `'all'`, `'available'` (`isAvailable === true`), and `'unavailable'` (`isAvailable === false`).
+  3. *Bilingual Case-Insensitive Search*: Checks if trimmed, lowercased query substrings match either Arabic (`item.name.ar`) or English (`item.name.en`) product names. Works uniformly regardless of current active UI language.
+- **Independent State Persistence Across Filters**: Adjusting category does not clear search or availability; opening and applying availability options preserves the active search query and category.
+- **Two-Tier Empty States (`MenuEmptyState.tsx`)**:
+  - *No Products in Menu* (`items.length === 0`): Prompts user to add their first product (`+ Add Item`).
+  - *No Matches Found* (`items.length > 0 && filteredItems.length === 0`): Displays `SearchX` graphic, informative description with search query context, and a primary action button to reset all filters (`handleResetAllFilters`).
+- **Reactive Synchronization**: When products are added, edited, deleted, or toggled in `menuStore`, `filteredItems` re-evaluates immediately without full reload.
+
+
 
 
 
