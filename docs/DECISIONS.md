@@ -155,6 +155,18 @@ To provide an intuitive, accessible Add Product editing experience:
 - **Image Type Selector & Live Preview**: Interactive grid supporting all 7 existing culinary types (`burger`, `chicken`, `pasta`, `fries`, `salad`, `cola`, `juice`). An interactive live preview card mirrors the dashboard card anatomy in real-time.
 - **Phase 3A UI Scope**: Validating all fields triggers informative localized warning toasts if incomplete; submitting a valid form provides localized placeholder feedback (`addProduct.placeholderSaveSuccess`) and returns to Menu without mutating `menuStore` or persisting data.
 
+## D-022: Menu Product Creation Logic & Persistence (Phase 3B)
+
+To connect the Add Product form to the centralized `menuStore` and support full product creation:
+- **Centralized Creation Method (`addItem`)**: Implemented `addItem(input: CreateMenuItemInput): MenuItem | null` in `src/data/menuStore.ts`. It securely validates candidate products, assigns next IDs, appends to store state, writes immediately to `localStorage['menu_items']`, and notifies reactive subscribers.
+- **Deterministic ID Generation (`generateNextId`)**: Parses numeric suffixes (`menu-item-(\d+)`) from all existing products, finds the current maximum integer (e.g. 7 for initial seed items), and increments it safely (`menu-item-8`, `menu-item-9`, etc.). Includes a timestamp fallback in the event of collisions.
+- **Strict Domain Validation**: Stricter schema enforcement in `validateMenuItem` checks that both Arabic and English names are present and non-empty, category matches allowed values (`'main' | 'appetizers' | 'drinks'`), price is numeric and strictly greater than zero (`price > 0`), and image type is one of the supported 7 types (`'burger' | 'chicken' | 'pasta' | 'fries' | 'salad' | 'cola' | 'juice'`). Invalid payloads are cleanly rejected without throwing or polluting storage.
+- **Dynamic Category Count Synchronization**: Because category tabs in `MenuPage.tsx` compute totals directly via `getCategoryCounts(items)`, newly created items instantly increment their respective category badge count and the "All" badge count without requiring manual synchronization or page refreshes.
+- **Form Submission & Navigation Flow**: In `AddProductScreen.tsx`, submitting a valid form triggers `addItem()`. On success, displays a localized success toast (`addProduct.createSuccess`), resets local form state, and invokes `onBack()` to return to the Menu dashboard. On failure, retains form contents and presents a localized error toast (`addProduct.createError`).
+- **Persistence Across Sessions**: New products are saved to `localStorage['menu_items']` alongside existing seed items, surviving hard page refreshes and browser restarts without mutating or overwriting the original seed dataset.
+
+
+
 
 
 

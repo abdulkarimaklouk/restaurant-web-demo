@@ -64,6 +64,8 @@
     "availabilityHint": "Enabling availability allows students to order this item immediately",
     "saveBtn": "Save Product",
     "cancelBtn": "Cancel",
+    "createSuccess": "Product added successfully to the menu.",
+    "createError": "Failed to add product. Please try again.",
     "placeholderSaveSuccess": "Demo • Product data verified successfully (product creation will be enabled in next phase).",
     "errors": {
       "nameArRequired": "Please enter the product name in Arabic",

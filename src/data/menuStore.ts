@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   MenuItem,
+  CreateMenuItemInput,
   CategoryInfo,
   MenuCategoryType,
   MenuProductImageType,
@@ -141,20 +142,19 @@ export function validateMenuItem(raw: any): MenuItem | null {
     return null;
   }
 
-  // Must have at least one name representation
-  if (!name.ar && !name.en) return null;
+  // Must have both Arabic and English names
+  if (!name.ar || !name.en) return null;
 
   // Category validation
   const validCategories: MenuCategoryType[] = ['main', 'appetizers', 'drinks'];
-  const category: MenuCategoryType = validCategories.includes(raw.category)
-    ? raw.category
-    : 'main';
+  if (!validCategories.includes(raw.category)) return null;
+  const category: MenuCategoryType = raw.category;
 
-  // Price validation
-  const price =
-    typeof raw.price === 'number' && !isNaN(raw.price) && raw.price >= 0
-      ? raw.price
-      : 0;
+  // Price validation: strictly positive number
+  if (typeof raw.price !== 'number' || isNaN(raw.price) || raw.price <= 0) {
+    return null;
+  }
+  const price = raw.price;
 
   // Currency validation
   const currency =
@@ -172,9 +172,8 @@ export function validateMenuItem(raw: any): MenuItem | null {
     'cola',
     'juice',
   ];
-  const imageType: MenuProductImageType = validImageTypes.includes(raw.imageType)
-    ? raw.imageType
-    : 'burger';
+  if (!validImageTypes.includes(raw.imageType)) return null;
+  const imageType: MenuProductImageType = raw.imageType;
 
   // Availability validation
   const isAvailable = Boolean(raw.isAvailable);
@@ -258,6 +257,57 @@ class MenuStore {
   public getItemById(id: string): MenuItem | undefined {
     const item = this.items.find((i) => i.id === id);
     return item ? { ...item, name: { ...item.name } } : undefined;
+  }
+
+  public generateNextId(): string {
+    const numericIds = this.items
+      .map((item) => {
+        const match = item.id.match(/^menu-item-(\d+)$/);
+        return match ? parseInt(match[1], 10) : 0;
+      })
+      .filter((num) => !isNaN(num) && num > 0);
+
+    const maxId = numericIds.length > 0 ? Math.max(...numericIds) : 0;
+    let candidate = `menu-item-${maxId + 1}`;
+
+    while (this.items.some((i) => i.id === candidate)) {
+      candidate = `menu-item-${Date.now()}`;
+    }
+
+    return candidate;
+  }
+
+  public addItem(input: CreateMenuItemInput): MenuItem | null {
+    const id = input.id && input.id.trim() ? input.id.trim() : this.generateNextId();
+
+    if (this.items.some((i) => i.id === id)) {
+      console.error(`An item with id "${id}" already exists`);
+      return null;
+    }
+
+    const candidate: MenuItem = {
+      id,
+      name: {
+        ar: typeof input.name?.ar === 'string' ? input.name.ar.trim() : '',
+        en: typeof input.name?.en === 'string' ? input.name.en.trim() : '',
+      },
+      category: input.category,
+      price: typeof input.price === 'number' ? input.price : parseFloat(String(input.price)),
+      currency: input.currency && input.currency.trim() ? input.currency.trim() : 'EGP',
+      imageType: input.imageType,
+      isAvailable: Boolean(input.isAvailable),
+    };
+
+    const valid = validateMenuItem(candidate);
+    if (!valid) {
+      console.error('Failed to validate new menu item:', candidate);
+      return null;
+    }
+
+    this.items = [...this.items, valid];
+    this.writeToStorage(this.items);
+    this.notify();
+    return valid;
   }
 
   public updateItems(newItems: MenuItem[]): void {
@@ -351,6 +401,8 @@ export function useMenuStore() {
     items,
     categoryCounts,
     getItemById: (id: string) => menuStore.getItemById(id),
+    generateNextId: () => menuStore.generateNextId(),
+    addItem: (input: CreateMenuItemInput) => menuStore.addItem(input),
     updateItems: (newItems: MenuItem[]) => menuStore.updateItems(newItems),
     updateItem: (id: string, updates: Partial<MenuItem>) => menuStore.updateItem(id, updates),
     resetToDefault: () => menuStore.resetToDefault(),

@@ -26,6 +26,8 @@ export interface MenuItem {
   nameKey?: string;
 }
 
+export type CreateMenuItemInput = Omit<MenuItem, 'id'> & { id?: string };
+
 export interface CategoryInfo {
   id: MenuCategoryId;
   labelKey: string;

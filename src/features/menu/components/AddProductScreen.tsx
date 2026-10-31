@@ -13,6 +13,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { MenuCategoryType, MenuProductImageType } from '../../../types/menu';
+import { useMenuStore } from '../../../data/menuStore';
 import { MenuProductImage } from './MenuProductImage';
 import { formatCurrency } from '../../../utils/formatCurrency';
 import { ToastProps } from '../../../components/ui/Toast';
@@ -45,6 +46,7 @@ export const AddProductScreen: React.FC<AddProductScreenProps> = ({
   onShowToast,
 }) => {
   const { t, i18n } = useTranslation('menu');
+  const { addItem } = useMenuStore();
   const isArabic = (i18n.resolvedLanguage || i18n.language || 'ar').startsWith('ar');
 
   // Form local state (initialized with empty values, except availability = true)
@@ -110,9 +112,26 @@ export const AddProductScreen: React.FC<AddProductScreenProps> = ({
       return;
     }
 
-    // Phase 3A: UI only, placeholder feedback, do not mutate store yet
-    onShowToast(t('addProduct.placeholderSaveSuccess'), 'info');
-    onBack();
+    const parsedPrice = parseFloat(price);
+
+    const created = addItem({
+      name: {
+        ar: nameAr.trim(),
+        en: nameEn.trim(),
+      },
+      category: category as MenuCategoryType,
+      price: parsedPrice,
+      currency: 'EGP',
+      imageType,
+      isAvailable,
+    });
+
+    if (created) {
+      onShowToast(t('addProduct.createSuccess'), 'success');
+      onBack();
+    } else {
+      onShowToast(t('addProduct.createError'), 'warning');
+    }
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {

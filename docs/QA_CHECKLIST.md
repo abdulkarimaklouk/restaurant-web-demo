@@ -133,4 +133,25 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Arabic RTL and English LTR layouts verified across both themes.
 - [x] 0 console errors logged; production build passed with 0 errors.
 
+## Menu Management — Phase 3B: Product Creation Logic & Persistence
+
+- [x] Add New Product form connected to `menuStore.addItem()`.
+- [x] Form submission creates a conformant `MenuItem` object with safe, unique sequential ID (`menu-item-8`, `menu-item-9`, etc.).
+- [x] Bilingual name inputs validated: requires both Arabic and English names.
+- [x] Category selection strictly validated against allowed values (`'main' | 'appetizers' | 'drinks'`).
+- [x] Numeric price validation strictly enforces positive value (`price > 0`) and supports decimals.
+- [x] Currency is set to `'EGP'`.
+- [x] Selected culinary `imageType` preserved and validated across all 7 asset types.
+- [x] Initial availability switch state (`isAvailable`) preserved accurately.
+- [x] New items immediately appended to store state and persisted to `localStorage['menu_items']`.
+- [x] Menu dashboard updates reactively upon creation without full page reload.
+- [x] Dynamic category counts in tab pills update automatically (both category count and "All" count).
+- [x] Reloading or refreshing the page faithfully restores created products alongside seed items.
+- [x] Original seed products (`menu-item-1` to `menu-item-7`) are preserved without mutation or overwrite.
+- [x] Successful submission shows localized success toast (`addProduct.createSuccess`) and returns to Menu dashboard.
+- [x] Cancel button discards all entered inputs without saving or mutating store state.
+- [x] Zero regressions across Orders, Settings, Working Hours, Notifications, and Appearance/Theme features.
+- [x] TypeScript compilation and production build (`npm run build`) succeeded with 0 errors.
+
+
 
