@@ -1,0 +1,59 @@
+/* Edit Product Screen Styles
+ * Reuses design tokens and layout conventions from AddProductScreen.css
+ */
+@import './AddProductScreen.css';
+
+.edit-product-view {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+}
+
+.edit-product-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px 8px 16px;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.edit-product-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.edit-product-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 16px calc(88px + env(safe-area-inset-bottom, 0px)) 16px;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  min-width: 0;
+  width: 100%;
+}
+
+.edit-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  width: 100%;
+}
+
+.edit-product-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+

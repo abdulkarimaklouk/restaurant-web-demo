@@ -74,6 +74,42 @@
       "priceRequired": "يرجى إدخال سعر صحيح أكبر من الصفر",
       "priceNegative": "لا يمكن أن يكون السعر سالباً أو صفراً"
     }
+  },
+  "editProduct": {
+    "pageTitle": "تعديل العنصر",
+    "backAria": "العودة إلى القائمة",
+    "nameSectionTitle": "بيانات التسمية",
+    "nameArLabel": "اسم العنصر (بالعربية)",
+    "nameArPlaceholder": "مثال: شاورما دجاج ممتازة",
+    "nameEnLabel": "اسم العنصر (بالإنجليزية)",
+    "nameEnPlaceholder": "مثال: Premium Chicken Shawarma",
+    "categoryLabel": "التصنيف",
+    "categoryPlaceholder": "اختر التصنيف",
+    "priceLabel": "السعر (ج.م)",
+    "pricePlaceholder": "مثال: 85",
+    "imageLabel": "أيقونة وصورة العنصر",
+    "imagePreview": "معاينة المظهر",
+    "images": {
+      "burger": "ساندوتش / برجر",
+      "chicken": "دجاج / وجبات",
+      "pasta": "باستا / مكرونة",
+      "fries": "بطاطس / وجبات خفيفة",
+      "salad": "سلطات خضراء",
+      "cola": "مشروبات غازية",
+      "juice": "عصائر طبيعية"
+    },
+    "availabilityLabel": "حالة التوفر الحالية",
+    "availabilityHint": "تفعيل التوفر يتيح للطلاب طلب هذا العنصر فوراً من القائمة",
+    "saveBtn": "حفظ التعديلات",
+    "cancelBtn": "إلغاء",
+    "placeholderSaveSuccess": "نسخة تجريبية • تم التحقق من تعديلات العنصر بنجاح (سيتم حفظ التعديلات في المرحلة التالية).",
+    "errors": {
+      "nameArRequired": "يرجى إدخال اسم العنصر باللغة العربية",
+      "nameEnRequired": "يرجى إدخال اسم العنصر باللغة الإنجليزية",
+      "categoryRequired": "يرجى اختيار تصنيف صالح للعنصر",
+      "priceRequired": "يرجى إدخال سعر صحيح أكبر من الصفر",
+      "priceNegative": "لا يمكن أن يكون السعر سالباً أو صفراً"
+    }
   }
 }
 

@@ -153,5 +153,23 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Zero regressions across Orders, Settings, Working Hours, Notifications, and Appearance/Theme features.
 - [x] TypeScript compilation and production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 3C: Edit Product Interface & Live Preview
+
+- [x] Clicking Edit (`btn-edit-item`) on any menu card opens dedicated `EditProductScreen` for the selected product.
+- [x] Selected product object correctly passed and loaded using `key={editingItem.id}` to isolate component state.
+- [x] All 7 seed products verified for accurate initial field pre-population (Arabic/English names, category, price, image type, availability).
+- [x] Initially unavailable products (e.g. `menu-item-5` Caesar Salad) correctly initialize with `isAvailable = false`.
+- [x] Each form field can be edited locally without mutating store or other products.
+- [x] Live Preview card updates in real-time as user types names, adjusts price, selects category, or toggles availability.
+- [x] Client-side validation catches missing Arabic name, missing English name, missing category, and non-positive price.
+- [x] Inline localized validation error messages (`AlertCircle` icon + red borders) displayed, and entered values preserved.
+- [x] Cancel button discards local modifications and returns to Menu dashboard with existing data intact.
+- [x] Save Changes validates form, displays localized placeholder toast (`editProduct.placeholderSaveSuccess`), and returns to Menu without modifying `menuStore` (deferred to Phase 3D).
+- [x] Bilingual RTL Arabic and LTR English layouts verified.
+- [x] Light and Dark theme styling verified with semantic CSS tokens.
+- [x] Mobile viewport at 390 × 844 CSS pixels verified with 0 horizontal overflow.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
+
 
 

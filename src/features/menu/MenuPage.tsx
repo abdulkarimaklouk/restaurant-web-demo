@@ -7,6 +7,7 @@ import { CategoryTabs } from './components/CategoryTabs';
 import { SearchAndFilterBar } from './components/SearchAndFilterBar';
 import { MenuProductCard } from './components/MenuProductCard';
 import { AddProductScreen } from './components/AddProductScreen';
+import { EditProductScreen } from './components/EditProductScreen';
 import './MenuPage.css';
 
 interface MenuPageProps {
@@ -18,6 +19,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { items, categoryCounts } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
   const [isAddingProduct, setIsAddingProduct] = useState(false);
+  const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
 
   const handleAddItem = () => {
     setIsAddingProduct(true);
@@ -35,8 +37,8 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
     onShowToast(t('toasts.toggleNotice'), 'info');
   };
 
-  const handleEditItem = (_item: MenuItem) => {
-    onShowToast(t('toasts.editNotice'), 'info');
+  const handleEditItem = (item: MenuItem) => {
+    setEditingItem(item);
   };
 
   const handleMoreActions = (_item: MenuItem) => {
@@ -51,6 +53,17 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
     return (
       <AddProductScreen
         onBack={() => setIsAddingProduct(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
+
+  if (editingItem) {
+    return (
+      <EditProductScreen
+        key={editingItem.id}
+        item={editingItem}
+        onBack={() => setEditingItem(null)}
         onShowToast={onShowToast}
       />
     );

@@ -74,5 +74,41 @@
       "priceRequired": "Please enter a valid price greater than zero",
       "priceNegative": "Price cannot be zero or negative"
     }
+  },
+  "editProduct": {
+    "pageTitle": "Edit Product",
+    "backAria": "Back to Menu",
+    "nameSectionTitle": "Product Names",
+    "nameArLabel": "Product Name (Arabic)",
+    "nameArPlaceholder": "e.g., Premium Chicken Shawarma",
+    "nameEnLabel": "Product Name (English)",
+    "nameEnPlaceholder": "e.g., Premium Chicken Shawarma",
+    "categoryLabel": "Category",
+    "categoryPlaceholder": "Select category",
+    "priceLabel": "Price (EGP)",
+    "pricePlaceholder": "e.g., 85",
+    "imageLabel": "Product Icon / Image",
+    "imagePreview": "Preview Appearance",
+    "images": {
+      "burger": "Sandwich / Burger",
+      "chicken": "Chicken / Meals",
+      "pasta": "Pasta / Noodles",
+      "fries": "Fries / Snacks",
+      "salad": "Fresh Salads",
+      "cola": "Soft Drinks",
+      "juice": "Fresh Juice"
+    },
+    "availabilityLabel": "Current Availability",
+    "availabilityHint": "Enabling availability allows students to order this item immediately",
+    "saveBtn": "Save Changes",
+    "cancelBtn": "Cancel",
+    "placeholderSaveSuccess": "Demo • Product changes verified successfully (product updates will be enabled in next phase).",
+    "errors": {
+      "nameArRequired": "Please enter the product name in Arabic",
+      "nameEnRequired": "Please enter the product name in English",
+      "categoryRequired": "Please select a valid product category",
+      "priceRequired": "Please enter a valid price greater than zero",
+      "priceNegative": "Price cannot be zero or negative"
+    }
   }
 }

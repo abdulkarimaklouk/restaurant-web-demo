@@ -165,6 +165,17 @@ To connect the Add Product form to the centralized `menuStore` and support full 
 - **Form Submission & Navigation Flow**: In `AddProductScreen.tsx`, submitting a valid form triggers `addItem()`. On success, displays a localized success toast (`addProduct.createSuccess`), resets local form state, and invokes `onBack()` to return to the Menu dashboard. On failure, retains form contents and presents a localized error toast (`addProduct.createError`).
 - **Persistence Across Sessions**: New products are saved to `localStorage['menu_items']` alongside existing seed items, surviving hard page refreshes and browser restarts without mutating or overwriting the original seed dataset.
 
+## D-023: Edit Product Interface & State Architecture (Phase 3C)
+
+To provide a consistent, accessible Edit Product experience using the existing Menu Management architecture:
+- **Sub-page Navigation Integration**: In `MenuPage.tsx`, replaced the Edit placeholder toast with dedicated `editingItem: MenuItem | null` state. Clicking the Edit button (`btn-edit-item`) on any `MenuProductCard` passes the selected item to `setEditingItem(item)`. Rendered with `key={editingItem.id}` to cleanly initialize fresh local state and prevent state leakage across different products.
+- **Accurate Initial State Pre-population**: Unlike the Add Product screen, `EditProductScreen.tsx` populates all fields directly from the passed `item` (Arabic and English names, category, price, image type, and initial availability status). Tested across all seven seed items including initially unavailable items (`menu-item-5` Caesar Salad) and distinct category types.
+- **Reactive Live Preview Synchronization**: Incorporates an interactive preview card matching the dashboard card anatomy. Real-time changes to Arabic/English names, category, price, image type, or availability immediately update the live preview without submitting the form.
+- **Strict Client-side Validation**: Requires both Arabic and English names, a valid category selection, and a positive numeric price (`price > 0`). Disallows negative price input directly on keystroke. Displays localized inline validation errors (`AlertCircle` icon + red borders) and surfaces warning toasts if submission is attempted with invalid inputs.
+- **Phase 3C Non-Mutation Scope**: Submitting a valid form validates all fields, displays a localized placeholder success toast (`editProduct.placeholderSaveSuccess`), and returns to Menu via `onBack()` without updating `menuStore` or mutating stored products. Clicking Cancel or Back discards local edits immediately without altering existing data. Actual update mutations and persistence are deferred to Phase 3D.
+- **Theming & Localization**: Seamlessly supports Light and Dark modes via semantic CSS custom properties (`--color-card-bg`, `--color-border`, `--color-primary-dark`, etc.) and full bilingual RTL Arabic and LTR English layouts.
+
+
 
 
 
