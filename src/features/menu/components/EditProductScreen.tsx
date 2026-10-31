@@ -13,6 +13,7 @@ import {
   AlertCircle,
 } from 'lucide-react';
 import { MenuItem, MenuCategoryType, MenuProductImageType } from '../../../types/menu';
+import { useMenuStore } from '../../../data/menuStore';
 import { MenuProductImage } from './MenuProductImage';
 import { formatCurrency } from '../../../utils/formatCurrency';
 import { ToastProps } from '../../../components/ui/Toast';
@@ -47,6 +48,7 @@ export const EditProductScreen: React.FC<EditProductScreenProps> = ({
   onShowToast,
 }) => {
   const { t, i18n } = useTranslation('menu');
+  const { updateItem } = useMenuStore();
   const isArabic = (i18n.resolvedLanguage || i18n.language || 'ar').startsWith('ar');
 
   // Form local state initialized with selected product values
@@ -123,10 +125,25 @@ export const EditProductScreen: React.FC<EditProductScreenProps> = ({
       return;
     }
 
-    // Phase 3C: UI validation and placeholder feedback only
-    // Actual persistence and store updates are deferred to Phase 3D
-    onShowToast(t('editProduct.placeholderSaveSuccess'), 'success');
-    onBack();
+    const parsedPrice = parseFloat(price);
+
+    const success = updateItem(item.id, {
+      name: {
+        ar: nameAr.trim(),
+        en: nameEn.trim(),
+      },
+      category: category as MenuCategoryType,
+      price: parsedPrice,
+      imageType,
+      isAvailable,
+    });
+
+    if (success) {
+      onShowToast(t('editProduct.editSuccess'), 'success');
+      onBack();
+    } else {
+      onShowToast(t('editProduct.editError'), 'warning');
+    }
   };
 
   const handlePriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {

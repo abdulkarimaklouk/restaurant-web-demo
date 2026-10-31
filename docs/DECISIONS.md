@@ -175,6 +175,17 @@ To provide a consistent, accessible Edit Product experience using the existing M
 - **Phase 3C Non-Mutation Scope**: Submitting a valid form validates all fields, displays a localized placeholder success toast (`editProduct.placeholderSaveSuccess`), and returns to Menu via `onBack()` without updating `menuStore` or mutating stored products. Clicking Cancel or Back discards local edits immediately without altering existing data. Actual update mutations and persistence are deferred to Phase 3D.
 - **Theming & Localization**: Seamlessly supports Light and Dark modes via semantic CSS custom properties (`--color-card-bg`, `--color-border`, `--color-primary-dark`, etc.) and full bilingual RTL Arabic and LTR English layouts.
 
+## D-024: Product Update Mutation & Persistence Logic (Phase 3D)
+
+To connect the Edit Product form to the centralized `menuStore` and support full product updates:
+- **Centralized Update Method (`updateItem`)**: Enhanced `menuStore.updateItem(id: string, updates: Partial<MenuItem>): boolean` in `src/data/menuStore.ts`. It strictly locks the original `id` (`id: current.id`) so product identifiers cannot be modified, safely handles numeric conversions for prices, executes schema validation against `validateMenuItem`, updates the item in place preserving card sequence, writes immediately to `localStorage['menu_items']`, and notifies reactive subscribers.
+- **Form Submission Flow in `EditProductScreen.tsx`**: Submitting a valid form validates all fields and calls `updateItem(item.id, ...)`. On success, presents a localized success toast (`editProduct.editSuccess`: "تم تعديل بيانات العنصر بنجاح." / "Product updated successfully."), resets state, and calls `onBack()` to return to the dashboard. On failure, preserves user-entered values in the form and surfaces a localized error toast (`editProduct.editError`).
+- **Real-time Dashboard & Count Synchronization**: When an item's category changes, `useMenuStore()` automatically triggers recalculation in `CategoryTabs` via `getCategoryCounts(items)`, updating category badge counts and dashboard cards synchronously without full page reload.
+- **Persistence Across Sessions**: Updates are serialized to `localStorage['menu_items']`, surviving hard browser reloads and tab closures while leaving other products in the store unmutated.
+- **Cancel Safety**: Clicking Cancel discards uncommitted modifications without mutating the store or storage.
+
+
+
 
 
 

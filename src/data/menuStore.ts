@@ -329,17 +329,24 @@ class MenuStore {
     this.notify();
   }
 
-  public updateItem(id: string, updates: Partial<MenuItem>): void {
+  public updateItem(id: string, updates: Partial<MenuItem>): boolean {
     const index = this.items.findIndex((i) => i.id === id);
     if (index === -1) {
       console.warn(`Item with id "${id}" not found`);
-      return;
+      return false;
     }
 
     const current = this.items[index];
     const candidate = {
       ...current,
       ...updates,
+      id: current.id, // Strictly preserve original product ID
+      price:
+        updates.price !== undefined
+          ? typeof updates.price === 'number'
+            ? updates.price
+            : parseFloat(String(updates.price))
+          : current.price,
       name:
         updates.name !== undefined
           ? typeof updates.name === 'string'
@@ -351,12 +358,13 @@ class MenuStore {
     const valid = validateMenuItem(candidate);
     if (!valid) {
       console.warn(`Invalid update for item "${id}"`);
-      return;
+      return false;
     }
 
     this.items[index] = valid;
     this.writeToStorage(this.items);
     this.notify();
+    return true;
   }
 
   public resetToDefault(): void {

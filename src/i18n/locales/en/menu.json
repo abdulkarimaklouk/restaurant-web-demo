@@ -102,6 +102,8 @@
     "availabilityHint": "Enabling availability allows students to order this item immediately",
     "saveBtn": "Save Changes",
     "cancelBtn": "Cancel",
+    "editSuccess": "Product updated successfully.",
+    "editError": "Failed to update product. Please try again.",
     "placeholderSaveSuccess": "Demo • Product changes verified successfully (product updates will be enabled in next phase).",
     "errors": {
       "nameArRequired": "Please enter the product name in Arabic",

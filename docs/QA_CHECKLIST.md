@@ -170,6 +170,29 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Mobile viewport at 390 × 844 CSS pixels verified with 0 horizontal overflow.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 3D: Product Edit Logic & Persistence
+
+- [x] Form submission in `EditProductScreen` connected to `menuStore.updateItem(id, updates)`.
+- [x] Updated Arabic and English names applied accurately to target product.
+- [x] Price updates (including decimals like `135.5` and `38.25`) applied and formatted in EGP.
+- [x] Category changes update product data and automatically recalculate dynamic category counts.
+- [x] Image type modifications applied from all 7 supported culinary asset types.
+- [x] Availability toggle modifications update both status pill/badge and card toggle switch.
+- [x] Corresponding menu card on dashboard updates immediately upon returning to Menu.
+- [x] Product ordering is preserved in place.
+- [x] Original product ID (`menu-item-1`, etc.) is strictly preserved and cannot be overwritten.
+- [x] Edits survive full browser reload and session restart via `localStorage['menu_items']`.
+- [x] Multiple products can be edited independently without mutual interference or side-effects.
+- [x] All unedited products remain completely intact.
+- [x] Cancel button discards uncommitted modifications without mutating store or persistent storage.
+- [x] Form validation blocks invalid submissions (negative prices, missing names, invalid categories) and preserves user-entered data.
+- [x] Successful update displays localized success toast (`editProduct.editSuccess`) and returns to dashboard.
+- [x] Bilingual RTL Arabic and LTR English layouts verified with edited data.
+- [x] Light and Dark modes render edited cards without visual regressions.
+- [x] 0 uncaught errors in browser console.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
+
 
 
 
