@@ -8,6 +8,8 @@ import { SearchAndFilterBar } from './components/SearchAndFilterBar';
 import { MenuProductCard } from './components/MenuProductCard';
 import { AddProductScreen } from './components/AddProductScreen';
 import { EditProductScreen } from './components/EditProductScreen';
+import { ProductActionsSheet } from './components/ProductActionsSheet';
+import { DeleteProductDialog } from './components/DeleteProductDialog';
 import './MenuPage.css';
 
 interface MenuPageProps {
@@ -15,11 +17,13 @@ interface MenuPageProps {
 }
 
 export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
-  const { t } = useTranslation('menu');
+  const { t, i18n } = useTranslation('menu');
   const { items, categoryCounts } = useMenuStore();
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
   const [isAddingProduct, setIsAddingProduct] = useState(false);
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
+  const [actionMenuProduct, setActionMenuProduct] = useState<MenuItem | null>(null);
+  const [deleteConfirmProduct, setDeleteConfirmProduct] = useState<MenuItem | null>(null);
 
   const handleAddItem = () => {
     setIsAddingProduct(true);
@@ -41,8 +45,30 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
     setEditingItem(item);
   };
 
-  const handleMoreActions = (_item: MenuItem) => {
-    onShowToast(t('toasts.moreNotice'), 'info');
+  const handleMoreActions = (item: MenuItem) => {
+    setActionMenuProduct(item);
+  };
+
+  const handleOpenDeleteConfirm = (item: MenuItem) => {
+    setActionMenuProduct(null);
+    setDeleteConfirmProduct(item);
+  };
+
+  const handleConfirmDelete = (item: MenuItem) => {
+    if (!item || !item.id) return;
+    const currentLang = i18n.resolvedLanguage || i18n.language || 'ar';
+    const isEn = currentLang.startsWith('en');
+    const productName = item.name
+      ? isEn
+        ? item.name.en || item.name.ar
+        : item.name.ar || item.name.en
+      : item.nameKey
+        ? t(`items.${item.nameKey}`)
+        : '';
+
+    // Phase 3E: UI implementation only. Actual deletion is deferred to Phase 3F.
+    onShowToast(t('deleteProduct.placeholderSuccess', { name: productName }), 'info');
+    setDeleteConfirmProduct(null);
   };
 
   const handleSelectCategory = (categoryId: MenuCategoryId) => {
@@ -118,6 +144,26 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
           ))}
         </div>
       </main>
+
+      {/* 6. Product Actions Bottom Sheet */}
+      <ProductActionsSheet
+        item={actionMenuProduct}
+        isOpen={Boolean(actionMenuProduct)}
+        onClose={() => setActionMenuProduct(null)}
+        onEdit={(item) => {
+          setActionMenuProduct(null);
+          setEditingItem(item);
+        }}
+        onDelete={handleOpenDeleteConfirm}
+      />
+
+      {/* 7. Delete Product Confirmation Dialog */}
+      <DeleteProductDialog
+        item={deleteConfirmProduct}
+        isOpen={Boolean(deleteConfirmProduct)}
+        onClose={() => setDeleteConfirmProduct(null)}
+        onConfirmDelete={handleConfirmDelete}
+      />
     </div>
   );
 };

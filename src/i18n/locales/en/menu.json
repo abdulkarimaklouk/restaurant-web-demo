@@ -112,5 +112,16 @@
       "priceRequired": "Please enter a valid price greater than zero",
       "priceNegative": "Price cannot be zero or negative"
     }
+  },
+  "deleteProduct": {
+    "actionMenuTitle": "Product Options",
+    "editOption": "Edit Product Details",
+    "deleteOption": "Delete Product",
+    "dialogTitle": "Delete Product from Menu",
+    "dialogMessage": "Are you sure you want to delete \"{{name}}\" from the menu? Students will no longer be able to order this item once removed.",
+    "warningNote": "This action will permanently remove the product from the menu.",
+    "confirmBtn": "Delete Product",
+    "cancelBtn": "Cancel",
+    "placeholderSuccess": "Demo • Deletion request for \"{{name}}\" confirmed successfully (actual deletion will be executed in next phase)."
   }
 }

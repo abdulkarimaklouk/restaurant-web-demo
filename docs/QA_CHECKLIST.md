@@ -192,6 +192,25 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] 0 uncaught errors in browser console.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Management — Phase 3E: Delete Product Confirmation Interface
+
+- [x] More Actions button (`btn-more-actions`) connected to `ProductActionsSheet` across all cards.
+- [x] Selected product ID and data correctly identified when opening More Actions for different products.
+- [x] Selecting "Delete Product" from actions sheet opens `DeleteProductDialog`.
+- [x] Confirmation dialog displays the selected product's name in bold.
+- [x] Dialog clearly explains that the deletion will remove the product from the menu.
+- [x] Dialog features destructive Confirm Delete button (`var(--color-crimson)`) and Cancel button.
+- [x] Cancel button closes dialog without mutating product data or persistent storage.
+- [x] Backdrop click and `Escape` key dismiss both action sheet and confirmation dialog cleanly.
+- [x] Confirm Delete shows localized placeholder feedback toast (`deleteProduct.placeholderSuccess`).
+- [x] Product remains present in `menuStore` and `localStorage['menu_items']` (actual deletion deferred to Phase 3F).
+- [x] Bilingual RTL Arabic and LTR English layouts verified.
+- [x] Light and Dark theme styling verified with semantic CSS tokens.
+- [x] Mobile viewport at 390 × 844 CSS pixels verified with 0 horizontal overflow.
+- [x] 0 uncaught console errors.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
+
 
 
 

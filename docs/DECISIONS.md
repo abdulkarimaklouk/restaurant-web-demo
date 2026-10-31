@@ -184,6 +184,16 @@ To connect the Edit Product form to the centralized `menuStore` and support full
 - **Persistence Across Sessions**: Updates are serialized to `localStorage['menu_items']`, surviving hard browser reloads and tab closures while leaving other products in the store unmutated.
 - **Cancel Safety**: Clicking Cancel discards uncommitted modifications without mutating the store or storage.
 
+## D-025: Product Deletion Confirmation UI & Actions Architecture (Phase 3E)
+
+To establish an accessible, mobile-first product deletion entry point and confirmation flow:
+- **Two-Step Action Flow**: Connected the existing More Actions button (`btn-more-actions`) in `MenuProductCard.tsx` to `ProductActionsSheet.tsx`. Clicking More Actions opens a touch-friendly bottom sheet displaying the product preview with "Edit Product Details" and "Delete Product" actions. Selecting "Delete Product" dismisses the sheet and opens `DeleteProductDialog.tsx`.
+- **Accessible Confirmation Dialog Anatomy**: Designed according to WCAG/ARIA guidelines with `role="alertdialog"`, `aria-modal="true"`, `aria-labelledby`, and `aria-describedby`. Displays a crimson trash badge (`var(--color-crimson)`), prominent dialog title, product visual preview box with thumbnail and category/price, clear explanatory warning explaining that students will no longer be able to order the item, a destructive Confirm Delete action button, and a Cancel button.
+- **Dismissal & Accessibility Handlers**: Both the bottom sheet and confirmation dialog dismiss cleanly upon clicking the backdrop, pressing the `Escape` key, or clicking the Cancel button.
+- **Phase 3E Non-Mutation Scope**: In compliance with UI-only requirements, clicking Confirm Delete validates the product existence, shows an informative localized placeholder toast (`deleteProduct.placeholderSuccess`), and closes the dialog without mutating `menuStore` or `localStorage['menu_items']`. Actual item removal from memory and storage is deferred to Phase 3F.
+- **Theming & Localization**: Seamlessly supports Light and Dark modes via semantic CSS tokens (`--color-modal-bg`, `--color-modal-overlay`, `--color-crimson`, etc.) and full RTL Arabic and LTR English layouts without horizontal overflow on mobile viewports.
+
+
 
 
 

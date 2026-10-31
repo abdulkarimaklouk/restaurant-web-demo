@@ -1,0 +1,211 @@
+/* Delete Product Confirmation Dialog */
+.delete-dialog-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--color-modal-overlay);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 160;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: dialogFadeIn 0.18s ease;
+  box-sizing: border-box;
+}
+
+.delete-dialog-card {
+  width: 100%;
+  max-width: 358px;
+  background-color: var(--color-modal-bg);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-modal);
+  padding: 20px 18px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  animation: dialogPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Header with Icon and Title */
+.delete-dialog-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 10px;
+}
+
+.delete-dialog-icon-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: var(--color-crimson-light);
+  color: var(--color-crimson);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4px var(--color-crimson-badge);
+}
+
+[data-theme="dark"] .delete-dialog-icon-circle {
+  background-color: rgba(220, 38, 38, 0.15);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.1);
+  color: #f87171;
+}
+
+.delete-dialog-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.delete-dialog-desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  margin: 0;
+  text-align: center;
+}
+
+.delete-dialog-desc strong {
+  color: var(--color-text-main);
+}
+
+/* Product Highlight Preview Card */
+.delete-dialog-product-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background-color: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+}
+
+.delete-preview-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.delete-preview-name {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--color-text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.delete-preview-meta {
+  font-size: 11.5px;
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+/* Warning note */
+.delete-dialog-warning-box {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-crimson);
+  font-weight: 600;
+  padding: 6px 10px;
+  background-color: var(--color-crimson-light);
+  border-radius: var(--radius-btn);
+  border: 1px solid var(--color-crimson-border);
+}
+
+[data-theme="dark"] .delete-dialog-warning-box {
+  background-color: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.25);
+  color: #fca5a5;
+}
+
+.delete-warning-icon {
+  flex-shrink: 0;
+}
+
+/* Dialog Action Buttons */
+.delete-dialog-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.btn-confirm-delete {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: var(--color-crimson);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.25);
+}
+
+.btn-confirm-delete:hover {
+  background-color: var(--color-crimson-hover);
+}
+
+.btn-confirm-delete:active {
+  transform: scale(0.98);
+}
+
+.btn-cancel-delete {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-subtle);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-btn);
+  font-size: 13px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-cancel-delete:hover {
+  background-color: var(--color-surface-muted);
+  color: var(--color-text-main);
+}
+
+@keyframes dialogFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes dialogPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
