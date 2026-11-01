@@ -263,3 +263,25 @@ To align the Menu Dashboard with the visual hierarchy, polish, and modern aesthe
 - **Search & Filter Controls**: Expanded search input to $42\text{px}$ height with subtle borders and soft focus ring, and styled the filter trigger as a standalone $42 \times 42\text{px}$ outlined square button with blue active state and indicator dot.
 - **Bottom Navigation**: Refined the shared bottom navigation bar to display both icons and text labels. Active tab features a soft light-blue rounded pill container with blue primary icon and label; inactive tabs remain muted with generous $44\text{px}$ touch targets.
 - **Header & Action Prominence**: Refined restaurant brand typography, status dot glow, and styled the "+ Add Item" header button with prominent blue styling (`#2563eb`) and hover/active states.
+
+## D-031: Price Input Currency Indicator Overlap & Toggle Knob Direction Fixes (Phase 7.2)
+
+To resolve UI overlap in product price inputs and normalize toggle behavior:
+
+- **Currency Indicator Collision**: In `AddProductScreen` and `EditProductScreen`, native number input spinners caused visual collision with the localized currency badge (`ج.م` / `EGP`). Hidden native stepper controls via `appearance: textfield` / `::-webkit-inner-spin-button: none` while preserving numeric keypad input and adjusted `padding-inline` to ensure permanent visual separation between the numeric value and the currency badge.
+- **Physical Switch Normalization**: Enforced explicit LTR coordinate mapping on `.menu-toggle-switch` across both Arabic RTL and English LTR layouts so that the inactive OFF position rests on the left and the active ON position translates to the right with blue active track.
+
+## D-032: Analytics Data Layer and Calculation Architecture (Phase 2)
+
+Following the approved Analytics Dashboard design and calculation requirements:
+
+- **Preservation of Seed Dataset**: Kept the original 10 seed orders untouched. No additional seed orders were fabricated, and existing IDs, timestamps, items, and statuses remain preserved.
+- **Order Financial Qualification**: Only orders with `paymentStatus === 'confirmed'` qualify for revenue and order analytics. The two seed orders (`1044` and `1045`) with `paymentStatus === 'pendingConfirmation'` are strictly excluded from Total Sales, Total Orders, Items Sold, Average Order Value, and Top Selling Products calculations to prevent revenue inflation.
+- **Business Week Definition**: Defined the business week as Saturday 00:00:00 through Friday 23:59:59.999 local time. Represented range boundaries as `[startInclusive, endExclusive)` where the end boundary is the following Saturday 00:00:00.
+- **Deterministic Time Boundaries**: Date range resolution utilities (`dateRangeUtils.ts`) support deterministic `now` parameter injection for repeatable testing across month transitions, leap years, and daylight changes without timezone skew.
+- **Zero-Prior Period Handling**: When a metric has zero units or zero revenue in the prior comparison period and non-zero value in the current period, the calculation engine returns `status: 'no_prior_data'` and `percentageChange: null`. An artificial $+100\%$ change is never invented for new activity.
+- **Product Normalization**: Aggregation groups order line items by normalized product name (`normalizeProductName` trims whitespace and converts to lower case) while preserving the original display name, ensuring variations merge properly into unified item metrics.
+- **Operational Statuses**: Orders by Status distribution calculates percentages and counts across the 4 operational statuses (`delivered`, `ready`, `preparing`, `newOrder`) among confirmed orders, guaranteeing an exact 100.0% sum when data is present and safe empty distribution when 0 orders exist.
+- **Today's Chart Alignment**: Aligned Today's chart buckets with the 7 reference points shown in `Restaurant Analytics Dashboard.png` (`10 AM`, `12 PM`, `2 PM`, `4 PM`, `6 PM`, `8 PM`, `10 PM`). The 10 AM bucket strictly represents 10:00–12:00, and remaining buckets represent consecutive 2-hour intervals through 10 PM (22:00–24:00). Out-of-chart-hours sales and orders (e.g. before 10 AM or after chart hours) are tracked explicitly in `outOfChartHours` without merging them into the 10 AM bucket, ensuring $\sum \text{bucket.sales} + \text{outOfChartHours.sales} \equiv \text{totalSales}$ without assuming unverified restaurant operating hours.
+- **Top-Selling Item Calculations**: Strictly referenced actual `OrderItem` properties (`lineTotal` and `unitPrice`), never referencing non-existent properties. Tiebreakers for identical sold unit quantities sort deterministically by total revenue descending.
+- **Custom Lightweight Architecture**: In accordance with project policy, no third-party charting or analytics packages were introduced. Pure TypeScript calculation functions generate structured data ready for SVG chart rendering in subsequent phases.

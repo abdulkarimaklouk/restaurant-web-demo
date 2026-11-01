@@ -306,3 +306,34 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Verified across Arabic Light, Arabic Dark, English Light, and English Dark themes.
 - [x] Full regression test suite passed with 0 console errors.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Phase 7.2: Menu UI Input Controls & Toggle Polish
+- [x] Price input native spinners hidden across AddProductScreen and EditProductScreen (`appearance: textfield`).
+- [x] Currency indicator (`ج.م` / `EGP`) padded cleanly without overlapping input value in RTL and LTR.
+- [x] Availability toggle physical knob strictly mapped to left for OFF and right for ON across both RTL and LTR.
+
+## Analytics Dashboard Phase 2: Data Layer & Calculation Utilities
+- [x] Test 1: Today date range boundaries start at local midnight and end at start of tomorrow (24h span `[start, end)`).
+- [x] Test 2: Saturday week start: business week starts Saturday 00:00:00 local time.
+- [x] Test 3: Friday week end: business week ends Friday 23:59:59.999 (exclusive boundary Saturday 00:00:00, 7 days).
+- [x] Test 4: Week transitions across months bridge cleanly (e.g. Oct 31 to Nov 7).
+- [x] Test 5: Month and year boundaries: Jan 15 compares to Dec 2026; leap year February has 29 days vs 28 days.
+- [x] Test 6: Custom range: start inclusive, end exclusive next-day boundary, prior comparison duration matches exactly.
+- [x] Test 7: Local timezone-safe calculations: midnight boundaries calculated without UTC offset skew.
+- [x] Test 8: Confirmed vs pending order qualification: `pendingConfirmation` orders strictly excluded from calculations.
+- [x] Test 9: Total Sales calculation: accurately sums gross order totals with floating-point precision.
+- [x] Test 10: Total Orders calculation: accurately counts qualified confirmed orders.
+- [x] Test 11: Items Sold calculation: accurately sums line item quantities across all qualified orders.
+- [x] Test 12: Average Order Value calculation: correctly computes Total Sales / Total Orders.
+- [x] Test 13: Zero-order handling: safe execution returning 0 with no NaN or Division-by-Zero errors.
+- [x] Test 14: Percentage change calculations: accurately computes positive and negative percentage changes.
+- [x] Test 15: Missing comparison-period handling: zero prior data returns status `no_prior_data` with `null` percentage.
+- [x] Test 16: Sales aggregation: 10 AM strictly covers 10:00-12:00, boundary tests pass, out-of-chart-hours tracked explicitly with full conservation.
+- [x] Test 17: Orders aggregation: counts qualifying orders per time bucket.
+- [x] Test 18: Top-selling product ranking: sorts by quantity sold descending with revenue as deterministic tiebreaker.
+- [x] Test 19: Product name normalization: casing and whitespace variants merge into a single item group.
+- [x] Test 20: Order status distribution: accurately calculates counts and percentages for 4 operational statuses (excluding pending).
+- [x] Test 21: Zero-data chart aggregation: empty orders returns clean 7-bucket zero template (10 AM to 10 PM) with `hasData: false`.
+- [x] Test 22: Seed data integrity: the original 10 seed orders remain completely intact and unmodified (8 confirmed, 2 pending).
+- [x] Automated test runner (`node scratch/run_phase2_verification.mjs`) passed 22/22 tests with exit code 0.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
