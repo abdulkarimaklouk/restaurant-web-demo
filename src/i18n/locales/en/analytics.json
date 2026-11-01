@@ -30,6 +30,18 @@
   "units": {
     "items": "items",
     "orders": "orders"
+  },
+  "chart": {
+    "title": "Sales Overview",
+    "modes": {
+      "sales": "Sales",
+      "orders": "Orders"
+    },
+    "empty": "No activity recorded for this period",
+    "outOfHours": "+ {{amount}} outside chart hours (before 10 AM / after 10 PM)",
+    "tooltip": {
+      "ordersCount": "{{count}} Orders"
+    }
   }
 }
 

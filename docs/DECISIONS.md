@@ -300,3 +300,21 @@ Following the approved `Restaurant Analytics Dashboard.png` reference image:
   - Dark mode surfaces adapt via semantic `[data-theme="dark"]` selectors with elevated contrast and glowing badges.
 - **Accessible Custom Date Range Selection**: Implemented `CustomDateRangeModal` with start/end date inputs, inline validation preventing invalid ranges where `endDate < startDate`, Apply and Cancel actions, keyboard `Escape` dismissal, and state preservation on cancellation.
 - **Bilingual Context-Aware Translations**: Created dedicated `analytics` translation namespaces in `src/i18n/locales/ar/analytics.json` and `src/i18n/locales/en/analytics.json`, supporting localized comparison strings (e.g. `vs. yesterday`, `vs. last week`, `vs. last month`, `vs. previous period`, and `no comparison data`).
+
+## D-034: Sales Overview Interactive SVG Chart Architecture (Phase 4)
+
+To faithfully recreate the interactive Sales Overview section from `Restaurant Analytics Dashboard.png` without introducing third-party chart libraries:
+
+- **Custom SVG Chart Canvas**: Implemented custom scalable vector graphics with a responsive `viewBox="0 0 350 190"` and mobile viewport baseline at $390 \times 844\text{ CSS px}$. Applied `direction: ltr` explicitly to the SVG element to enforce consistent Cartesian coordinate mathematics and prevent bidirectional layout flipping across Arabic RTL and English LTR layouts.
+- **Smooth Bezier Spline & Gradient Area**: Generated smooth cubic Bezier paths (`buildSmoothBezierPath`) with calibrated tension ($0.2$) and boundary clamping between `minY` and `baselineY` to guarantee natural curves without artificial overshoot. Layered a linear gradient (`#2563eb` with 22% opacity to transparent) underneath the curve closed along the baseline.
+- **Dual-Metric Toggle**: Integrated an accessible segmented toggle (`ChartMetricToggle`) for `Sales` (revenue in EGP) and `Orders` (confirmed orders count), switching modes seamlessly without resetting the selected date preset.
+- **Reference-Accurate Y-Axis Scaling**: Created `calculateYAxisTicks` producing evenly distributed intervals:
+  - Sales mode: Generates 7 ticks `[0, 200, 400, 600, 800, 1000, 1200]` with localized currency formatting (`EGP 1,200` in English, `١,٢٠٠ ج.م` in Arabic) for values near 1,000 EGP, matching the approved design reference.
+  - Orders mode: Generates integer-only intervals (`[0, 2, 4, 6, 8, 10]`) preventing fractional counts.
+- **Active Point & Floating Tooltip**:
+  - Highlights the peak bucket by default (8 PM / index 5 on Today preset matching the reference design).
+  - Displays a vertical dashed guide line (`stroke="#93c5fd" stroke-dasharray="3 3"`), an outer highlight halo (`rgba(37, 99, 235, 0.22)`), and an elevated floating tooltip card displaying the formatted value and time (e.g., `● 861 EGP / 8:00 PM` or `● 861 ج.م / 8:00 م`).
+  - Supports mobile touch interaction through full-height invisible column hit targets ($44\text{px}+$ touch width).
+- **Out-of-Chart-Hours Transparency**: Renders a subtle notice banner when sales occur outside displayed chart hours (e.g. before 10 AM or after 10 PM), ensuring complete financial conservation ($\sum \text{bucket.sales} + \text{outOfChartHours.sales} \equiv \text{totalSales}$).
+- **Dark Mode & Contrast**: Full theme adaptation using design system tokens (`--color-card-bg`, `--color-divider`, `#60a5fa` guidelines, `#0f172a` tooltip background).
+

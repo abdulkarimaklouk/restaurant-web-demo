@@ -1,0 +1,210 @@
+.sales-overview-card {
+  background-color: var(--color-card-bg, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e2e8f0);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(15, 23, 42, 0.05));
+  padding: 16px;
+  margin-top: 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.sales-overview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  gap: 12px;
+}
+
+.sales-overview-title-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.sales-overview-icon {
+  color: var(--color-text-main, #0f172a);
+  flex-shrink: 0;
+}
+
+.sales-overview-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-main, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sales-overview-chart-wrapper {
+  width: 100%;
+  position: relative;
+  overflow: visible;
+  touch-action: pan-y;
+}
+
+.sales-overview-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-select: none;
+  overflow: visible;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* Grid & Axes */
+.chart-grid-line {
+  stroke: var(--color-divider, #f1f5f9);
+  stroke-width: 1;
+}
+
+.chart-y-axis-label {
+  font-size: 10px;
+  font-weight: 500;
+  fill: var(--color-text-muted, #94a3b8);
+  font-family: inherit;
+}
+
+.chart-x-axis-label {
+  font-size: 10px;
+  font-weight: 500;
+  fill: var(--color-text-muted, #94a3b8);
+  font-family: inherit;
+  transition: fill 0.15s ease;
+}
+
+.chart-x-axis-label.active {
+  fill: var(--color-primary-blue, #2563eb);
+  font-weight: 700;
+}
+
+/* Curve & Points */
+.chart-bezier-line {
+  stroke: var(--color-primary-blue, #2563eb);
+  stroke-width: 2.5;
+}
+
+.chart-data-point {
+  fill: var(--color-primary-blue, #2563eb);
+  stroke: #ffffff;
+  stroke-width: 2;
+  transition: r 0.15s ease, stroke-width 0.15s ease;
+}
+
+.chart-data-point.active {
+  fill: var(--color-primary-blue, #2563eb);
+  stroke: #ffffff;
+  stroke-width: 2.2;
+}
+
+.chart-point-active-halo {
+  fill: rgba(37, 99, 235, 0.22);
+}
+
+.chart-active-guideline {
+  stroke: #93c5fd;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+
+/* Floating Tooltip */
+.chart-tooltip-rect {
+  fill: #ffffff;
+  stroke: var(--color-border-subtle, #e2e8f0);
+  stroke-width: 1;
+  rx: 6;
+}
+
+.chart-tooltip-value {
+  font-size: 11px;
+  font-weight: 700;
+  fill: var(--color-text-main, #0f172a);
+  font-family: inherit;
+}
+
+.chart-tooltip-time {
+  font-size: 9px;
+  font-weight: 500;
+  fill: var(--color-text-secondary, #64748b);
+  font-family: inherit;
+}
+
+/* Mobile Hit Rectangles */
+.chart-hit-rect {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Out of chart hours footer */
+.chart-out-of-hours-notice {
+  margin-top: 10px;
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary, #64748b);
+  background-color: var(--color-surface-subtle, #f8fafc);
+  border: 1px dashed var(--color-border-subtle, #e2e8f0);
+  border-radius: 6px;
+  text-align: center;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .sales-overview-card {
+  background-color: var(--color-card-bg, #1e293b);
+  border-color: var(--color-border-subtle, #334155);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .chart-grid-line {
+  stroke: rgba(51, 65, 85, 0.6);
+}
+
+[data-theme="dark"] .chart-y-axis-label,
+[data-theme="dark"] .chart-x-axis-label {
+  fill: #94a3b8;
+}
+
+[data-theme="dark"] .chart-x-axis-label.active {
+  fill: #60a5fa;
+}
+
+[data-theme="dark"] .chart-bezier-line {
+  stroke: #3b82f6;
+}
+
+[data-theme="dark"] .chart-data-point {
+  fill: #3b82f6;
+  stroke: #1e293b;
+}
+
+[data-theme="dark"] .chart-point-active-halo {
+  fill: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .chart-active-guideline {
+  stroke: #60a5fa;
+}
+
+[data-theme="dark"] .chart-tooltip-rect {
+  fill: #0f172a;
+  stroke: #334155;
+}
+
+[data-theme="dark"] .chart-tooltip-value {
+  fill: #f8fafc;
+}
+
+[data-theme="dark"] .chart-tooltip-time {
+  fill: #cbd5e1;
+}
+
+[data-theme="dark"] .chart-out-of-hours-notice {
+  background-color: rgba(15, 23, 42, 0.6);
+  border-color: #334155;
+  color: #94a3b8;
+}

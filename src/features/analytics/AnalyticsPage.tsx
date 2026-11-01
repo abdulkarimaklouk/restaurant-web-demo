@@ -1,9 +1,10 @@
 import React, { useState, useMemo } from 'react';
 import { useOrderStore } from '../../data/mockStore';
-import { AnalyticsDatePreset } from './types';
+import { AnalyticsDatePreset, MetricMode } from './types';
 import { generateAnalyticsDataSet } from './utils/analyticsCalculations';
 import { AnalyticsHeader } from './components/AnalyticsHeader';
 import { KpiCardGrid } from './components/KpiCardGrid';
+import { SalesOverviewChart } from './components/SalesOverviewChart';
 import { CustomDateRangeModal, formatIsoDateString } from './components/CustomDateRangeModal';
 import './AnalyticsPage.css';
 
@@ -14,6 +15,7 @@ interface AnalyticsPageProps {
 export const AnalyticsPage: React.FC<AnalyticsPageProps> = () => {
   const { orders } = useOrderStore();
   const [preset, setPreset] = useState<AnalyticsDatePreset>('today');
+  const [metricMode, setMetricMode] = useState<MetricMode>('sales');
   const [isCustomModalOpen, setIsCustomModalOpen] = useState(false);
 
   // Default custom range: start of today to end of today
@@ -66,7 +68,15 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = () => {
         {/* 2x2 KPI Cards Grid */}
         <KpiCardGrid kpis={dataSet.kpis} preset={preset} />
 
-        {/* Reserved space for future sections (Sales chart, Top items, Statuses, Insights) */}
+        {/* Full-width Sales Overview Chart */}
+        <SalesOverviewChart
+          chartData={dataSet.chartData[metricMode]}
+          metricMode={metricMode}
+          onMetricModeChange={setMetricMode}
+          preset={preset}
+        />
+
+        {/* Reserved space for future sections (Top items, Statuses, Insights) */}
         <div className="analytics-future-sections" aria-hidden="true" />
       </div>
 

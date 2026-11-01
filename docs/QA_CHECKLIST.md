@@ -244,7 +244,7 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] English name search while the interface is Arabic (e.g. "burger", "chicken").
 - [x] Arabic name search while the interface is English.
 - [x] Case-insensitive English search ("bUrGeR", "BURGER", "burger").
-- [x] Leading and trailing whitespace trimming ("  burger  ").
+- [x] Leading and trailing whitespace trimming (" burger ").
 - [x] Category filtering for all tabs: All, Main Dishes, Appetizers, Drinks.
 - [x] Available-only filtering via filter sheet.
 - [x] Unavailable-only filtering via filter sheet.
@@ -308,11 +308,13 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
 ## Phase 7.2: Menu UI Input Controls & Toggle Polish
+
 - [x] Price input native spinners hidden across AddProductScreen and EditProductScreen (`appearance: textfield`).
 - [x] Currency indicator (`ج.م` / `EGP`) padded cleanly without overlapping input value in RTL and LTR.
 - [x] Availability toggle physical knob strictly mapped to left for OFF and right for ON across both RTL and LTR.
 
 ## Analytics Dashboard Phase 2: Data Layer & Calculation Utilities
+
 - [x] Test 1: Today date range boundaries start at local midnight and end at start of tomorrow (24h span `[start, end)`).
 - [x] Test 2: Saturday week start: business week starts Saturday 00:00:00 local time.
 - [x] Test 3: Friday week end: business week ends Friday 23:59:59.999 (exclusive boundary Saturday 00:00:00, 7 days).
@@ -339,6 +341,7 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
 ## Analytics Dashboard Phase 3: Page Structure, Date Filters & KPI Cards
+
 - [x] Test 1: Analytics navigation activation (AnalyticsPage rendered, notice interceptor removed).
 - [x] Test 2: Analytics page rendering (TopHeader, AnalyticsHeader, KpiCardGrid, CustomDateRangeModal).
 - [x] Test 3: Correct four KPI cards (Total Sales, Total Orders, Items Sold, Avg. Order Value).
@@ -361,4 +364,34 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Test 20: Code integrity: production build compiled cleanly with zero TypeScript errors or missing imports.
 - [x] Automated test runner (`node scratch/run_phase3_verification.mjs`) passed 20/20 tests with exit code 0.
 - [x] Actual browser screenshots captured at 390×844 for Arabic Light, English Light, Custom Modal, and Arabic Dark.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Analytics Dashboard Phase 4: Sales Overview Interactive SVG Chart
+
+- [x] Test 1: Reference Y-axis scaling for 1050 EGP generates 7 ticks `[0, 200, 400, 600, 800, 1000, 1200]` matching `Restaurant Analytics Dashboard.png`.
+- [x] Test 2: Y-axis currency formatting in English (`EGP 1,200` to `EGP 0`).
+- [x] Test 3: Y-axis currency formatting in Arabic (`١,٢٠٠ ج.م` / `1,200 ج.م` to `0 ج.م`).
+- [x] Test 4: Y-axis scale adaptability for smaller revenue values with positive step intervals.
+- [x] Test 5: Y-axis integer-only scale for Orders mode (strictly no fractional orders).
+- [x] Test 6: Zero orders fallback provides clean default scale `[0, 2, 4, 6, 8, 10]`.
+- [x] Test 7: Smooth cubic Bezier path generation (`buildSmoothBezierPath`) with valid `M` and `C` commands.
+- [x] Test 8: Gradient area path closure along baseline back to origin (`buildAreaPath`).
+- [x] Test 9: Zero-data flat path stability without `NaN` coordinates or distortion.
+- [x] Test 10: X-axis time label localization (`10 AM` to `10 ص`, `8 PM` to `8 م`, `Sat` to `السبت`).
+- [x] Test 11: Tooltip 12-hour time formatting matching reference image (`8:00 PM` / `8:00 م`).
+- [x] Test 12: Visual composition: full-width card, trend icon, SVG canvas, Bezier curve, area fill, guideline, data points, and floating tooltip.
+- [x] Test 13: Accessible segmented toggle (`ChartMetricToggle`) for Sales and Orders with active pill styling.
+- [x] Test 14: Metric mode state preservation in `AnalyticsPage` without resetting date preset.
+- [x] Test 15: Design token adherence (`14px` radius, `--color-card-bg`, `--color-divider`, complete dark mode).
+- [x] Test 16: Segmented toggle button styling (blue active pill `#2563eb`, white text, muted inactive).
+- [x] Test 17: Dedicated chart localization strings registered in both Arabic and English.
+- [x] Test 18: Dual-metric 7-bucket alignment for Today preset (10 AM to 10 PM).
+- [x] Test 19: Strict financial conservation (`displayedBucketSales + outOfChartHours === totalSales`).
+- [x] Test 20: Clean zero-data fallback template (`hasData: false`).
+- [x] Automated test runner (`node scratch/run_phase4_verification.mjs`) passed 20/20 tests with exit code 0.
+- [x] Actual browser screenshots captured at 390×844:
+  - `analytics-sales-chart-ar-390x844.png` (Arabic Light, Sales mode)
+  - `analytics-sales-chart-en-390x844.png` (English Light, Sales mode matching Reference)
+  - `analytics-orders-chart-en-390x844.png` (English Light, Orders mode)
+  - `analytics-sales-chart-dark-390x844.png` (Arabic Dark, Sales mode)
 - [x] Production build (`npm run build`) succeeded with 0 errors.
