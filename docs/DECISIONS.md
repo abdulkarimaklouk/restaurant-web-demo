@@ -318,3 +318,24 @@ To faithfully recreate the interactive Sales Overview section from `Restaurant A
 - **Out-of-Chart-Hours Transparency**: Renders a subtle notice banner when sales occur outside displayed chart hours (e.g. before 10 AM or after 10 PM), ensuring complete financial conservation ($\sum \text{bucket.sales} + \text{outOfChartHours.sales} \equiv \text{totalSales}$).
 - **Dark Mode & Contrast**: Full theme adaptation using design system tokens (`--color-card-bg`, `--color-divider`, `#60a5fa` guidelines, `#0f172a` tooltip background).
 
+## D-035: Business Performance & Insights Architecture (Phase 5)
+
+To faithfully complete the business performance and intelligence tiers of `Restaurant Analytics Dashboard.png`:
+
+- **Two-Column Performance Layout**: Placed `TopSellingItems` and `OrdersByStatusDonut` in a side-by-side 2-column grid (`repeat(2, 1fr)` with 12px gap) directly beneath `SalesOverviewChart`. Bounded card widths to `calc(100% - 32px)` with 16px lateral page margins, perfectly preventing mobile clipping or horizontal overflow on 390px viewports.
+- **Top Selling Product Fallback Architecture**: Recognized that `OrderItem.id` represents individual line-item references rather than menu item identifiers. In `productMappingUtils.ts`, implemented exact normalized name matching against `INITIAL_MENU_ITEMS`. When a verified match exists, the component renders `MenuProductImage`. For unmapped line items (such as traditional breakfast, beverage, or dessert items present in seed orders), the original product display name is preserved with a neutral culinary fallback container (`Utensils` icon, 34×34px, 8px radius) rather than inventing fabricated menu mappings or altering seed records.
+- **Custom SVG Donut Chart**: Built `OrdersByStatusDonut` using a lightweight `<svg>` donut chart ($54 \times 54\text{px}$, radius 34, stroke 14) with SVG `strokeDasharray` and cumulative negative offsets. Represents the 4 confirmed operational statuses (`delivered` #10b981, `ready` #2563eb, `preparing` #f59e0b, `newOrder` #8b5cf6), strictly excluding pending confirmation orders. The center prominently renders total confirmed orders, while the adjacent legend shows localized status labels, counts, and integer percentage values matching the visual reference without text ellipsis.
+- **Deterministic Insights Generation**: Created pure utility `generateAnalyticsInsights` (`insightsGenerator.ts`). For datasets with missing historical periods (`no_prior_data`, typical of recent seed orders), it transparently states that prior comparison data is unavailable while highlighting the top-selling product and units sold. For periods with valid comparisons, it reports localized percentage increases/decreases. For empty intervals, it produces a clear empty-state message.
+- **Full Date Preset Reactivity**: All three components (`TopSellingItems`, `OrdersByStatusDonut`, and `AnalyticsInsights`) derive state reactively from `dataSet` computed in `AnalyticsPage`, updating instantly across Today, This Week, This Month, and Custom presets without isolated or desynchronized state.
+
+## D-036: OrdersByStatusDonut Percentage Precision & Exact Geometry Correction
+
+To resolve an integer-rounding artifact where displayed status percentages could sum to 101% (38% + 13% + 25% + 25%):
+
+- **Single Decimal Place Precision**: Formatted legend percentages with one decimal place via `item.percentage.toFixed(1) + '%'`. For the 8 confirmed seed orders (Delivered: 3, Ready: 1, Preparing: 2, New: 2), this yields `37.5%`, `12.5%`, `25.0%`, and `25.0%`, summing strictly to `100.0%`.
+- **Exact Segment Proportions**: Maintained SVG donut `strokeDasharray` slice calculation directly from exact underlying counts `(item.count / totalCount) * circumference`. This ensures the visual arc lengths precisely represent $3/8$, $1/8$, $2/8$, and $2/8$ of the circle with zero drift or geometric distortion.
+- **Data Integrity Preserved**: No order records, timestamps, status values, or calculations outside the presentation formatting were altered.
+- **Deterministic Regression Test**: Added Test 23 to `scratch/run_phase5_verification.mjs` asserting the exact distribution, string formatting, 100.0% sum, exact slice ratios, and component source patterns.
+
+
+

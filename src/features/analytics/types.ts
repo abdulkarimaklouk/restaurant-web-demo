@@ -1,5 +1,7 @@
 import { OperationalStatus, Order } from '../../types/order';
 
+export type { OperationalStatus, Order };
+
 export type AnalyticsDatePreset = 'today' | 'week' | 'month' | 'custom';
 
 export type MetricMode = 'sales' | 'orders';

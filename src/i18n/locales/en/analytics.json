@@ -42,6 +42,31 @@
     "tooltip": {
       "ordersCount": "{{count}} Orders"
     }
+  },
+  "performance": {
+    "topSelling": {
+      "title": "Top Selling Items",
+      "sold": "{{count}} sold",
+      "empty": "No sales recorded"
+    },
+    "ordersStatus": {
+      "title": "Orders by Status",
+      "orders": "Orders",
+      "delivered": "Delivered",
+      "ready": "Ready",
+      "preparing": "Preparing",
+      "new": "New",
+      "empty": "No orders"
+    },
+    "insights": {
+      "title": "Insights",
+      "growthPositive": "Sales are up by {{pct}}% compared to {{period}}. {{item}} is your top selling item.",
+      "growthNegative": "Sales are down by {{pct}}% compared to {{period}}. {{item}} is your top selling item.",
+      "growthNeutral": "Sales remained steady compared to {{period}}. {{item}} is your top selling item.",
+      "noComparison": "Historical comparison data is unavailable for this period. {{item}} is your top selling item with {{qty}} units sold.",
+      "noComparisonNoTop": "Historical comparison data is unavailable for this period.",
+      "emptyPeriod": "No order activity recorded for the selected period."
+    }
   }
 }
 

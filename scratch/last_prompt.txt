@@ -1,0 +1,71 @@
+<USER_REQUEST>
+# Analytics Dashboard — Phase 4: Sales Overview Chart
+
+## Objective
+
+Implement the Sales Overview section according to the approved reference image:
+
+`design/reference-screens/Restaurant Analytics Dashboard.png`
+
+This phase is dedicated exclusively to the interactive Sales Overview chart.
+
+## 1. Initial Inspection
+
+Inspect:
+
+- Existing AnalyticsPage and its layout.
+- Phase 2 analytics calculations and chart aggregation utilities.
+- Existing Analytics types.
+- Current date filter state and selected date range.
+- Existing design tokens and Settings visual style.
+
+Reuse the existing architecture. Do not duplicate calculation logic.
+
+## 2. Chart Layout
+
+Create a full-width Sales Overview card containing:
+
+- Section title: Sales Overview / نظرة عامة على المبيعات.
+- Sales / Orders segmented toggle.
+- Chart plotting area.
+- Vertical Y-axis labels.
+- Horizontal X-axis time labels.
+- Blue smooth line.
+- Subtle gradient area fill beneath the line.
+- Circular data points.
+- Vertical dashed guide for the active point.
+- Floating tooltip displaying the selected value and time.
+
+Match the reference image's proportions, spacing, visual hierarchy, and styling.
+
+## 3. Metric Toggle
+
+Support two modes:
+
+**Sales**
+- Display revenue values.
+- Format Y-axis values using the existing currency formatter.
+- Tooltip shows the revenue and corresponding time period.
+
+**Orders**
+- Display the number of confirmed orders.
+- Use integer Y-axis values.
+- Tooltip shows the order count and corresponding time period.
+
+Switching modes must update the chart without resetting the selected date filter.
+
+## 4. Data
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-01T21:48:44+02:00.
+
+The user's current state is as follows:
+Active Document: c:\Users\Star\Desktop\restaurant-web-demo-starter\src\features\analytics\types.ts (LANGUAGE_UNSPECIFIED)
+Cursor is on line: 1
+Other open documents:
+- c:\Users\Star\Desktop\restaurant-web-demo-starter\src\i18n\locales\en\analytics.json (LANGUAGE_UNSPECIFIED)
+- c:\Users\Star\Desktop\restaurant-web-demo-starter\src\features\analytics\components\DateFilterTabs.tsx (LANGUAGE_UNSPECIFIED)
+- c:\Users\Star\Desktop\restaurant-web-demo-starter\src\features\analytics\components\KpiCard.css (LANGUAGE_UNSPECIFIED)
+- c:\Users\Star\Desktop\restaurant-web-demo-starter\src\features\analytics\components\KpiCard.tsx (LANGUAGE_UNSPECIFIED)
+- c:\Users\Star\Desktop\restaurant-web-demo-starter\src\features\analytics\components\KpiCardGrid.css (LANGUAGE_UNSPECIFIED)
+</ADDITIONAL_METADATA>

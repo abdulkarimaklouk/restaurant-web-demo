@@ -1,0 +1,126 @@
+.top-selling-card {
+  background-color: var(--color-card-bg, #ffffff);
+  border: 1px solid var(--color-border-subtle, #e2e8f0);
+  border-radius: 14px;
+  box-shadow: var(--shadow-card, 0 1px 3px rgba(15, 23, 42, 0.05));
+  padding: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.top-selling-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  min-width: 0;
+}
+
+.top-selling-icon {
+  color: var(--color-text-main, #0f172a);
+  flex-shrink: 0;
+}
+
+.top-selling-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-main, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-selling-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.top-selling-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  min-width: 0;
+}
+
+.top-selling-thumb-wrap {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.top-selling-thumb-wrap .product-image-container {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+}
+
+.top-selling-thumb-wrap .product-svg-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.top-selling-fallback-thumb {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-color: var(--color-surface-muted, #f1f5f9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary, #64748b);
+  border: 1px solid var(--color-border-subtle, #e2e8f0);
+}
+
+.top-selling-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+  flex: 1;
+}
+
+.top-selling-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-text-main, #0f172a);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+
+.top-selling-sold {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-muted, #94a3b8);
+  line-height: 1.2;
+}
+
+.top-selling-empty {
+  font-size: 11px;
+  color: var(--color-text-muted, #94a3b8);
+  text-align: center;
+  padding: 18px 0;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .top-selling-card {
+  background-color: var(--color-card-bg, #1e293b);
+  border-color: var(--color-border-subtle, #334155);
+}
+
+[data-theme="dark"] .top-selling-fallback-thumb {
+  background-color: var(--color-surface-subtle, #0f172a);
+  border-color: var(--color-border-subtle, #334155);
+  color: #94a3b8;
+}

@@ -5,6 +5,9 @@ import { generateAnalyticsDataSet } from './utils/analyticsCalculations';
 import { AnalyticsHeader } from './components/AnalyticsHeader';
 import { KpiCardGrid } from './components/KpiCardGrid';
 import { SalesOverviewChart } from './components/SalesOverviewChart';
+import { TopSellingItems } from './components/TopSellingItems';
+import { OrdersByStatusDonut } from './components/OrdersByStatusDonut';
+import { AnalyticsInsights } from './components/AnalyticsInsights';
 import { CustomDateRangeModal, formatIsoDateString } from './components/CustomDateRangeModal';
 import './AnalyticsPage.css';
 
@@ -76,7 +79,16 @@ export const AnalyticsPage: React.FC<AnalyticsPageProps> = () => {
           preset={preset}
         />
 
-        {/* Reserved space for future sections (Top items, Statuses, Insights) */}
+        {/* Two-Column Business Performance Section */}
+        <div className="analytics-performance-grid">
+          <TopSellingItems products={dataSet.topSellingProducts} />
+          <OrdersByStatusDonut ordersByStatus={dataSet.ordersByStatus} />
+        </div>
+
+        {/* Full-Width Insights Panel */}
+        <AnalyticsInsights dataSet={dataSet} preset={preset} />
+
+        {/* Bottom spacing before navigation clearance */}
         <div className="analytics-future-sections" aria-hidden="true" />
       </div>
 

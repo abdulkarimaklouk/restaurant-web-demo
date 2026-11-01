@@ -395,3 +395,37 @@ Update this checklist during implementation. Do not mark an item complete until 
   - `analytics-orders-chart-en-390x844.png` (English Light, Orders mode)
   - `analytics-sales-chart-dark-390x844.png` (Arabic Dark, Sales mode)
 - [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Analytics Dashboard Phase 5: Business Performance & Insights
+
+- [x] Test 1: Top 3 product ranking aggregates correctly from qualifying orders.
+- [x] Test 2: Products strictly ranked in descending order by quantity sold.
+- [x] Test 3: Deterministic revenue tiebreaker ranks identical quantity items by revenue descending.
+- [x] Test 4: Product mapping safely identifies unmapped items without guessing and preserves original name.
+- [x] Test 5: Pending confirmation orders strictly excluded from top selling totals.
+- [x] Test 6: Orders by status accurately counts all 4 confirmed operational statuses (3, 1, 2, 2).
+- [x] Test 7: Orders by status percentages calculate accurately to 1 decimal place.
+- [x] Test 8: Zero qualifying orders returns safe empty distribution with 0% and no division errors.
+- [x] Test 9: Donut segments sum strictly to 100.0% when confirmed orders exist.
+- [x] Test 10: Insights correctly generates positive sales growth message with best selling product.
+- [x] Test 11: Insights correctly generates negative sales growth message.
+- [x] Test 12: Insights accurately reports comparison data unavailable without fabricating percentage.
+- [x] Test 13: Best-selling product insight accurately highlights top product name and quantity.
+- [x] Test 14: Empty period generates localized empty-state message without crashing.
+- [x] Test 15: All three performance outputs synchronize reactively with selected date range presets.
+- [x] Test 16: Arabic translations fully defined for all Performance and Insights sections.
+- [x] Test 17: English translations fully defined for all Performance and Insights sections.
+- [x] Test 18: Light theme styling adheres to 14px radius, soft blue insights panel, and design tokens.
+- [x] Test 19: Dark theme styling provides comprehensive `[data-theme="dark"]` overrides for cards and donut slices.
+- [x] Test 20: Two-column lower performance grid defined with `repeat(2, 1fr)` and 12px gap.
+- [x] Test 21: Card containers enforce `calc(100% - 32px)` margin bounds to prevent mobile horizontal overflow.
+- [x] Test 22: AnalyticsPage seamlessly composes TopSellingItems, OrdersByStatusDonut, and AnalyticsInsights.
+- [x] Test 23: OrdersByStatusDonut displays 1-decimal-place percentages summing to 100.0% and exact SVG slice proportions (regression test for 37.5%, 12.5%, 25.0%, 25.0%).
+- [x] Automated test runner (`node scratch/run_phase5_verification.mjs`) passed 23/23 tests with exit code 0.
+- [x] Regression test suites passed (Phase 2: 22/22, Phase 3: 20/20, Phase 4: 20/20).
+- [x] Actual browser screenshots captured at 390×844:
+  - `analytics-phase5-full-ar-light-390x844.png` (Arabic Light, full top view)
+  - `analytics-phase5-scrolled-performance-ar-390x844.png` (Arabic Light, performance grid & insights)
+  - `analytics-phase5-scrolled-performance-en-390x844.png` (English Light, performance grid & insights matching reference)
+  - `analytics-phase5-ar-dark-390x844.png` (Arabic Dark, performance grid & insights)
+- [x] Production build (`npm run build`) succeeded with 0 errors.
