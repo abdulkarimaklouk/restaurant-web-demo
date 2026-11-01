@@ -1,0 +1,185 @@
+/* KPI Card Component Styling */
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 13px 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* Card Header (Icon badge + title) */
+.kpi-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.kpi-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.kpi-card-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.1px;
+}
+
+/* Main Value */
+.kpi-card-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  line-height: 1.2;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Comparison Row */
+.kpi-comparison-row {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kpi-comp-icon {
+  flex-shrink: 0;
+}
+
+.kpi-comp-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kpi-comparison-row.positive {
+  color: #16a34a;
+}
+
+.kpi-comparison-row.negative {
+  color: #dc2626;
+}
+
+.kpi-comparison-row.neutral {
+  color: var(--color-text-muted);
+}
+
+/* Theme 1: Mint Green (Total Sales) */
+.kpi-card-green {
+  background-color: #ecfdf5;
+  border-color: #d1fae5;
+}
+
+.kpi-card-green .kpi-icon-badge {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+/* Theme 2: Soft Blue (Total Orders) */
+.kpi-card-blue {
+  background-color: #eff6ff;
+  border-color: #dbeafe;
+}
+
+.kpi-card-blue .kpi-icon-badge {
+  background-color: #dbeafe;
+  color: #2563eb;
+}
+
+/* Theme 3: Soft Lavender / Purple (Items Sold) */
+.kpi-card-purple {
+  background-color: #f5f3ff;
+  border-color: #ede9fe;
+}
+
+.kpi-card-purple .kpi-icon-badge {
+  background-color: #ede9fe;
+  color: #7c3aed;
+}
+
+/* Theme 4: Soft Peach / Orange (Avg. Order Value) */
+.kpi-card-orange {
+  background-color: #fff7ed;
+  border-color: #ffedd5;
+}
+
+.kpi-card-orange .kpi-icon-badge {
+  background-color: #ffedd5;
+  color: #ea580c;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .kpi-card-green {
+  background-color: rgba(6, 78, 59, 0.3);
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="dark"] .kpi-card-green .kpi-icon-badge {
+  background-color: rgba(16, 185, 129, 0.2);
+  color: #34d399;
+}
+
+[data-theme="dark"] .kpi-card-blue {
+  background-color: rgba(30, 58, 138, 0.3);
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+[data-theme="dark"] .kpi-card-blue .kpi-icon-badge {
+  background-color: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+}
+
+[data-theme="dark"] .kpi-card-purple {
+  background-color: rgba(76, 29, 149, 0.3);
+  border-color: rgba(168, 85, 247, 0.25);
+}
+
+[data-theme="dark"] .kpi-card-purple .kpi-icon-badge {
+  background-color: rgba(168, 85, 247, 0.2);
+  color: #c084fc;
+}
+
+[data-theme="dark"] .kpi-card-orange {
+  background-color: rgba(124, 45, 18, 0.3);
+  border-color: rgba(249, 115, 22, 0.25);
+}
+
+[data-theme="dark"] .kpi-card-orange .kpi-icon-badge {
+  background-color: rgba(249, 115, 22, 0.2);
+  color: #fb923c;
+}
+
+[data-theme="dark"] .kpi-comparison-row.positive {
+  color: #4ade80;
+}
+
+[data-theme="dark"] .kpi-comparison-row.negative {
+  color: #f87171;
+}
+

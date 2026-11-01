@@ -285,3 +285,18 @@ Following the approved Analytics Dashboard design and calculation requirements:
 - **Today's Chart Alignment**: Aligned Today's chart buckets with the 7 reference points shown in `Restaurant Analytics Dashboard.png` (`10 AM`, `12 PM`, `2 PM`, `4 PM`, `6 PM`, `8 PM`, `10 PM`). The 10 AM bucket strictly represents 10:00–12:00, and remaining buckets represent consecutive 2-hour intervals through 10 PM (22:00–24:00). Out-of-chart-hours sales and orders (e.g. before 10 AM or after chart hours) are tracked explicitly in `outOfChartHours` without merging them into the 10 AM bucket, ensuring $\sum \text{bucket.sales} + \text{outOfChartHours.sales} \equiv \text{totalSales}$ without assuming unverified restaurant operating hours.
 - **Top-Selling Item Calculations**: Strictly referenced actual `OrderItem` properties (`lineTotal` and `unitPrice`), never referencing non-existent properties. Tiebreakers for identical sold unit quantities sort deterministically by total revenue descending.
 - **Custom Lightweight Architecture**: In accordance with project policy, no third-party charting or analytics packages were introduced. Pure TypeScript calculation functions generate structured data ready for SVG chart rendering in subsequent phases.
+
+## D-033: Analytics Page Structure, Date Filtering & KPI Cards UI (Phase 3)
+
+Following the approved `Restaurant Analytics Dashboard.png` reference image:
+
+- **Bottom Navigation Activation**: Replaced the previous `nav.analyticsNotice` toast interception in `BottomNavigation.tsx` with direct navigation to the `analytics` tab, rendering `AnalyticsPage.tsx` in `App.tsx` and displaying active pill styling with `BarChart2` icon.
+- **Modular Component Architecture**: Separated concerns into modular presentation components (`AnalyticsHeader`, `DateFilterTabs`, `KpiCardGrid`, `KpiCard`, and `CustomDateRangeModal`), driving state reactively from `useOrderStore()` and `generateAnalyticsDataSet`.
+- **Reference-Accurate KPI Card Styling**: Replicated the 2×2 grid layout with individual pastel background colors:
+  - Total Sales: mint green surface (`#ecfdf5`), green border (`#d1fae5`), and `Coins` badge.
+  - Total Orders: soft blue surface (`#eff6ff`), blue border (`#dbeafe`), and `ShoppingBag` badge.
+  - Items Sold: soft lavender surface (`#f5f3ff`), purple border (`#ede9fe`), and `Utensils` badge.
+  - Average Order Value: soft peach surface (`#fff7ed`), orange border (`#ffedd5`), and `Receipt` badge.
+  - Dark mode surfaces adapt via semantic `[data-theme="dark"]` selectors with elevated contrast and glowing badges.
+- **Accessible Custom Date Range Selection**: Implemented `CustomDateRangeModal` with start/end date inputs, inline validation preventing invalid ranges where `endDate < startDate`, Apply and Cancel actions, keyboard `Escape` dismissal, and state preservation on cancellation.
+- **Bilingual Context-Aware Translations**: Created dedicated `analytics` translation namespaces in `src/i18n/locales/ar/analytics.json` and `src/i18n/locales/en/analytics.json`, supporting localized comparison strings (e.g. `vs. yesterday`, `vs. last week`, `vs. last month`, `vs. previous period`, and `no comparison data`).

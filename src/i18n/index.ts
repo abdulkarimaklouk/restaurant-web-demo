@@ -6,11 +6,13 @@ import arCommon from './locales/ar/common.json';
 import arOrders from './locales/ar/orders.json';
 import arSettings from './locales/ar/settings.json';
 import arMenu from './locales/ar/menu.json';
+import arAnalytics from './locales/ar/analytics.json';
 
 import enCommon from './locales/en/common.json';
 import enOrders from './locales/en/orders.json';
 import enSettings from './locales/en/settings.json';
 import enMenu from './locales/en/menu.json';
+import enAnalytics from './locales/en/analytics.json';
 
 export const STORAGE_KEY_LANGUAGE = 'app_language';
 export const DEFAULT_LANGUAGE: AppLanguage = 'ar';
@@ -44,18 +46,20 @@ i18n
         orders: arOrders,
         settings: arSettings,
         menu: arMenu,
+        analytics: arAnalytics,
       },
       en: {
         common: enCommon,
         orders: enOrders,
         settings: enSettings,
         menu: enMenu,
+        analytics: enAnalytics,
       },
     },
     lng: initialLanguage,
     fallbackLng: DEFAULT_LANGUAGE,
     defaultNS: 'common',
-    ns: ['common', 'orders', 'settings', 'menu'],
+    ns: ['common', 'orders', 'settings', 'menu', 'analytics'],
     interpolation: {
       escapeValue: false,
     },

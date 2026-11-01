@@ -1,0 +1,51 @@
+/* Analytics Subheader Bar */
+.analytics-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px 14px 16px;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: 0;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.analytics-title-wrap {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 2px;
+}
+
+.analytics-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-text-main);
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.analytics-custom-badge {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  color: #2563eb;
+  background-color: #eff6ff;
+  border-radius: 4px;
+  padding: 1px 6px;
+  border: 1px solid #dbeafe;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+[data-theme="dark"] .analytics-custom-badge {
+  background-color: rgba(37, 99, 235, 0.2);
+  border-color: rgba(59, 130, 246, 0.35);
+  color: #60a5fa;
+}
+

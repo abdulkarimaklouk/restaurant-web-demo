@@ -5,6 +5,7 @@ import { TopHeader } from '../components/layout/TopHeader';
 import { BottomNavigation, NavTab } from '../components/layout/BottomNavigation';
 import { OrdersPage } from '../features/orders/OrdersPage';
 import { MenuPage } from '../features/menu/MenuPage';
+import { AnalyticsPage } from '../features/analytics/AnalyticsPage';
 import { SettingsPage } from '../features/settings/SettingsPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
 import { useOrderStore } from '../data/mockStore';
@@ -70,6 +71,7 @@ export function App() {
       {/* Primary Approved Screens */}
       {activeTab === 'orders' && <OrdersPage onShowToast={showToast} />}
       {activeTab === 'menu' && <MenuPage onShowToast={showToast} />}
+      {activeTab === 'analytics' && <AnalyticsPage onShowToast={showToast} />}
       {activeTab === 'settings' && <SettingsPage onShowToast={showToast} />}
 
       {/* Full-width Edge-to-Edge Bottom Navigation */}

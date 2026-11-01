@@ -1,0 +1,35 @@
+{
+  "title": "Analytics",
+  "presets": {
+    "today": "Today",
+    "week": "This Week",
+    "month": "This Month",
+    "custom": "Custom"
+  },
+  "customModal": {
+    "title": "Select Custom Range",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "invalidRange": "End date must be on or after start date",
+    "selectedRange": "Period: {{range}}"
+  },
+  "kpis": {
+    "totalSales": "Total Sales",
+    "totalOrders": "Total Orders",
+    "itemsSold": "Items Sold",
+    "avgOrderValue": "Avg. Order Value",
+    "vsYesterday": "vs. yesterday",
+    "vsLastWeek": "vs. last week",
+    "vsLastMonth": "vs. last month",
+    "vsPriorPeriod": "vs. previous period",
+    "noPriorData": "No comparison data",
+    "neutral": "No change"
+  },
+  "units": {
+    "items": "items",
+    "orders": "orders"
+  }
+}
+

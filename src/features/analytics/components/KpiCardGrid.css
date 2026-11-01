@@ -1,0 +1,10 @@
+/* KPI Card Grid (2x2 Layout matching Reference) */
+.kpi-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  width: 100%;
+}
+

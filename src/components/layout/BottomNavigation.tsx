@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ClipboardList, UtensilsCrossed, SlidersHorizontal, Settings } from 'lucide-react';
+import { ClipboardList, UtensilsCrossed, BarChart2, Settings } from 'lucide-react';
 import { useOrderStore } from '../../data/mockStore';
 import './BottomNavigation.css';
 
@@ -9,14 +9,13 @@ export type NavTab = 'orders' | 'menu' | 'analytics' | 'settings';
 interface BottomNavigationProps {
   activeTab: NavTab;
   onTabChange: (tab: NavTab) => void;
-  onShowNotice: (message: string) => void;
+  onShowNotice?: (message: string) => void;
   unreadOrdersCount?: number;
 }
 
 export const BottomNavigation: React.FC<BottomNavigationProps> = ({
   activeTab,
   onTabChange,
-  onShowNotice,
   unreadOrdersCount,
 }) => {
   const { t } = useTranslation('common');
@@ -25,11 +24,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
     unreadOrdersCount !== undefined ? unreadOrdersCount : counts.pending + counts.new;
 
   const handleNavClick = (dest: NavTab) => {
-    if (dest === 'analytics') {
-      onShowNotice(t('nav.analyticsNotice'));
-    } else {
-      onTabChange(dest);
-    }
+    onTabChange(dest);
   };
 
   return (
@@ -84,7 +79,7 @@ export const BottomNavigation: React.FC<BottomNavigationProps> = ({
       >
         <span className="nav-pill-content">
           <span className="nav-icon-wrap">
-            <SlidersHorizontal size={20} strokeWidth={2.2} className="nav-icon" />
+            <BarChart2 size={20} strokeWidth={2.2} className="nav-icon" />
           </span>
           <span className="nav-label">{t('nav.analytics')}</span>
         </span>

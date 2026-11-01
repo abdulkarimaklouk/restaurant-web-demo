@@ -1,0 +1,111 @@
+/* Date Filter Controls Bar */
+.date-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+/* Segmented Pill Group */
+.date-filter-segmented {
+  display: inline-flex;
+  align-items: center;
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.date-preset-tab {
+  border: none;
+  background: transparent;
+  color: #64748b;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 500;
+  padding: 6px 10px;
+  border-radius: 7px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+
+.date-preset-tab:hover:not(.active) {
+  color: #334155;
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.date-preset-tab.active {
+  background-color: #2563eb;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.25);
+}
+
+/* Standalone Custom Calendar Button */
+.custom-calendar-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  color: #64748b;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.custom-calendar-btn:hover:not(.active) {
+  border-color: #cbd5e1;
+  color: #334155;
+  background-color: #f8fafc;
+}
+
+.custom-calendar-btn.active {
+  background-color: #eff6ff;
+  border-color: #2563eb;
+  color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] .date-filter-segmented {
+  background-color: #1e293b;
+}
+
+[data-theme="dark"] .date-preset-tab {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .date-preset-tab:hover:not(.active) {
+  color: #f1f5f9;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .date-preset-tab.active {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .custom-calendar-btn {
+  background-color: #1e293b;
+  border-color: #334155;
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .custom-calendar-btn:hover:not(.active) {
+  background-color: #334155;
+  color: #f8fafc;
+}
+
+[data-theme="dark"] .custom-calendar-btn.active {
+  background-color: rgba(37, 99, 235, 0.2);
+  border-color: #3b82f6;
+  color: #60a5fa;
+  box-shadow: 0 0 0 1px #3b82f6;
+}
+

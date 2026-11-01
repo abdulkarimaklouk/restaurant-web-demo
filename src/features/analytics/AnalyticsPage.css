@@ -1,0 +1,30 @@
+/* Analytics Page Main Container */
+.analytics-page {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  width: 100%;
+  background-color: var(--color-page-bg);
+}
+
+.analytics-scroll-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 16px));
+  box-sizing: border-box;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Reserved space for upcoming Phase 4+ sections */
+.analytics-future-sections {
+  flex: 1;
+  min-height: 24px;
+}
+

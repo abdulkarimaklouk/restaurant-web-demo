@@ -1,0 +1,35 @@
+{
+  "title": "التحليلات",
+  "presets": {
+    "today": "اليوم",
+    "week": "هذا الأسبوع",
+    "month": "هذا الشهر",
+    "custom": "مخصص"
+  },
+  "customModal": {
+    "title": "تحديد فترة مخصصة",
+    "startDate": "تاريخ البداية",
+    "endDate": "تاريخ النهاية",
+    "apply": "تطبيق",
+    "cancel": "إلغاء",
+    "invalidRange": "تاريخ النهاية يجب أن يكون مساوياً لتاريخ البداية أو بعده",
+    "selectedRange": "الفترة: {{range}}"
+  },
+  "kpis": {
+    "totalSales": "إجمالي المبيعات",
+    "totalOrders": "عدد الطلبات",
+    "itemsSold": "الأصناف المباعة",
+    "avgOrderValue": "متوسط قيمة الطلب",
+    "vsYesterday": "مقارنة بالأمس",
+    "vsLastWeek": "مقارنة بالأسبوع الماضي",
+    "vsLastMonth": "مقارنة بالشهر الماضي",
+    "vsPriorPeriod": "مقارنة بالفترة السابقة",
+    "noPriorData": "لا توجد بيانات مقارنة",
+    "neutral": "لا يوجد تغيير"
+  },
+  "units": {
+    "items": "صنف",
+    "orders": "طلب"
+  }
+}
+
