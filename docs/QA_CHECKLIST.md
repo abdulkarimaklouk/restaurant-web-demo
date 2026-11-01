@@ -429,3 +429,37 @@ Update this checklist during implementation. Do not mark an item complete until 
   - `analytics-phase5-scrolled-performance-en-390x844.png` (English Light, performance grid & insights matching reference)
   - `analytics-phase5-ar-dark-390x844.png` (Arabic Dark, performance grid & insights)
 - [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Analytics Dashboard Phase 6: Final Integration & Visual QA
+
+- [x] End-to-End preset switching: Today, This Week, This Month, and Custom Date Range update all metrics reactively.
+- [x] KPI cards integrity: Total Sales (861 EGP), Total Orders (8), Items Sold (25), Average Order Value (107.63 EGP) strictly verified.
+- [x] Dual chart metric modes: Segmented toggle switches seamlessly between Sales (currency) and Orders (integer counts).
+- [x] Cross-section financial reconciliation: Displayed chart buckets + out-of-chart-hours exactly equal Total Sales and Total Orders KPIs.
+- [x] Donut distribution agreement: Total confirmed orders in Donut chart strictly equals Total Orders KPI (8 orders).
+- [x] Top selling products reconciliation: Sum of item quantities sold across all products equals Items Sold KPI (25 units).
+- [x] Ranking tiebreakers: Products with identical quantities sold break ties deterministically by total revenue descending.
+- [x] Exact 1-decimal percentage precision: Orders by status percentages display 37.5%, 12.5%, 25.0%, and 25.0%, strictly summing to 100.0%.
+- [x] Pending order isolation: Pending confirmation orders (#1044 and #1045) strictly excluded from all revenue, items, and operational distribution.
+- [x] No fabricated comparison data: Zero-prior-period metrics return `no_prior_data` with null percentage rather than invented metrics.
+- [x] Custom Date Range validation: Start/end boundaries validated; invalid ranges (`endDate < startDate`) prevented.
+- [x] Empty-period handling: Zero order records produce clean 0 values and localized empty messaging without application crashes.
+- [x] Mobile viewport baseline (390 × 844 CSS px): Perfect 0-horizontal-overflow layout with 16px lateral card bounds (`calc(100% - 32px)`).
+- [x] Bottom navigation clearance: Scrolling container provides `72px + env(safe-area-inset-bottom, 16px)` clearance.
+- [x] Desktop centered shell: 1280 × 800 viewport renders mobile shell centered without layout breakage.
+- [x] Complete localization: Dedicated translation namespaces in both Arabic RTL and English LTR without missing keys.
+- [x] Complete theming: Full semantic light and dark theme contrast across cards, SVG curves, donut slices, and modals.
+- [x] Automated test runner (`node scratch/run_phase6_verification.mjs`) passed 18/18 tests with exit code 0.
+- [x] Full regression test suite passed (Phase 2: 22/22, Phase 3: 20/20, Phase 4: 20/20, Phase 5: 23/23, Phase 6: 18/18; 103/103 total).
+- [x] Actual browser screenshots captured across all language and theme combinations:
+  - `analytics-phase6-ar-light-top.png` (Arabic Light, Top View)
+  - `analytics-phase6-ar-light-scrolled.png` (Arabic Light, Scrolled Performance View)
+  - `analytics-phase6-ar-dark-top.png` (Arabic Dark, Top View)
+  - `analytics-phase6-ar-dark-scrolled.png` (Arabic Dark, Scrolled Performance View)
+  - `analytics-phase6-en-light-top.png` (English Light, Top View matching Reference)
+  - `analytics-phase6-en-light-scrolled.png` (English Light, Scrolled Performance View matching Reference)
+  - `analytics-phase6-en-dark-top.png` (English Dark, Top View)
+  - `analytics-phase6-en-dark-scrolled.png` (English Dark, Scrolled Performance View)
+  - `analytics-phase6-custom-modal.png` (Custom Date Range Modal View)
+  - `analytics-phase6-desktop-centered.png` (Desktop Centered Frame View)
+- [x] Production build (`npm run build`) succeeded with 0 errors.

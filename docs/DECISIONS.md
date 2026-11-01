@@ -339,3 +339,16 @@ To resolve an integer-rounding artifact where displayed status percentages could
 
 
 
+
+## D-037: Final Analytics Dashboard Integration and Verification (Phase 6)
+
+During the Phase 6 end-to-end integration and visual QA audit:
+
+- **Cross-Section Financial & Operational Reconciliation**: Confirmed mathematical identity across all dashboard tiers:
+  - $\text{Total Sales KPI (861 EGP)} \equiv \sum \text{displayed chart buckets (851 EGP)} + \text{outOfChartHours (10 EGP)}$.
+  - $\text{Total Orders KPI (8)} \equiv \sum \text{displayed chart orders (8)} + \text{outOfChartHours (0)} \equiv \text{OrdersByStatus totalCount (8)}$.
+  - $\text{Items Sold KPI (25 units)} \equiv \sum \text{quantities of all sold products in Top Selling aggregation (25 units)}$.
+  - Insights headline top product matches the #1 item in `TopSellingItems` (عصير برتقال طازج with 4 units sold and 120 EGP revenue).
+- **Preset Synchronization**: Verified that changing presets (Today, This Week, This Month, Custom Date Range) reactively updates all four KPI cards, the Sales Overview chart, Top Selling Items, Orders by Status donut, and Insights without desynchronized state or full-page reload.
+- **Visual QA at 390 × 844 Baseline**: Captured and verified all 4 combinations (Arabic RTL Light/Dark, English LTR Light/Dark, Custom Range Modal, Desktop centered canvas) with zero horizontal overflow, consistent 16px lateral margins (`calc(100% - 32px)`), 14px card radii, and 72px safe-area bottom navigation clearance.
+- **Verification Suite Completeness**: All 5 phase verification suites passed (103/103 tests total) alongside successful production build (`tsc && vite build`).
