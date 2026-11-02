@@ -483,6 +483,39 @@ To integrate the Menu Settings features into the live Menu, Orders, and applicat
   - All regression suites passed: Phase 2 (20/20), Phase 3 (10/10), Phase 4 (10/10), Analytics (23/23).
   - Production build (`npm run build`) succeeded with exit code 0.
 
+## D-044: Menu Settings Final Integration, Order Acceptance Boundary & Live Preview Harmonization (Phase 6)
+
+During the Phase 6 Final Integration & Quality Assurance review of Menu Settings:
+
+- **Order Acceptance Prototype Boundary & Operational Status Representation**:
+  - The demonstration application is strictly a merchant-facing mobile web prototype with in-memory state and pre-seeded operational data.
+  - Because there is no consumer-facing student ordering client, checkout API, or external backend in this prototype (per D-001 and D-003), operational closure under `autoAvailability.syncWithWorkingHours` is represented through clear, accessible, localized status banners (`#menu-operational-banner` and `#orders-operational-banner`).
+  - The banners inform the merchant that order acceptance is paused outside official working hours (*"المطعم مغلق حالياً • تم إيقاف استقبال الطلبات تلقائياً خارج أوقات العمل الرسمية"*).
+  - Existing orders already in the pipeline remain fully manageable and can transition through operational fulfillment stages, reflecting realistic restaurant workflows.
+  - Real backend order-creation blocking and network checkout interception are explicitly documented as outside the prototype scope; no artificial backend or simulated public ordering engine was introduced.
+- **Product Form Live Preview Category Harmonization**:
+  - In `AddProductScreen.tsx` and `EditProductScreen.tsx`, the live preview card's category badge was updated to resolve the active category definition dynamically from `useMenuSettingsStore().categories`.
+  - When a custom category (e.g., "حلويات" / "Desserts") is selected, the live preview card reactively displays its natural localized name (`name.ar` or `name.en`) rather than attempting a static translation key lookup.
+- **Visual, Layout, and Viewport QA Verification**:
+  - Verified across all four localization and theme permutations:
+    1. Arabic RTL + Light Theme
+    2. Arabic RTL + Dark Theme
+    3. English LTR + Light Theme
+    4. English LTR + Dark Theme
+  - Confirmed zero horizontal overflow (`scrollWidth <= 390px`) at the $390 \times 844\text{ CSS px}$ mobile baseline.
+  - Confirmed desktop viewport review at $1280 \times 800\text{ CSS px}$ safely renders a centered 390px mobile frame (`.app-canvas`) per D-002 and D-006.
+- **Final Verification & Test Coverage**:
+  - All automated test suites passed with exit code 0:
+    - Phase 2 verification: 20/20 passed
+    - Phase 3 verification: 10/10 passed
+    - Phase 4 verification: 10/10 passed
+    - Phase 5 verification: 20/20 passed
+    - Phase 6 verification: 21/21 passed
+    - Menu & Orders regression: 13/13 passed
+    - Analytics Phase 5 regression: 23/23 passed
+    - Phase 6 Browser CDP QA: 5/5 passed
+  - Production build (`npm run build`) succeeded with 0 errors.
+
 
 
 

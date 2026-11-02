@@ -612,10 +612,35 @@ Update this checklist during implementation. Do not mark an item complete until 
   - Analytics Phase 5: 23/23 passed (exit code 0)
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
-## Menu Settings (Planned Final Verification & Visual QA - Phase 6)
-- [ ] Comprehensive visual audit across all Menu Settings sub-screens and integrated Menu/Orders views against reference designs.
-- [ ] End-to-end user journeys verification across language switching (Arabic RTL / English LTR) and theme toggling (Light / Dark).
-- [ ] Final accessibility and screen reader audit.
+## Menu Settings Phase 6: Final Integration & Visual QA
+
+- [x] Comprehensive visual and functional audit across all Menu Settings sub-screens and integrated Menu/Orders views against reference designs.
+- [x] End-to-end user journeys verification across all 4 visual & localization combinations:
+  - Arabic RTL + Light Theme
+  - Arabic RTL + Dark Theme
+  - English LTR + Light Theme
+  - English LTR + Dark Theme
+- [x] Desktop layout at 1280 × 800 CSS px verified: centers fixed 390px mobile application canvas (`.app-canvas`) per D-002 and D-006.
+- [x] Zero horizontal scroll overflow (`document.documentElement.scrollWidth <= 390`) across all mobile configurations.
+- [x] Full categories lifecycle verified: creation, dynamic tab updates, product form selectors, live preview categories, reordering, deletion safety blocks, empty deletion.
+- [x] Full automatic availability lifecycle verified: working hours sync, closed banners on Menu and Orders, 100% item visibility during closure, pipeline management invariance, daily auto-reset day boundary detection, same-day idempotency, and manual reset all.
+- [x] Pricing section strictly informational, fixed base currency (EGP), gross VAT-inclusive copy, integer precision, and zero modifications to historical orders.
+- [x] Data integrity and non-regression confirmed: exactly 10 initial orders and 7 seed menu items preserved intact.
+- [x] Browser-level CDP automation suite (`node --experimental-websocket scratch/test_menu_settings_phase6_ui.mjs`) passed 5/5 tests with exit code 0 and captured screenshots:
+  - `menu-settings-final-ar-light.png`
+  - `menu-settings-final-ar-dark.png`
+  - `menu-settings-final-en-light.png`
+  - `menu-settings-final-en-dark.png`
+  - `menu-settings-final-desktop-1280.png`
+- [x] Complete automated verification suites passed:
+  - Menu Settings Phase 2: 20/20 passed (exit code 0)
+  - Menu Settings Phase 3: 10/10 passed (exit code 0)
+  - Menu Settings Phase 4: 10/10 passed (exit code 0)
+  - Menu Settings Phase 5: 20/20 passed (exit code 0)
+  - Menu Settings Phase 6: 21/21 passed (exit code 0)
+  - Menu & Orders regression: 13/13 passed (exit code 0)
+  - Analytics Phase 5 regression: 23/23 passed (exit code 0)
+- [x] Production build (`npm run build`) succeeded with 0 errors.
 
 
 

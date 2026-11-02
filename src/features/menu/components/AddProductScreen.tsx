@@ -150,6 +150,17 @@ export const AddProductScreen: React.FC<AddProductScreenProps> = ({
 
   const previewPrice = parseFloat(price) > 0 ? parseFloat(price) : 0;
 
+  const selectedCatDef = categories.find((c) => c.id === category);
+  const previewCategory = selectedCatDef
+    ? isArabic
+      ? selectedCatDef.name.ar
+      : selectedCatDef.name.en
+    : category
+    ? ['main', 'appetizers', 'drinks'].includes(category)
+      ? t(`categories.${category}`)
+      : category
+    : t('addProduct.categoryPlaceholder');
+
   return (
     <div className="add-product-view" aria-label={t('addProduct.pageTitle')}>
       {/* 1. Demo Notice Banner */}
@@ -194,7 +205,7 @@ export const AddProductScreen: React.FC<AddProductScreenProps> = ({
               />
               <div className="preview-details">
                 <span className="preview-category">
-                  {category ? t(`categories.${category}`) : t('addProduct.categoryPlaceholder')}
+                  {previewCategory}
                 </span>
                 <h3 className="preview-name">{previewName}</h3>
                 <span className="preview-price">
