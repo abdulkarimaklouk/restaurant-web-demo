@@ -504,15 +504,39 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Automated test runner (`node scratch/run_menu_settings_phase2_verification.cjs`) passed 20/20 tests with exit code 0.
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
+## Menu Settings Phase 3: Categories Management UI
+
+- [x] Sub-screen accessible from `Settings → Restaurant Settings → Menu Settings` replacing temporary toast placeholder.
+- [x] Categories list renders all categories with live item count badges and sort order indicators.
+- [x] Default seed categories (`main`, `appetizers`, `drinks`) display emerald protected badge with delete disabled.
+- [x] Add Category button opens `CategoryModal` supporting Arabic name, English name, and 8 curated Lucide icons.
+- [x] Form validation enforces required non-empty names and rejects duplicate category names.
+- [x] Edit Category button allows modifying bilingual names and icon while preserving ID and default protection.
+- [x] Reorder controls (Move Up / Move Down) update visual category sequence and persist sort order.
+- [x] Boundary reorder buttons disabled (Move Up on first category, Move Down on last category).
+- [x] Non-empty custom categories block deletion with informative modal explaining products must be reassigned first.
+- [x] Empty custom categories open destructive confirmation dialog and delete safely upon confirmation.
+- [x] Design tokens strictly adhered to (`--radius-card: 6px`, `--radius-btn: 5px`, `--radius-badge: 4px`, `--color-primary-dark`).
+- [x] Full bilingual support with Arabic RTL and English LTR layouts.
+- [x] Theme compatibility verified across Light and Dark modes.
+- [x] Viewport safety: 0 horizontal overflow at 390 × 844 CSS pixels mobile baseline.
+- [x] Automated test runner (`node scratch/run_menu_settings_phase3_verification.cjs`) passed 10/10 tests with exit code 0.
+- [x] Browser CDP automation test suite (`node --experimental-websocket scratch/test_menu_settings_phase3_ui.mjs`) passed with exit code 0 and captured screenshots:
+  - `menu-settings-categories-ar-light.png`
+  - `menu-settings-categories-ar-dark.png`
+  - `menu-settings-categories-en-light.png`
+  - `menu-settings-add-modal.png`
+  - `menu-settings-delete-confirm.png`
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
 ## Menu Settings (Planned UI & System Integration)
 
-### Category Safety & Dynamic Management (UI Integration - Planned)
+### Category Safety & Dynamic Management (Menu Screen Integration - Planned Phase 5)
 - [ ] Category tabs in MenuPage reflect dynamic categories list from menuSettingsStore.
 - [ ] AddProductScreen and EditProductScreen dynamically render category selectors from menuSettingsStore.
-- [ ] Safe category deletion UI blocks removal of categories with active products and guides reassignment.
-- [ ] Category display reordering controls (Move Up / Move Down) update visual tab sequence.
+- [ ] MenuFilterSheet dynamically populates categories from menuSettingsStore.
 
-### Automatic Availability & Operational Synchronization (UI Integration - Planned)
+### Automatic Availability & Operational Synchronization (UI Integration - Planned Phase 4 & 5)
 - [ ] Working-hours synchronization defaults to disabled (`false`).
 - [ ] When working-hours sync is enabled and restaurant is closed, ordering is paused while products remain visible.
 - [ ] Daily availability auto-reset defaults to disabled (`false`).
@@ -520,17 +544,11 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [ ] Explicit "Reset All Items to Available Now" button in settings UI triggers availability reset with localized toast feedback.
 - [ ] Manual availability toggles made on the Menu screen take precedence until the next explicit reset or day boundary.
 
-### Pricing Preferences & Financial Baseline (UI Integration - Planned)
+### Pricing Preferences & Financial Baseline (UI Integration - Planned Phase 4)
 - [ ] Base currency indicator displays Egyptian Pound (`EGP` / `ج.م`).
 - [ ] Tax-inclusive status is displayed as active/informational and cannot be disabled.
 - [ ] Price display maintains clean integer formatting matching seed orders.
 - [ ] No dynamic tax, VAT, or service charge calculations are introduced.
 - [ ] Historical order snapshots and seed order totals remain completely unaffected.
 
-### Sub-Screen UI, Theming & Navigation (Planned)
-- [ ] Sub-screen accessible from `Settings → Restaurant Settings → Menu Settings`.
-- [ ] Viewport conforms to $390 \times 844\text{ CSS px}$ baseline with 0 horizontal overflow.
-- [ ] Design tokens adhered to (`--radius-card: 6px`, `--radius-btn: 5px`, `--radius-badge: 4px`, `--color-primary-dark`).
-- [ ] Full bilingual support across Arabic (RTL) and English (LTR).
-- [ ] Theme contrast and appearance verified across Light and Dark modes.
 

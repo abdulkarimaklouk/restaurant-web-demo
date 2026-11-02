@@ -412,4 +412,17 @@ To establish the data management, validation, and storage layer for Menu Setting
   - Operations on `menuSettingsStore` do not mutate `menu_items`, `restaurant_working_hours`, product availability flags, or seed order records.
 - **Automated Verification**: Created `scratch/run_menu_settings_phase2_verification.cjs` covering all 20 specification tests (20/20 passed) alongside clean production compilation (`tsc && vite build`).
 
+## D-041: Menu Settings Categories Management UI Architecture (Phase 3)
+
+To faithfully deliver the Categories Management interface inside Menu Settings (`Settings → Restaurant Settings → Menu Settings`):
+
+- **Sub-Screen Navigation Activation**: Replaced the temporary toast placeholder in `SettingsPage.tsx` with dedicated full sub-screen navigation rendering `EditMenuSettings` (`src/features/settings/components/EditMenuSettings.tsx` and `.css`).
+- **Category List & Live Product Counts**: Renders active categories sorted by `sortOrder` using `useMenuSettingsStore()`. Live product counts are computed reactively using `useMenuStore()`.
+- **Default Category Protection**: The 3 default categories (`main`, `appetizers`, `drinks`) display an emerald protected badge (`ShieldCheck` icon + localized "Default" label) and have their delete action strictly disabled with aria-label feedback.
+- **Product In-Use Deletion Block**: Clicking delete on custom categories with active items (`count > 0`) presents an informative blocked dialog explaining that products must be reassigned or deleted first. Empty custom categories (`count === 0`) present a destructive confirmation dialog.
+- **Curated 8-Icon Radiogroup**: `CategoryModal` incorporates a 4×2 grid of curated food-themed Lucide icons (`utensils`, `salad`, `cup-soda`, `coffee`, `cake`, `pizza`, `sandwich`, `layout-grid`) with active check badges, accessible radiogroup semantics, and natural bilingual labels.
+- **Reordering Controls**: Sequential Move Up and Move Down buttons update `sortOrder` via `menuSettingsStore.reorderCategories`, cleanly disabling boundary actions (Move Up on first item, Move Down on last item).
+- **Design Tokens & Viewport Conformance**: Enforces `--radius-card: 6px`, `--radius-btn: 5px`, and `--radius-badge: 4px`. Fully verified across $390 \times 844\text{ CSS px}$ mobile baseline with zero horizontal overflow in Arabic RTL Light/Dark and English LTR Light/Dark modes via automated CDP test suite (`scratch/test_menu_settings_phase3_ui.mjs`).
+
+
 

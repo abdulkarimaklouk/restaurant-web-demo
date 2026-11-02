@@ -25,6 +25,7 @@ import { EditWorkingHours } from './components/EditWorkingHours';
 import { EditRestaurantInfo } from './components/EditRestaurantInfo';
 import { EditNotifications } from './components/EditNotifications';
 import { EditAppearance } from './components/EditAppearance';
+import { EditMenuSettings } from './components/EditMenuSettings';
 import './SettingsPage.css';
 
 interface SettingsRowProps {
@@ -110,6 +111,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
   const [isEditingInfo, setIsEditingInfo] = useState(false);
   const [isEditingNotifications, setIsEditingNotifications] = useState(false);
   const [isEditingAppearance, setIsEditingAppearance] = useState(false);
+  const [isEditingMenuSettings, setIsEditingMenuSettings] = useState(false);
 
   const handleItemClick = (message: string) => {
     onShowToast(message, 'info');
@@ -163,6 +165,15 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
     return (
       <EditAppearance
         onBack={() => setIsEditingAppearance(false)}
+        onShowToast={onShowToast}
+      />
+    );
+  }
+
+  if (isEditingMenuSettings) {
+    return (
+      <EditMenuSettings
+        onBack={() => setIsEditingMenuSettings(false)}
         onShowToast={onShowToast}
       />
     );
@@ -296,7 +307,7 @@ export const SettingsPage: React.FC<SettingsPageProps> = ({ onShowToast }) => {
               icon={<UtensilsCrossed size={17} strokeWidth={2} />}
               title={t('restaurant.menuTitle')}
               subtitle={t('restaurant.menuSubtitle')}
-              onClick={() => handleItemClick(t('toasts.menu'))}
+              onClick={() => setIsEditingMenuSettings(true)}
             />
           </div>
         </section>
