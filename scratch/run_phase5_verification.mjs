@@ -402,13 +402,13 @@ async function runAllTests() {
   const insightCss = fs.readFileSync('src/features/analytics/components/AnalyticsInsights.css', 'utf8');
 
   assert(
-    topCss.includes('border-radius: 14px') &&
-    donutCss.includes('border-radius: 14px') &&
-    insightCss.includes('border-radius: 14px') &&
+    topCss.includes('border-radius: var(--radius-card, 6px)') &&
+    donutCss.includes('border-radius: var(--radius-card, 6px)') &&
+    insightCss.includes('border-radius: var(--radius-card, 6px)') &&
     insightCss.includes('--color-primary-blue-bg'),
     18,
-    'Light theme styling adheres to 14px radius, soft blue insights panel, and design tokens',
-    '14px radius and soft blue surface confirmed'
+    'Light theme styling adheres to design token radius, soft blue insights panel, and design tokens',
+    'Design token radius and soft blue surface confirmed'
   );
 
   // --- 19. Dark theme styling ---

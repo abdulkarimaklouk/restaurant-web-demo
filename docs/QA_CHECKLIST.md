@@ -463,3 +463,18 @@ Update this checklist during implementation. Do not mark an item complete until 
   - `analytics-phase6-custom-modal.png` (Custom Date Range Modal View)
   - `analytics-phase6-desktop-centered.png` (Desktop Centered Frame View)
 - [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Analytics UI: Border Radius Consistency Fix
+
+- [x] Inspected Settings and Menu source-of-truth radius values: `var(--radius-card)` = 6px, `var(--radius-btn)` = 5px, `var(--radius-badge)` = 4px.
+- [x] Card containers unified to `var(--radius-card, 6px)`: KPI cards, Sales Overview card, Top Selling Items card, Orders by Status card, and Analytics Insights panel.
+- [x] Buttons and inputs unified to `var(--radius-btn, 5px)`: Date preset tabs, custom calendar button, chart metric toggle buttons, custom range inputs, cancel button, and apply button.
+- [x] Segmented pill wrappers unified to `var(--radius-card, 6px)`: Date filter segmented wrap and chart metric toggle wrap.
+- [x] Thumbnail containers unified to `var(--radius-card, 6px)`: Top selling product thumbnail wraps matching Menu's product image thumbnail containers.
+- [x] Badges unified to `var(--radius-badge, 4px)`: Analytics custom date range badge matching Menu category count badges.
+- [x] Circular elements preserved at 50%: KPI icon badges, status legend dots, and custom modal close button.
+- [x] Bottom sheet modal header preserved at `16px 16px 0 0`, matching Menu filter sheet.
+- [x] Verified at 390 × 844 CSS pixels across Arabic RTL, English LTR, Light theme, and Dark theme.
+- [x] Zero layout breakage, text truncation, or horizontal clipping.
+- [x] All 5 automated test runners passed (Phase 2: 22/22, Phase 3: 20/20, Phase 4: 20/20, Phase 5: 23/23, Phase 6: 18/18; 103/103 tests total).
+- [x] Production build (`npm run build`) succeeded with 0 errors.

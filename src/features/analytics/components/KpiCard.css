@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 13px 12px;
-  border-radius: 14px;
+  border-radius: var(--radius-card, 6px);
   border: 1px solid transparent;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   min-width: 0;

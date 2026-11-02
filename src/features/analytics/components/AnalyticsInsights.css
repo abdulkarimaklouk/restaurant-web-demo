@@ -1,7 +1,7 @@
 .analytics-insights-card {
   background-color: var(--color-primary-blue-bg, #eff6ff);
   border: 1px solid var(--color-primary-blue-border, #bfdbfe);
-  border-radius: 14px;
+  border-radius: var(--radius-card, 6px);
   box-shadow: var(--shadow-card, 0 1px 3px rgba(15, 23, 42, 0.05));
   padding: 14px 16px;
   margin: 16px 16px 0 16px;

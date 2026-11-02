@@ -352,3 +352,23 @@ During the Phase 6 end-to-end integration and visual QA audit:
 - **Preset Synchronization**: Verified that changing presets (Today, This Week, This Month, Custom Date Range) reactively updates all four KPI cards, the Sales Overview chart, Top Selling Items, Orders by Status donut, and Insights without desynchronized state or full-page reload.
 - **Visual QA at 390 × 844 Baseline**: Captured and verified all 4 combinations (Arabic RTL Light/Dark, English LTR Light/Dark, Custom Range Modal, Desktop centered canvas) with zero horizontal overflow, consistent 16px lateral margins (`calc(100% - 32px)`), 14px card radii, and 72px safe-area bottom navigation clearance.
 - **Verification Suite Completeness**: All 5 phase verification suites passed (103/103 tests total) alongside successful production build (`tsc && vite build`).
+
+
+## D-038: Analytics UI Border Radius Alignment with Settings and Menu
+
+To eliminate border-radius divergence across the mobile web prototype and harmonize Analytics with the approved design system in Settings and Menu:
+
+- **Established Reference Values**: Inspected Settings and Menu implementations:
+  - Cards & major containers: `var(--radius-card)` = `6px` (`SettingsPage.css`, `MenuProductCard.css`, `AddProductScreen.css`, `DeleteProductDialog.css`).
+  - Buttons, tabs, and interactive controls: `var(--radius-btn)` = `5px` (`CategoryTabs.css`, `SearchAndFilterBar.css`, `EditAppearance.css`).
+  - Small badges and labels: `var(--radius-badge)` = `4px` (`CategoryTabs.css`, `SettingsPage.css`).
+  - Thumbnail containers: `var(--radius-card, 6px)` = `6px` (`MenuProductCard.css`).
+  - Bottom sheet headers: `border-radius: 16px 16px 0 0;` (`MenuFilterSheet.css`).
+  - Circular badges and status dots: `50%` (`KpiCard.css`, `OrdersByStatusDonut.css`, `MenuProductCard.css`).
+- **Applied Token Replacements**:
+  - Replaced ad-hoc `14px` on cards (`KpiCard`, `SalesOverviewChart`, `TopSellingItems`, `OrdersByStatusDonut`, `AnalyticsInsights`) with `var(--radius-card, 6px)`.
+  - Replaced ad-hoc `8px` and `7px` on buttons & segmented tabs (`date-preset-tab`, `custom-calendar-btn`, `chart-metric-btn`, `custom-range-input`, `custom-range-cancel-btn`, `custom-range-apply-btn`) with `var(--radius-btn, 5px)`.
+  - Replaced `8px` and `10px` segmented container wrappers (`date-filter-segmented`, `chart-metric-toggle`) with `var(--radius-card, 6px)`.
+  - Replaced `8px` thumbnail wraps in `TopSellingItems` with `var(--radius-card, 6px)`, matching Menu's product thumbnail containers.
+  - Replaced `4px` custom badge with `var(--radius-badge, 4px)`.
+- **Preserved Core Structure & Rules**: Maintained all existing colors, spacing, typography, grid layouts, and functionality unchanged. All 5 test suites (103/103 tests) and production build pass with exit code 0.

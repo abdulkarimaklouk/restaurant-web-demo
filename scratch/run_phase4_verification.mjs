@@ -225,19 +225,19 @@ async function runAllTests() {
 
     assert(
       chartCss.includes('--color-card-bg') &&
-      chartCss.includes('border-radius: 14px') &&
+      chartCss.includes('border-radius: var(--radius-card, 6px)') &&
       chartCss.includes('.chart-bezier-line') &&
       chartCss.includes('.chart-data-point') &&
       chartCss.includes('[data-theme="dark"]'),
       15,
       'SalesOverviewChart.css adheres to design system tokens with complete light/dark theme support',
-      '14px radius, blue strokes, dark mode overrides confirmed'
+      'Design token radius, blue strokes, dark mode overrides confirmed'
     );
 
     assert(
       toggleCss.includes('.chart-metric-btn.active') &&
       toggleCss.includes('--color-primary-blue') &&
-      toggleCss.includes('border-radius: 6px'),
+      toggleCss.includes('border-radius: var(--radius-btn, 5px)'),
       16,
       'ChartMetricToggle.css styles segmented toggle with blue active pill and muted inactive state',
       'Active blue pill styling verified'
