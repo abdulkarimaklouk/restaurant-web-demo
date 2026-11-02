@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Check, Edit3, MoreVertical } from 'lucide-react';
 import { MenuItem } from '../../../types/menu';
 import { formatCurrency } from '../../../utils/formatCurrency';
+import { useMenuSettingsStore } from '../../../data/menuSettingsStore';
 import { MenuProductImage } from './MenuProductImage';
 import './MenuProductCard.css';
 
@@ -20,6 +21,7 @@ export const MenuProductCard: React.FC<MenuProductCardProps> = ({
   onMoreActions,
 }) => {
   const { t, i18n } = useTranslation('menu');
+  const { getCategoryById } = useMenuSettingsStore();
   const currentLang = i18n.resolvedLanguage || i18n.language || 'ar';
   const isEn = currentLang.startsWith('en');
   const productName = item.name
@@ -29,7 +31,14 @@ export const MenuProductCard: React.FC<MenuProductCardProps> = ({
     : item.nameKey
       ? t(`items.${item.nameKey}`)
       : '';
-  const categoryName = t(`categories.${item.category}`);
+  const catDef = getCategoryById(item.category);
+  const categoryName = catDef
+    ? isEn
+      ? catDef.name.en || catDef.name.ar
+      : catDef.name.ar || catDef.name.en
+    : ['main', 'appetizers', 'drinks'].includes(item.category)
+    ? t(`categories.${item.category}`)
+    : item.category;
 
   return (
     <article

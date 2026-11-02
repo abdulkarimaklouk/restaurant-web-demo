@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Trash2, AlertTriangle } from 'lucide-react';
 import { MenuItem } from '../../../types/menu';
+import { useMenuSettingsStore } from '../../../data/menuSettingsStore';
 import { MenuProductImage } from './MenuProductImage';
 import { formatCurrency } from '../../../utils/formatCurrency';
 import './DeleteProductDialog.css';
@@ -45,7 +46,15 @@ export const DeleteProductDialog: React.FC<DeleteProductDialogProps> = ({
       ? t(`items.${item.nameKey}`)
       : '';
 
-  const categoryName = t(`categories.${item.category}`);
+  const { getCategoryById } = useMenuSettingsStore();
+  const catDef = getCategoryById(item.category);
+  const categoryName = catDef
+    ? isEn
+      ? catDef.name.en || catDef.name.ar
+      : catDef.name.ar || catDef.name.en
+    : ['main', 'appetizers', 'drinks'].includes(item.category)
+    ? t(`categories.${item.category}`)
+    : item.category;
 
   return (
     <div

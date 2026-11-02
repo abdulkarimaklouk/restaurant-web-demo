@@ -166,7 +166,7 @@ export function getEffectiveRestaurantStatus(
   return { isEffectiveOpen: true, reason: 'open', activeShiftClosingTime };
 }
 
-class WorkingHoursStore {
+export class WorkingHoursStore {
   private hours: WorkingHours;
   private listeners: Set<() => void> = new Set();
   private testDate: Date | null = null;

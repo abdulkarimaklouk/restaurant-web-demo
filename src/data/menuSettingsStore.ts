@@ -440,6 +440,37 @@ export class MenuSettingsStore {
     return { success: true };
   }
 
+  public checkAndExecuteDailyReset(currentDate: Date = new Date()): boolean {
+    const settings = this.getSettings();
+    if (!settings.autoAvailability.dailyAutoReset) {
+      return false;
+    }
+
+    const y = currentDate.getFullYear();
+    const m = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const d = String(currentDate.getDate()).padStart(2, '0');
+    const todayStr = `${y}-${m}-${d}`;
+
+    if (settings.autoAvailability.lastResetDate === todayStr) {
+      return false;
+    }
+
+    // New business day detected: restore unavailable items
+    try {
+      const items = menuStore.getItems();
+      const hasUnavailable = items.some((item) => !item.isAvailable);
+      if (hasUnavailable) {
+        const restored = items.map((item) => ({ ...item, isAvailable: true }));
+        menuStore.updateItems(restored);
+      }
+    } catch (e) {
+      console.error('Failed to restore menu availability during daily reset:', e);
+    }
+
+    this.updateAutoAvailability({ lastResetDate: todayStr });
+    return true;
+  }
+
   public resetToDefault(): void {
     this.settings = cloneMenuSettings(DEFAULT_MENU_SETTINGS);
     this.writeToStorage(this.settings);
@@ -481,6 +512,7 @@ export function useMenuSettingsStore() {
     categories: settings.categories,
     autoAvailability: settings.autoAvailability,
     pricing: settings.pricing,
+    getCategoryById: (id: string) => menuSettingsStore.getCategoryById(id),
     updateAutoAvailability: (updates: Partial<MenuAutoAvailabilitySettings>) =>
       menuSettingsStore.updateAutoAvailability(updates),
     addCategory: (input: CreateCategoryInput) => menuSettingsStore.addCategory(input),
@@ -490,5 +522,6 @@ export function useMenuSettingsStore() {
       menuSettingsStore.deleteCategory(id, productInUseChecker),
     reorderCategories: (orderedIds: string[]) => menuSettingsStore.reorderCategories(orderedIds),
     resetToDefault: () => menuSettingsStore.resetToDefault(),
+    checkAndExecuteDailyReset: (d?: Date) => menuSettingsStore.checkAndExecuteDailyReset(d),
   };
 }

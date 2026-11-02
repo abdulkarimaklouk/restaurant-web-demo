@@ -4,9 +4,6 @@ import {
   ArrowLeft,
   Info,
   DollarSign,
-  Utensils,
-  Salad,
-  CupSoda,
   Check,
   Image as ImageIcon,
   CheckCircle2,
@@ -14,6 +11,8 @@ import {
 } from 'lucide-react';
 import { MenuCategoryType, MenuProductImageType } from '../../../types/menu';
 import { useMenuStore } from '../../../data/menuStore';
+import { useMenuSettingsStore } from '../../../data/menuSettingsStore';
+import { renderCategoryIcon } from '../../../components/ui/CategoryIcon';
 import { MenuProductImage } from './MenuProductImage';
 import { formatCurrency } from '../../../utils/formatCurrency';
 import { ToastProps } from '../../../components/ui/Toast';
@@ -47,6 +46,7 @@ export const AddProductScreen: React.FC<AddProductScreenProps> = ({
 }) => {
   const { t, i18n } = useTranslation('menu');
   const { addItem } = useMenuStore();
+  const { categories } = useMenuSettingsStore();
   const isArabic = (i18n.resolvedLanguage || i18n.language || 'ar').startsWith('ar');
 
   // Form local state (initialized with empty values, except availability = true)
@@ -275,47 +275,26 @@ export const AddProductScreen: React.FC<AddProductScreenProps> = ({
               </label>
 
               <div className="category-select-buttons" role="radiogroup" aria-label={t('addProduct.categoryLabel')}>
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={category === 'main'}
-                  className={`category-select-btn ${category === 'main' ? 'active' : ''}`}
-                  onClick={() => {
-                    setCategory('main');
-                    if (errors.category) setErrors((prev) => ({ ...prev, category: undefined }));
-                  }}
-                >
-                  <Utensils size={15} className="cat-btn-icon" />
-                  <span>{t('categories.main')}</span>
-                </button>
-
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={category === 'appetizers'}
-                  className={`category-select-btn ${category === 'appetizers' ? 'active' : ''}`}
-                  onClick={() => {
-                    setCategory('appetizers');
-                    if (errors.category) setErrors((prev) => ({ ...prev, category: undefined }));
-                  }}
-                >
-                  <Salad size={15} className="cat-btn-icon" />
-                  <span>{t('categories.appetizers')}</span>
-                </button>
-
-                <button
-                  type="button"
-                  role="radio"
-                  aria-checked={category === 'drinks'}
-                  className={`category-select-btn ${category === 'drinks' ? 'active' : ''}`}
-                  onClick={() => {
-                    setCategory('drinks');
-                    if (errors.category) setErrors((prev) => ({ ...prev, category: undefined }));
-                  }}
-                >
-                  <CupSoda size={15} className="cat-btn-icon" />
-                  <span>{t('categories.drinks')}</span>
-                </button>
+                {categories.map((cat) => {
+                  const isSelected = category === cat.id;
+                  const catName = isArabic ? cat.name.ar : cat.name.en;
+                  return (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      role="radio"
+                      aria-checked={isSelected}
+                      className={`category-select-btn ${isSelected ? 'active' : ''}`}
+                      onClick={() => {
+                        setCategory(cat.id);
+                        if (errors.category) setErrors((prev) => ({ ...prev, category: undefined }));
+                      }}
+                    >
+                      {renderCategoryIcon(cat.icon, 15, 'cat-btn-icon')}
+                      <span>{catName}</span>
+                    </button>
+                  );
+                })}
               </div>
 
               {errors.category && (

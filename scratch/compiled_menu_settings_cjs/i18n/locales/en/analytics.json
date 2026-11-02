@@ -1,0 +1,72 @@
+{
+  "title": "Analytics",
+  "presets": {
+    "today": "Today",
+    "week": "This Week",
+    "month": "This Month",
+    "custom": "Custom"
+  },
+  "customModal": {
+    "title": "Select Custom Range",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "apply": "Apply",
+    "cancel": "Cancel",
+    "invalidRange": "End date must be on or after start date",
+    "selectedRange": "Period: {{range}}"
+  },
+  "kpis": {
+    "totalSales": "Total Sales",
+    "totalOrders": "Total Orders",
+    "itemsSold": "Items Sold",
+    "avgOrderValue": "Avg. Order Value",
+    "vsYesterday": "vs. yesterday",
+    "vsLastWeek": "vs. last week",
+    "vsLastMonth": "vs. last month",
+    "vsPriorPeriod": "vs. previous period",
+    "noPriorData": "No comparison data",
+    "neutral": "No change"
+  },
+  "units": {
+    "items": "items",
+    "orders": "orders"
+  },
+  "chart": {
+    "title": "Sales Overview",
+    "modes": {
+      "sales": "Sales",
+      "orders": "Orders"
+    },
+    "empty": "No activity recorded for this period",
+    "outOfHours": "+ {{amount}} outside chart hours (before 10 AM / after 10 PM)",
+    "tooltip": {
+      "ordersCount": "{{count}} Orders"
+    }
+  },
+  "performance": {
+    "topSelling": {
+      "title": "Top Selling Items",
+      "sold": "{{count}} sold",
+      "empty": "No sales recorded"
+    },
+    "ordersStatus": {
+      "title": "Orders by Status",
+      "orders": "Orders",
+      "delivered": "Delivered",
+      "ready": "Ready",
+      "preparing": "Preparing",
+      "new": "New",
+      "empty": "No orders"
+    },
+    "insights": {
+      "title": "Insights",
+      "growthPositive": "Sales are up by {{pct}}% compared to {{period}}. {{item}} is your top selling item.",
+      "growthNegative": "Sales are down by {{pct}}% compared to {{period}}. {{item}} is your top selling item.",
+      "growthNeutral": "Sales remained steady compared to {{period}}. {{item}} is your top selling item.",
+      "noComparison": "Historical comparison data is unavailable for this period. {{item}} is your top selling item with {{qty}} units sold.",
+      "noComparisonNoTop": "Historical comparison data is unavailable for this period.",
+      "emptyPeriod": "No order activity recorded for the selected period."
+    }
+  }
+}
+

@@ -1,8 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Info, Plus } from 'lucide-react';
+import { Info, Plus, Clock } from 'lucide-react';
 import { MenuCategoryId, MenuItem } from '../../types/menu';
-import { useMenuStore } from '../../data/menuStore';
+import { useMenuStore, getCategoryCounts } from '../../data/menuStore';
+import { useMenuSettingsStore } from '../../data/menuSettingsStore';
+import { useWorkingHoursStore } from '../../data/workingHoursStore';
+import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import { CategoryTabs } from './components/CategoryTabs';
 import { SearchAndFilterBar } from './components/SearchAndFilterBar';
 import { MenuProductCard } from './components/MenuProductCard';
@@ -20,7 +23,18 @@ interface MenuPageProps {
 
 export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const { t, i18n } = useTranslation('menu');
-  const { items, categoryCounts, updateItem, deleteItem } = useMenuStore();
+  const { categories, autoAvailability } = useMenuSettingsStore();
+  const { items, updateItem, deleteItem } = useMenuStore();
+  const { getEffectiveStatus } = useWorkingHoursStore();
+  const { profile } = useRestaurantProfileStore();
+
+  const effectiveStatus = getEffectiveStatus(profile.isOpen);
+  const isClosedSyncActive = autoAvailability.syncWithWorkingHours && !effectiveStatus.isEffectiveOpen;
+
+  const dynamicCategoryCounts = useMemo(() => {
+    return getCategoryCounts(items, categories);
+  }, [items, categories]);
+
   const [activeCategory, setActiveCategory] = useState<MenuCategoryId>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [availabilityFilter, setAvailabilityFilter] = useState<AvailabilityFilterOption>('all');
@@ -29,6 +43,13 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
   const [editingItem, setEditingItem] = useState<MenuItem | null>(null);
   const [actionMenuProduct, setActionMenuProduct] = useState<MenuItem | null>(null);
   const [deleteConfirmProduct, setDeleteConfirmProduct] = useState<MenuItem | null>(null);
+
+  // Safety: reset active category to 'all' if selected custom category was deleted
+  useEffect(() => {
+    if (activeCategory !== 'all' && !categories.some((c) => c.id === activeCategory)) {
+      setActiveCategory('all');
+    }
+  }, [categories, activeCategory]);
 
   const handleAddItem = () => {
     setIsAddingProduct(true);
@@ -187,6 +208,21 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
         <span className="notice-text">{t('demoNotice')}</span>
       </aside>
 
+      {/* Operational Banner when working hours sync is active and restaurant is closed */}
+      {isClosedSyncActive && (
+        <div
+          className="menu-operational-banner"
+          role="status"
+          aria-live="polite"
+          id="menu-operational-banner"
+        >
+          <Clock size={15} className="operational-banner-icon" aria-hidden="true" />
+          <span className="operational-banner-text">
+            {t('operationalClosedBanner')}
+          </span>
+        </div>
+      )}
+
       {/* 2. Page Header with Title and Primary Add Item Button */}
       <header className="menu-page-header">
         <h1 className="menu-page-title">{t('title')}</h1>
@@ -203,7 +239,7 @@ export const MenuPage: React.FC<MenuPageProps> = ({ onShowToast }) => {
 
       {/* 3. Category Navigation Tabs */}
       <CategoryTabs
-        categories={categoryCounts}
+        categories={dynamicCategoryCounts}
         activeCategory={activeCategory}
         onSelectCategory={handleSelectCategory}
       />

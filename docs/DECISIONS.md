@@ -445,6 +445,44 @@ To deliver the Automatic Availability and Pricing Preferences sections inside Me
   - Fully responsive to $390 \times 844\text{ CSS px}$ mobile baseline with zero horizontal overflow in Arabic RTL and English LTR, Light and Dark themes.
 - **Verification**: Created `scratch/run_menu_settings_phase4_verification.cjs` covering all 10 specification tests (10/10 passed), with full pass on Phase 2 (20/20), Phase 3 (10/10), Phase 5 analytics (23/23), and `tsc && vite build` (exit code 0).
 
+## D-043: Menu Settings Menu & System Integration (Phase 5)
+
+To integrate the Menu Settings features into the live Menu, Orders, and application startup lifecycles strictly according to `docs/MENU_SETTINGS_SPEC.md`:
+
+- **Dynamic Category Integration Across Menu Views**:
+  - Replaced hardcoded category definitions across the application with dynamic categories managed by `menuSettingsStore`.
+  - *Menu Category Tabs*: `CategoryTabs.tsx` dynamically derives category tabs and counts via `getCategoryCounts(items, categories)` from `menuStore.ts`. Supports active category filtering for both seed categories and custom categories with curated icons rendered via reusable `CategoryIcon.tsx`. Added safety fallback resetting `activeCategory` to `'all'` if an active custom category is deleted.
+  - *Add and Edit Product Forms*: `AddProductScreen.tsx` and `EditProductScreen.tsx` dynamically query `useMenuSettingsStore().categories` to populate category selection buttons with matching bilingual labels and curated icons.
+  - *Product Cards and Actions*: `MenuProductCard.tsx`, `ProductActionsSheet.tsx`, and `DeleteProductDialog.tsx` resolve category metadata dynamically via `getCategoryById()`, seamlessly presenting custom category names in both Arabic and English.
+  - *Data & Assignment Preservation*: Existing category IDs (`main`, `appetizers`, `drinks`) and all 7 seed product assignments are strictly preserved.
+- **Working Hours Operational Synchronization**:
+  - Integrated `autoAvailability.syncWithWorkingHours` with `workingHoursStore.getEffectiveStatus(profile.isOpen)`.
+  - When enabled and the restaurant is closed (`!effectiveStatus.isEffectiveOpen`), an informative operational banner (`.menu-operational-banner` / `.orders-operational-banner`) is rendered on both the Menu and Orders screens.
+  - Explanatory copy clearly informs merchants: *"المطعم مغلق حالياً • تم إيقاف استقبال الطلبات تلقائياً خارج أوقات العمل الرسمية"* / *"Restaurant is currently closed • Order acceptance is paused outside working hours"*.
+  - Products remain fully visible for customer browsing without altering individual `isAvailable` flags.
+  - Existing orders in the pipeline remain fully manageable, with state machine transitions advancing normally.
+  - When `syncWithWorkingHours` is disabled (default) or when the restaurant is open, operational banners remain hidden.
+- **Daily Automatic Availability Reset**:
+  - Implemented `checkAndExecuteDailyReset(currentDate)` in `menuSettingsStore.ts`.
+  - When `dailyAutoReset` is enabled, compares current calendar date (`YYYY-MM-DD`) against `lastResetDate`. If a new business day is detected, restores all unavailable products to `isAvailable: true` and updates `lastResetDate`.
+  - Reset executes strictly once per calendar day (idempotent); manual product availability changes made on the Menu page during the same day take priority and persist until the next day boundary.
+  - Wired into `src/app/App.tsx` on mount via `useEffect` to execute on application startup.
+  - When `dailyAutoReset` is disabled (default), unavailable products remain unchanged across day boundaries.
+- **Design Tokens & Mobile Viewport**:
+  - Operational banners use `var(--radius-card, 6px)` and semantic warning palette (`rgba(245, 158, 11, 0.1)` in light mode, `rgba(245, 158, 11, 0.15)` in dark mode).
+  - Mobile baseline of $390 \times 844\text{ CSS px}$ verified with zero horizontal scroll overflow in Arabic RTL and English LTR layouts.
+- **Automated Verification**:
+  - Unit/system verification suite (`scratch/run_menu_settings_phase5_verification.cjs`) passed 20/20 tests with exit code 0.
+  - Browser-level CDP automation suite (`scratch/test_menu_settings_phase5_ui.mjs`) passed 7/7 tests with exit code 0 and captured screenshots:
+    - `menu-phase5-dynamic-category-ar-light.png`
+    - `menu-phase5-add-product-category-ar-light.png`
+    - `menu-phase5-closed-banner-ar-light.png`
+    - `orders-phase5-closed-banner-ar-light.png`
+    - `menu-phase5-closed-banner-ar-dark.png`
+    - `menu-phase5-closed-banner-en-light.png`
+  - All regression suites passed: Phase 2 (20/20), Phase 3 (10/10), Phase 4 (10/10), Analytics (23/23).
+  - Production build (`npm run build`) succeeded with exit code 0.
+
 
 
 

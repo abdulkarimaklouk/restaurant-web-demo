@@ -1,4 +1,6 @@
-export type MenuCategoryType = 'main' | 'appetizers' | 'drinks';
+import { CategoryIconType } from './menuSettings';
+
+export type MenuCategoryType = 'main' | 'appetizers' | 'drinks' | string;
 export type MenuCategoryId = 'all' | MenuCategoryType;
 
 export type MenuProductImageType =
@@ -30,6 +32,8 @@ export type CreateMenuItemInput = Omit<MenuItem, 'id'> & { id?: string };
 
 export interface CategoryInfo {
   id: MenuCategoryId;
-  labelKey: string;
+  labelKey?: string;
+  name?: LocalizedName;
+  icon?: CategoryIconType;
   count: number;
 }

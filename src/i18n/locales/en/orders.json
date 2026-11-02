@@ -1,6 +1,7 @@
 {
   "pageTitle": "Orders",
   "demoNotice": "Future University Demo Prototype • All student and payment data is simulated",
+  "operationalClosedBanner": "Restaurant is currently closed • Order acceptance is paused outside working hours",
   "tabs": {
     "pending": "Awaiting Payment",
     "new": "New",

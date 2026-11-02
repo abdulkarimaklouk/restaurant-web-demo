@@ -1,0 +1,161 @@
+{
+  "title": "القائمة",
+  "demoNotice": "نسخة تجريبية • إدارة قائمة الطعام للمطعم",
+  "operationalClosedBanner": "المطعم مغلق حالياً • تم إيقاف استقبال الطلبات تلقائياً خارج أوقات العمل الرسمية",
+  "addItem": "إضافة عنصر",
+  "searchPlaceholder": "ابحث في القائمة...",
+  "filterAria": "تصفية القائمة",
+  "categories": {
+    "all": "الكل",
+    "main": "أطباق رئيسية",
+    "appetizers": "المقبلات",
+    "drinks": "المشروبات"
+  },
+  "items": {
+    "beefBurger": "برجر لحم",
+    "grilledChicken": "دجاج مشوي",
+    "pastaAlfredo": "باستا ألفريدو",
+    "frenchFries": "بطاطس مقلية",
+    "caesarSalad": "سلطة سيزر",
+    "cocaCola": "كوكاكولا",
+    "orangeJuice": "عصير برتقال"
+  },
+  "status": {
+    "available": "متوفر",
+    "unavailable": "غير متوفر"
+  },
+  "actions": {
+    "edit": "تعديل",
+    "more": "خيارات إضافية",
+    "toggleAvailabilityAria": "تبديل توفر {{name}}",
+    "editItemAria": "تعديل {{name}}",
+    "moreActionsAria": "خيارات إضافية لـ {{name}}"
+  },
+  "toasts": {
+    "addItemNotice": "خاصية إضافة عنصر جديد ستتوفر في مرحلة قادمة.",
+    "filterNotice": "خاصية تصفية القائمة ستتوفر في مرحلة قادمة.",
+    "searchNotice": "خاصية البحث في القائمة ستتوفر في مرحلة قادمة.",
+    "toggleNotice": "تعديل حالة التوفر سيتوفر في مرحلة قادمة.",
+    "editNotice": "تعديل بيانات العنصر سيتوفر في مرحلة قادمة.",
+    "moreNotice": "خيارات إضافية ستتوفر في مرحلة قادمة.",
+    "availabilityAvailable": "تم تعيين \"{{name}}\" كعنصر متوفر للطلب.",
+    "availabilityUnavailable": "تم تعيين \"{{name}}\" كعنصر غير متوفر مؤقتاً.",
+    "availabilityError": "حدث خطأ أثناء تحديث حالة توفر العنصر."
+  },
+  "addProduct": {
+    "pageTitle": "إضافة عنصر جديد",
+    "backAria": "العودة إلى القائمة",
+    "nameArLabel": "اسم العنصر (بالعربية)",
+    "nameArPlaceholder": "مثال: شاورما دجاج ممتازة",
+    "nameEnLabel": "اسم العنصر (بالإنجليزية)",
+    "nameEnPlaceholder": "مثال: Premium Chicken Shawarma",
+    "categoryLabel": "التصنيف",
+    "categoryPlaceholder": "اختر التصنيف",
+    "priceLabel": "السعر (ج.م)",
+    "pricePlaceholder": "مثال: 85",
+    "imageLabel": "أيقونة وصورة العنصر",
+    "imagePreview": "معاينة المظهر",
+    "images": {
+      "burger": "ساندوتش / برجر",
+      "chicken": "دجاج / وجبات",
+      "pasta": "باستا / مكرونة",
+      "fries": "بطاطس / وجبات خفيفة",
+      "salad": "سلطات خضراء",
+      "cola": "مشروبات غازية",
+      "juice": "عصائر طبيعية"
+    },
+    "availabilityLabel": "حالة التوفر الحالية",
+    "availabilityHint": "تفعيل التوفر يتيح للطلاب طلب هذا العنصر فوراً من القائمة",
+    "saveBtn": "حفظ العنصر",
+    "cancelBtn": "إلغاء",
+    "createSuccess": "تمت إضافة العنصر بنجاح إلى القائمة.",
+    "createError": "حدث خطأ أثناء إضافة العنصر، يرجى المحاولة مرة أخرى.",
+    "placeholderSaveSuccess": "نسخة تجريبية • تم التحقق من بيانات العنصر بنجاح (سيتم إنشاء وحفظ العناصر في المرحلة التالية).",
+    "errors": {
+      "nameArRequired": "يرجى إدخال اسم العنصر باللغة العربية",
+      "nameEnRequired": "يرجى إدخال اسم العنصر باللغة الإنجليزية",
+      "categoryRequired": "يرجى اختيار تصنيف صالح للعنصر",
+      "priceRequired": "يرجى إدخال سعر صحيح أكبر من الصفر",
+      "priceNegative": "لا يمكن أن يكون السعر سالباً أو صفراً"
+    }
+  },
+  "editProduct": {
+    "pageTitle": "تعديل العنصر",
+    "backAria": "العودة إلى القائمة",
+    "nameSectionTitle": "بيانات التسمية",
+    "nameArLabel": "اسم العنصر (بالعربية)",
+    "nameArPlaceholder": "مثال: شاورما دجاج ممتازة",
+    "nameEnLabel": "اسم العنصر (بالإنجليزية)",
+    "nameEnPlaceholder": "مثال: Premium Chicken Shawarma",
+    "categoryLabel": "التصنيف",
+    "categoryPlaceholder": "اختر التصنيف",
+    "priceLabel": "السعر (ج.م)",
+    "pricePlaceholder": "مثال: 85",
+    "imageLabel": "أيقونة وصورة العنصر",
+    "imagePreview": "معاينة المظهر",
+    "images": {
+      "burger": "ساندوتش / برجر",
+      "chicken": "دجاج / وجبات",
+      "pasta": "باستا / مكرونة",
+      "fries": "بطاطس / وجبات خفيفة",
+      "salad": "سلطات خضراء",
+      "cola": "مشروبات غازية",
+      "juice": "عصائر طبيعية"
+    },
+    "availabilityLabel": "حالة التوفر الحالية",
+    "availabilityHint": "تفعيل التوفر يتيح للطلاب طلب هذا العنصر فوراً من القائمة",
+    "saveBtn": "حفظ التعديلات",
+    "cancelBtn": "إلغاء",
+    "editSuccess": "تم تعديل بيانات العنصر بنجاح.",
+    "editError": "حدث خطأ أثناء تعديل العنصر، يرجى المحاولة مرة أخرى.",
+    "placeholderSaveSuccess": "نسخة تجريبية • تم التحقق من تعديلات العنصر بنجاح (سيتم حفظ التعديلات في المرحلة التالية).",
+    "errors": {
+      "nameArRequired": "يرجى إدخال اسم العنصر باللغة العربية",
+      "nameEnRequired": "يرجى إدخال اسم العنصر باللغة الإنجليزية",
+      "categoryRequired": "يرجى اختيار تصنيف صالح للعنصر",
+      "priceRequired": "يرجى إدخال سعر صحيح أكبر من الصفر",
+      "priceNegative": "لا يمكن أن يكون السعر سالباً أو صفراً"
+    }
+  },
+  "deleteProduct": {
+    "actionMenuTitle": "خيارات العنصر",
+    "editOption": "تعديل بيانات العنصر",
+    "deleteOption": "حذف العنصر من القائمة",
+    "dialogTitle": "حذف العنصر من القائمة",
+    "dialogMessage": "هل أنت متأكد من رغبتك في حذف \"{{name}}\" من قائمة الطعام؟ لن يتمكن الطلاب من طلب هذا العنصر بعد حذفه.",
+    "warningNote": "هذا الإجراء سيقوم بإزالة العنصر نهائياً من القائمة.",
+    "confirmBtn": "حذف العنصر",
+    "cancelBtn": "إلغاء",
+    "deleteSuccess": "تم حذف العنصر بنجاح من القائمة.",
+    "deleteSuccessWithName": "تم حذف \"{{name}}\" بنجاح من القائمة.",
+    "deleteError": "حدث خطأ أثناء حذف العنصر، أو أن العنصر غير موجود.",
+    "placeholderSuccess": "نسخة تجريبية • تم تأكيد طلب حذف \"{{name}}\" بنجاح (سيتم تنفيذ الحذف الفعلي في المرحلة التالية)."
+  },
+  "clearSearch": "مسح البحث",
+  "filter": {
+    "title": "تصفية القائمة",
+    "availabilitySection": "حالة التوفر",
+    "allProducts": "جميع العناصر",
+    "allProductsDesc": "عرض كافة عناصر القائمة",
+    "availableOnly": "المتوفر فقط",
+    "availableOnlyDesc": "عرض العناصر الجاهزة للطلب فقط",
+    "unavailableOnly": "غير المتوفر فقط",
+    "unavailableOnlyDesc": "عرض العناصر غير المتوفرة حالياً",
+    "applyBtn": "تطبيق التصفية",
+    "resetBtn": "إعادة ضبط",
+    "closeAria": "إغلاق نافذة التصفية"
+  },
+  "emptySearch": {
+    "title": "لا توجد نتائج مطابقة",
+    "desc": "لم نتمكن من العثور على أي عنصر يطابق معايير البحث أو التصفية الحالية.",
+    "descWithQuery": "لم نتمكن من العثور على أي عنصر يطابق \"{{query}}\".",
+    "resetBtn": "إعادة ضبط البحث والتصفية",
+    "clearSearchBtn": "مسح البحث"
+  },
+  "emptyMenu": {
+    "title": "قائمة الطعام فارغة",
+    "desc": "لم يتم إضافة أي عناصر بعد إلى قائمة الطعام.",
+    "addItemBtn": "إضافة عنصر جديد"
+  }
+}
+

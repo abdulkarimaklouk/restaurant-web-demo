@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MobileAppShell } from '../components/layout/MobileAppShell';
 import { TopHeader } from '../components/layout/TopHeader';
@@ -10,6 +10,7 @@ import { SettingsPage } from '../features/settings/SettingsPage';
 import { Toast, ToastProps } from '../components/ui/Toast';
 import { useOrderStore } from '../data/mockStore';
 import { useNotificationsStore } from '../data/notificationsStore';
+import { menuSettingsStore } from '../data/menuSettingsStore';
 import i18n from '../i18n';
 import '../styles/global.css';
 
@@ -43,6 +44,15 @@ export function App() {
     message: string;
     type?: ToastProps['type'];
   } | null>(null);
+
+  useEffect(() => {
+    // Phase 5: Execute daily automatic availability reset on app startup if enabled
+    menuSettingsStore.checkAndExecuteDailyReset();
+    if (typeof window !== 'undefined') {
+      (window as any).__checkAndExecuteDailyReset = (dateStr?: string) =>
+        menuSettingsStore.checkAndExecuteDailyReset(dateStr ? new Date(dateStr) : undefined);
+    }
+  }, []);
 
   const showToast = (message: string, type: ToastProps['type'] = 'info') => {
     setToast({ message, type });

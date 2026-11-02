@@ -9,14 +9,6 @@ import {
   Trash2,
   ArrowUp,
   ArrowDown,
-  Utensils,
-  Salad,
-  CupSoda,
-  Coffee,
-  Cake,
-  Pizza,
-  Sandwich,
-  LayoutGrid,
   AlertCircle,
   AlertTriangle,
   X,
@@ -29,6 +21,8 @@ import {
   Hash,
 } from 'lucide-react';
 import { ToastProps } from '../../../components/ui/Toast';
+import { renderCategoryIcon } from '../../../components/ui/CategoryIcon';
+export { renderCategoryIcon };
 import {
   CategoryDefinition,
   CategoryIconType,
@@ -42,32 +36,6 @@ export interface EditMenuSettingsProps {
   onBack: () => void;
   onShowToast: (message: string, type?: ToastProps['type']) => void;
 }
-
-export const renderCategoryIcon = (
-  icon: CategoryIconType,
-  size = 18,
-  className = ''
-) => {
-  switch (icon) {
-    case 'utensils':
-      return <Utensils size={size} className={className} />;
-    case 'salad':
-      return <Salad size={size} className={className} />;
-    case 'cup-soda':
-      return <CupSoda size={size} className={className} />;
-    case 'coffee':
-      return <Coffee size={size} className={className} />;
-    case 'cake':
-      return <Cake size={size} className={className} />;
-    case 'pizza':
-      return <Pizza size={size} className={className} />;
-    case 'sandwich':
-      return <Sandwich size={size} className={className} />;
-    case 'layout-grid':
-    default:
-      return <LayoutGrid size={size} className={className} />;
-  }
-};
 
 interface CategoryModalProps {
   isOpen: boolean;

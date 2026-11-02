@@ -561,16 +561,61 @@ Update this checklist during implementation. Do not mark an item complete until 
   - `menu-settings-phase4-ar-dark.png`
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
-## Menu Settings (Planned UI & System Integration - Phase 5 & 6)
+## Menu Settings Phase 5: Menu & System Integration
 
-### Category Safety & Dynamic Management (Menu Screen Integration - Planned Phase 5)
-- [ ] Category tabs in MenuPage reflect dynamic categories list from menuSettingsStore.
-- [ ] AddProductScreen and EditProductScreen dynamically render category selectors from menuSettingsStore.
-- [ ] MenuFilterSheet dynamically populates categories from menuSettingsStore.
+### Dynamic Category Integration
+- [x] Category tabs in MenuPage reflect dynamic categories list from menuSettingsStore.
+- [x] Initial category counts computed accurately via `getCategoryCounts(items, categories)` (All: 7, Main: 3, Appetizers: 2, Drinks: 2).
+- [x] Adding a custom category in Menu Settings immediately reflects as a new tab in MenuPage with 0 product count.
+- [x] AddProductScreen and EditProductScreen dynamically render category selectors from menuSettingsStore with curated icons and bilingual labels.
+- [x] Creating a product assigned to a custom category updates dynamic category count and total count.
+- [x] MenuProductCard, ProductActionsSheet, and DeleteProductDialog resolve dynamic category names in Arabic and English.
+- [x] Custom categories containing products are strictly protected from deletion until products are reassigned or deleted.
+- [x] Empty custom categories delete safely and are immediately removed from category tabs.
+- [x] Default seed categories (`main`, `appetizers`, `drinks`) remain protected and can never be deleted.
+- [x] Safety fallback resets active category to `'all'` if selected custom category is removed.
 
-### Operational Synchronization Integration (Menu Screen Integration - Planned Phase 5)
-- [ ] When working-hours sync is enabled and restaurant is closed, an operational banner indicates ordering is paused.
-- [ ] When daily auto-reset is enabled, launching the app on a new business day restores unavailable items to available.
-- [ ] Manual availability toggles made on the Menu screen take precedence until the next explicit reset or day boundary.
+### Operational Synchronization & Working Hours
+- [x] `autoAvailability.syncWithWorkingHours` connects to `workingHoursStore.getEffectiveStatus()`.
+- [x] When sync is enabled and restaurant is closed, operational closed banner appears on both Menu and Orders pages.
+- [x] Operational closed banner communicates status clearly in Arabic RTL and English LTR.
+- [x] Products remain 100% visible for customer browsing when restaurant is closed; product availability flags are untouched.
+- [x] Orders already in the pipeline remain fully manageable, with state machine transitions advancing normally.
+- [x] When sync is disabled (default) or restaurant is open, operational closed banners are hidden.
+
+### Daily Automatic Availability Reset
+- [x] `menuSettingsStore.checkAndExecuteDailyReset()` connects to the menu availability lifecycle.
+- [x] When `dailyAutoReset` is enabled on a new business day, restores all unavailable products to available and updates `lastResetDate`.
+- [x] Reset check executes on application startup via `App.tsx` mount effect.
+- [x] Reset check executes strictly once per calendar day (idempotent); manual availability changes on the same day are preserved.
+- [x] Next calendar day boundary triggers reset again as expected.
+- [x] When `dailyAutoReset` is disabled (default), unavailable products remain unchanged across day boundaries.
+
+### Non-Regression & Styling
+- [x] Seed orders (10 orders) strictly preserved with exact status distribution.
+- [x] Seed menu items (7 items) strictly preserved with original prices, categories, and bilingual names.
+- [x] Working hours settings in storage remain untouched.
+- [x] Operational banners use `var(--radius-card, 6px)` and support Light & Dark themes.
+- [x] Mobile viewport baseline (390 × 844 CSS px) verified with 0 horizontal overflow.
+- [x] Automated test runner (`node scratch/run_menu_settings_phase5_verification.cjs`) passed 20/20 tests with exit code 0.
+- [x] Browser-level CDP automation suite (`node --experimental-websocket scratch/test_menu_settings_phase5_ui.mjs`) passed 7/7 tests with exit code 0 and captured screenshots:
+  - `menu-phase5-dynamic-category-ar-light.png`
+  - `menu-phase5-add-product-category-ar-light.png`
+  - `menu-phase5-closed-banner-ar-light.png`
+  - `orders-phase5-closed-banner-ar-light.png`
+  - `menu-phase5-closed-banner-ar-dark.png`
+  - `menu-phase5-closed-banner-en-light.png`
+- [x] Regression test suites passed:
+  - Phase 2: 20/20 passed (exit code 0)
+  - Phase 3: 10/10 passed (exit code 0)
+  - Phase 4: 10/10 passed (exit code 0)
+  - Analytics Phase 5: 23/23 passed (exit code 0)
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Menu Settings (Planned Final Verification & Visual QA - Phase 6)
+- [ ] Comprehensive visual audit across all Menu Settings sub-screens and integrated Menu/Orders views against reference designs.
+- [ ] End-to-end user journeys verification across language switching (Arabic RTL / English LTR) and theme toggling (Light / Dark).
+- [ ] Final accessibility and screen reader audit.
+
 
 

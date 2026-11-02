@@ -7,7 +7,10 @@ import { OrderTabs } from './components/OrderTabs';
 import { OrderCard } from './components/OrderCard';
 import { EmptyState } from '../../components/ui/EmptyState';
 import { SummaryModal } from '../../components/ui/SummaryModal';
-import { Info } from 'lucide-react';
+import { Info, Clock } from 'lucide-react';
+import { useMenuSettingsStore } from '../../data/menuSettingsStore';
+import { useWorkingHoursStore } from '../../data/workingHoursStore';
+import { useRestaurantProfileStore } from '../../data/restaurantProfileStore';
 import './OrdersPage.css';
 
 interface OrdersPageProps {
@@ -18,6 +21,13 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
   const { t } = useTranslation('orders');
   const { getOrdersByTab, counts, advanceOrder } = useOrderStore();
   const { preferences } = useNotificationsStore();
+  const { autoAvailability } = useMenuSettingsStore();
+  const { getEffectiveStatus } = useWorkingHoursStore();
+  const { profile } = useRestaurantProfileStore();
+
+  const effectiveStatus = getEffectiveStatus(profile.isOpen);
+  const isClosedSyncActive = autoAvailability.syncWithWorkingHours && !effectiveStatus.isEffectiveOpen;
+
   const [activeTab, setActiveTab] = useState<OrderViewTab>('pending');
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
@@ -68,6 +78,21 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onShowToast }) => {
         <Info size={14} className="notice-icon" />
         <span className="notice-text">{t('demoNotice')}</span>
       </aside>
+
+      {/* Operational Banner when working hours sync is active and restaurant is closed */}
+      {isClosedSyncActive && (
+        <div
+          className="orders-operational-banner"
+          role="status"
+          aria-live="polite"
+          id="orders-operational-banner"
+        >
+          <Clock size={15} className="operational-banner-icon" aria-hidden="true" />
+          <span className="operational-banner-text">
+            {t('operationalClosedBanner')}
+          </span>
+        </div>
+      )}
 
       {/* Main Page Title */}
       <div className="orders-page-header">

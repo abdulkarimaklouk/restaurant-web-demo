@@ -1,6 +1,7 @@
 {
   "title": "Menu",
   "demoNotice": "Demo Prototype • Restaurant Menu Management",
+  "operationalClosedBanner": "Restaurant is currently closed • Order acceptance is paused outside working hours",
   "addItem": "Add Item",
   "searchPlaceholder": "Search menu...",
   "filterAria": "Filter menu",

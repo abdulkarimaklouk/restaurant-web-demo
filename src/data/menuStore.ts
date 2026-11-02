@@ -7,6 +7,7 @@ import {
   MenuProductImageType,
   LocalizedName,
 } from '../types/menu';
+import { CategoryDefinition } from '../types/menuSettings';
 
 export const STORAGE_KEY_MENU_ITEMS = 'menu_items';
 
@@ -104,20 +105,42 @@ export function cloneMenuItems(items: MenuItem[]): MenuItem[] {
   }));
 }
 
-export function getCategoryCounts(items: MenuItem[] = INITIAL_MENU_ITEMS): CategoryInfo[] {
-  const counts = {
-    all: items.length,
-    main: items.filter((i) => i.category === 'main').length,
-    appetizers: items.filter((i) => i.category === 'appetizers').length,
-    drinks: items.filter((i) => i.category === 'drinks').length,
+export function getCategoryCounts(
+  items: MenuItem[] = INITIAL_MENU_ITEMS,
+  categories?: CategoryDefinition[]
+): CategoryInfo[] {
+  let activeCats: { id: string; name?: LocalizedName; icon?: any; labelKey?: string }[];
+
+  if (categories && categories.length > 0) {
+    activeCats = categories.map((c) => ({
+      id: c.id,
+      name: c.name,
+      icon: c.icon,
+      labelKey: ['main', 'appetizers', 'drinks'].includes(c.id) ? `categories.${c.id}` : undefined,
+    }));
+  } else {
+    activeCats = [
+      { id: 'main', labelKey: 'categories.main', icon: 'utensils' },
+      { id: 'appetizers', labelKey: 'categories.appetizers', icon: 'salad' },
+      { id: 'drinks', labelKey: 'categories.drinks', icon: 'cup-soda' },
+    ];
+  }
+
+  const allItem: CategoryInfo = {
+    id: 'all',
+    labelKey: 'categories.all',
+    count: items.length,
   };
 
-  return [
-    { id: 'all', labelKey: 'categories.all', count: counts.all },
-    { id: 'main', labelKey: 'categories.main', count: counts.main },
-    { id: 'appetizers', labelKey: 'categories.appetizers', count: counts.appetizers },
-    { id: 'drinks', labelKey: 'categories.drinks', count: counts.drinks },
-  ];
+  const dynamicItems: CategoryInfo[] = activeCats.map((cat) => ({
+    id: cat.id,
+    labelKey: cat.labelKey,
+    name: cat.name,
+    icon: cat.icon,
+    count: items.filter((i) => i.category === cat.id).length,
+  }));
+
+  return [allItem, ...dynamicItems];
 }
 
 export function validateMenuItem(raw: any): MenuItem | null {
@@ -145,10 +168,9 @@ export function validateMenuItem(raw: any): MenuItem | null {
   // Must have both Arabic and English names
   if (!name.ar || !name.en) return null;
 
-  // Category validation
-  const validCategories: MenuCategoryType[] = ['main', 'appetizers', 'drinks'];
-  if (!validCategories.includes(raw.category)) return null;
-  const category: MenuCategoryType = raw.category;
+  // Category validation: category must be a valid non-empty string
+  if (typeof raw.category !== 'string' || !raw.category.trim()) return null;
+  const category: MenuCategoryType = raw.category.trim();
 
   // Price validation: strictly positive number
   if (typeof raw.price !== 'number' || isNaN(raw.price) || raw.price <= 0) {
@@ -190,7 +212,7 @@ export function validateMenuItem(raw: any): MenuItem | null {
   };
 }
 
-class MenuStore {
+export class MenuStore {
   private items: MenuItem[];
   private listeners: Set<() => void> = new Set();
 
@@ -418,7 +440,7 @@ class MenuStore {
 
 export const menuStore = new MenuStore();
 
-export function useMenuStore() {
+export function useMenuStore(customCategories?: CategoryDefinition[]) {
   const [items, setItems] = useState<MenuItem[]>(() => menuStore.getItems());
 
   useEffect(() => {
@@ -428,7 +450,7 @@ export function useMenuStore() {
     return unsubscribe;
   }, []);
 
-  const categoryCounts = getCategoryCounts(items);
+  const categoryCounts = getCategoryCounts(items, customCategories);
 
   return {
     items,
