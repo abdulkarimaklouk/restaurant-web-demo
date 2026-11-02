@@ -478,3 +478,43 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] Zero layout breakage, text truncation, or horizontal clipping.
 - [x] All 5 automated test runners passed (Phase 2: 22/22, Phase 3: 20/20, Phase 4: 20/20, Phase 5: 23/23, Phase 6: 18/18; 103/103 tests total).
 - [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Menu Settings (Planned Verification)
+
+### Category Safety & Dynamic Management
+
+- [ ] Initial state exposes the 3 seed categories (`main`, `appetizers`, `drinks`) marked as default.
+- [ ] Default seed categories are protected and cannot be deleted.
+- [ ] Custom categories support creation with mandatory bilingual names (Arabic and English).
+- [ ] Category icon selection is strictly bounded to the 8 curated culinary Lucide icons.
+- [ ] Category display reordering (`sortOrder`) updates the visual tab sequence without data corruption.
+- [ ] Non-empty categories (`count > 0`) cannot be deleted, displaying clear blocker feedback.
+- [ ] Empty custom categories (`count === 0`) can be safely deleted after user confirmation.
+- [ ] Category modifications propagate reactively to `CategoryTabs` and product forms.
+
+### Automatic Availability & Operational Synchronization
+
+- [ ] Working-hours synchronization defaults to disabled (`false`).
+- [ ] When working-hours sync is enabled and restaurant is closed, ordering is paused while products remain visible.
+- [ ] Daily availability auto-reset defaults to disabled (`false`).
+- [ ] When daily auto-reset is enabled, launching the app on a new business day restores unavailable items to available.
+- [ ] Explicit "Reset All Items to Available Now" button sets all items to available immediately with localized toast feedback.
+- [ ] Manual availability toggles made on the Menu screen take precedence until the next explicit reset or day boundary.
+
+### Pricing Preferences & Financial Baseline
+
+- [ ] Base currency is fixed to Egyptian Pound (`EGP` / `ج.م`).
+- [ ] Tax-inclusive status is displayed as active/informational and cannot be disabled.
+- [ ] Price display maintains clean integer formatting matching seed orders.
+- [ ] No dynamic tax, VAT, or service charge calculations are introduced.
+- [ ] Historical order snapshots and seed order totals remain completely unaffected.
+
+### UI, Theming, Localization & Persistence
+
+- [ ] Sub-screen accessible from `Settings → Restaurant Settings → Menu Settings`.
+- [ ] Viewport conforms to $390 \times 844\text{ CSS px}$ baseline with 0 horizontal overflow.
+- [ ] Design tokens adhered to (`--radius-card: 6px`, `--radius-btn: 5px`, `--radius-badge: 4px`, `--color-primary-dark`).
+- [ ] Full bilingual support across Arabic (RTL) and English (LTR).
+- [ ] Theme contrast and appearance verified across Light and Dark modes.
+- [ ] Settings persist to `localStorage['restaurant_menu_settings_v1']` across page reloads.
+- [ ] Corrupt or missing storage gracefully falls back to default settings without crashing.

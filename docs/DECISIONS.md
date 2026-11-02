@@ -372,3 +372,24 @@ To eliminate border-radius divergence across the mobile web prototype and harmon
   - Replaced `8px` thumbnail wraps in `TopSellingItems` with `var(--radius-card, 6px)`, matching Menu's product thumbnail containers.
   - Replaced `4px` custom badge with `var(--radius-badge, 4px)`.
 - **Preserved Core Structure & Rules**: Maintained all existing colors, spacing, typography, grid layouts, and functionality unchanged. All 5 test suites (103/103 tests) and production build pass with exit code 0.
+
+## D-039: Menu Settings Feature Scope and Business Rules
+
+To establish the functional architecture and operational boundaries for the Menu Settings sub-screen (`Settings → Restaurant Settings → Menu Settings`):
+
+- **Dynamic Categories & Deletion Safety**:
+  - Transition categories from static union literals to dynamic `CategoryDefinition` objects supporting required bilingual Arabic and English names.
+  - Category icon selection is restricted to 8 curated culinary Lucide icons (`utensils`, `salad`, `cup-soda`, `coffee`, `cake`, `pizza`, `sandwich`, `layout-grid`).
+  - Categories support editing and reordering via `sortOrder`.
+  - The three initial seed categories (`main`, `appetizers`, `drinks`) are marked `isDefault: true` and cannot be deleted.
+  - Deletion of non-default categories is strictly blocked if they contain active products (`count > 0`), requiring the owner to reassign or remove products first.
+- **Automatic Availability & Operational Synchronization**:
+  - Working-hours synchronization defaults to disabled (`false`). When enabled, closing the restaurant stops order acceptance while keeping products visible for student browsing.
+  - Daily availability auto-reset defaults to disabled (`false`). When enabled, unavailable items are restored at the start of a new business day, detected on app launch by comparing `lastAutoResetDate` against current date.
+  - An explicit manual *"Reset All Items to Available Now"* action button is provided for live demonstration.
+  - Manual product availability toggles on the Menu page take immediate priority and remain effective until an automated schedule boundary or explicit reset.
+- **Pricing Preferences & Financial Integrity**:
+  - Currency remains Egyptian Pound (`EGP` / `ج.م`) with clean integer formatting.
+  - All prices represent gross tax-inclusive retail amounts. Tax-inclusive status is informational and cannot be modified.
+  - Dynamic taxes, service charges, and bulk price adjustment engines are explicitly out of scope, guaranteeing zero modification to historical order snapshots or seed order totals.
+
