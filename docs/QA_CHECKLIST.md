@@ -479,42 +479,58 @@ Update this checklist during implementation. Do not mark an item complete until 
 - [x] All 5 automated test runners passed (Phase 2: 22/22, Phase 3: 20/20, Phase 4: 20/20, Phase 5: 23/23, Phase 6: 18/18; 103/103 tests total).
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
-## Menu Settings (Planned Verification)
+## Menu Settings Phase 2: Data Models & Centralized Store
 
-### Category Safety & Dynamic Management
+- [x] Test 1: Correct default categories: 3 protected seed categories with exact bilingual labels and icons.
+- [x] Test 2: Correct default pricing values: currency EGP, isTaxInclusive true, decimalPrecision 0.
+- [x] Test 3: Automatic availability options default to false (syncWithWorkingHours=false, dailyAutoReset=false).
+- [x] Test 4: Add category with valid bilingual names succeeds and appends category with next sortOrder.
+- [x] Test 5: Reject empty or whitespace-only category names in Arabic or English.
+- [x] Test 6: Reject duplicate Arabic names across categories.
+- [x] Test 7: Reject duplicate English names (case-insensitive collision check).
+- [x] Test 8: Reject invalid category icons outside the 8 approved curated icons.
+- [x] Test 9: Edit category updates names and icon while strictly preserving ID and isDefault flag.
+- [x] Test 10: Protect default categories from deletion (main, appetizers, drinks cannot be deleted).
+- [x] Test 11: Block deletion of categories containing products (requires product reassignment).
+- [x] Test 12: Allow deletion of eligible empty custom categories.
+- [x] Test 13: Reorder categories correctly updates sortOrder indices sequentially.
+- [x] Test 14: Preserve categories during reordering: rejects missing, duplicate, or invalid IDs.
+- [x] Test 15: Persist settings after reload: second store instance restores all modified data from localStorage.
+- [x] Test 16: Recover safely from malformed JSON and corrupted data in localStorage, re-injecting missing defaults.
+- [x] Test 17: Notify subscribers after successful changes (listener triggers cleanly on add, edit, delete, reorder, auto-availability update).
+- [x] Test 18: Preserve existing menu_items data: localStorage menu_items is untouched and intact (7 seed products).
+- [x] Test 19: Preserve existing working hours settings: restaurant_working_hours storage key remains untouched.
+- [x] Test 20: Preserve existing product availability values: Caesar Salad remains unavailable (false), other 6 products remain available (true).
+- [x] Automated test runner (`node scratch/run_menu_settings_phase2_verification.cjs`) passed 20/20 tests with exit code 0.
+- [x] Production build (`npm run build`) succeeded with 0 errors.
 
-- [ ] Initial state exposes the 3 seed categories (`main`, `appetizers`, `drinks`) marked as default.
-- [ ] Default seed categories are protected and cannot be deleted.
-- [ ] Custom categories support creation with mandatory bilingual names (Arabic and English).
-- [ ] Category icon selection is strictly bounded to the 8 curated culinary Lucide icons.
-- [ ] Category display reordering (`sortOrder`) updates the visual tab sequence without data corruption.
-- [ ] Non-empty categories (`count > 0`) cannot be deleted, displaying clear blocker feedback.
-- [ ] Empty custom categories (`count === 0`) can be safely deleted after user confirmation.
-- [ ] Category modifications propagate reactively to `CategoryTabs` and product forms.
+## Menu Settings (Planned UI & System Integration)
 
-### Automatic Availability & Operational Synchronization
+### Category Safety & Dynamic Management (UI Integration - Planned)
+- [ ] Category tabs in MenuPage reflect dynamic categories list from menuSettingsStore.
+- [ ] AddProductScreen and EditProductScreen dynamically render category selectors from menuSettingsStore.
+- [ ] Safe category deletion UI blocks removal of categories with active products and guides reassignment.
+- [ ] Category display reordering controls (Move Up / Move Down) update visual tab sequence.
 
+### Automatic Availability & Operational Synchronization (UI Integration - Planned)
 - [ ] Working-hours synchronization defaults to disabled (`false`).
 - [ ] When working-hours sync is enabled and restaurant is closed, ordering is paused while products remain visible.
 - [ ] Daily availability auto-reset defaults to disabled (`false`).
 - [ ] When daily auto-reset is enabled, launching the app on a new business day restores unavailable items to available.
-- [ ] Explicit "Reset All Items to Available Now" button sets all items to available immediately with localized toast feedback.
+- [ ] Explicit "Reset All Items to Available Now" button in settings UI triggers availability reset with localized toast feedback.
 - [ ] Manual availability toggles made on the Menu screen take precedence until the next explicit reset or day boundary.
 
-### Pricing Preferences & Financial Baseline
-
-- [ ] Base currency is fixed to Egyptian Pound (`EGP` / `ج.م`).
+### Pricing Preferences & Financial Baseline (UI Integration - Planned)
+- [ ] Base currency indicator displays Egyptian Pound (`EGP` / `ج.م`).
 - [ ] Tax-inclusive status is displayed as active/informational and cannot be disabled.
 - [ ] Price display maintains clean integer formatting matching seed orders.
 - [ ] No dynamic tax, VAT, or service charge calculations are introduced.
 - [ ] Historical order snapshots and seed order totals remain completely unaffected.
 
-### UI, Theming, Localization & Persistence
-
+### Sub-Screen UI, Theming & Navigation (Planned)
 - [ ] Sub-screen accessible from `Settings → Restaurant Settings → Menu Settings`.
 - [ ] Viewport conforms to $390 \times 844\text{ CSS px}$ baseline with 0 horizontal overflow.
 - [ ] Design tokens adhered to (`--radius-card: 6px`, `--radius-btn: 5px`, `--radius-badge: 4px`, `--color-primary-dark`).
 - [ ] Full bilingual support across Arabic (RTL) and English (LTR).
 - [ ] Theme contrast and appearance verified across Light and Dark modes.
-- [ ] Settings persist to `localStorage['restaurant_menu_settings_v1']` across page reloads.
-- [ ] Corrupt or missing storage gracefully falls back to default settings without crashing.
+

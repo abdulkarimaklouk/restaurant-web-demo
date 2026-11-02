@@ -393,3 +393,23 @@ To establish the functional architecture and operational boundaries for the Menu
   - All prices represent gross tax-inclusive retail amounts. Tax-inclusive status is informational and cannot be modified.
   - Dynamic taxes, service charges, and bulk price adjustment engines are explicitly out of scope, guaranteeing zero modification to historical order snapshots or seed order totals.
 
+## D-040: Menu Settings Centralized Store and Persistence Architecture (Phase 2)
+
+To establish the data management, validation, and storage layer for Menu Settings without altering existing menu behaviors:
+
+- **Centralized Observable Store**: Implemented `MenuSettingsStore` (`src/data/menuSettingsStore.ts`) and data types (`src/types/menuSettings.ts`) following the singleton and subscriber pattern used across `workingHoursStore` and `menuStore`. Exported `useMenuSettingsStore()` React hook for future UI consumption.
+- **Persistence & Defensive Fallback**:
+  - Persisted under key `restaurant_menu_settings_v1` in `localStorage`.
+  - Defensive parsing validates categories, auto-availability flags, and pricing structure.
+  - Malformed JSON or corrupted storage recovers safely by restoring defaults.
+  - Missing protected default categories (`main`, `appetizers`, `drinks`) are automatically re-injected upon store initialization.
+- **Category Mutation & Deletion Safety**:
+  - `addCategory`: Validates non-empty bilingual names, enforces icon membership in `CURATED_CATEGORY_ICONS`, prevents duplicate names across categories, auto-generates stable IDs (`cat-${slug}`), and assigns sequential `sortOrder`.
+  - `updateCategory`: Allows updating bilingual labels and icons while strictly preserving category ID and `isDefault` status; enforces collision prevention against other categories.
+  - `deleteCategory`: Prevents deleting default seed categories; checks product usage via `menuStore.getItems()` and blocks deletion if active products exist in the category (`count > 0`).
+  - `reorderCategories`: Enforces array completeness, rejects missing/duplicate IDs, and updates `sortOrder` sequentially.
+- **Isolated Domain Boundaries**:
+  - Operations on `menuSettingsStore` do not mutate `menu_items`, `restaurant_working_hours`, product availability flags, or seed order records.
+- **Automated Verification**: Created `scratch/run_menu_settings_phase2_verification.cjs` covering all 20 specification tests (20/20 passed) alongside clean production compilation (`tsc && vite build`).
+
+
