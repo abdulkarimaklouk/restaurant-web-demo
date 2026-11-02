@@ -22,6 +22,11 @@ import {
   X,
   Check,
   ShieldCheck,
+  Clock,
+  RotateCcw,
+  Coins,
+  Receipt,
+  Hash,
 } from 'lucide-react';
 import { ToastProps } from '../../../components/ui/Toast';
 import {
@@ -388,6 +393,73 @@ const DeleteCategoryDialog: React.FC<DeleteCategoryDialogProps> = ({
   );
 };
 
+interface ResetAvailabilityDialogProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onConfirm: () => void;
+}
+
+const ResetAvailabilityDialog: React.FC<ResetAvailabilityDialogProps> = ({
+  isOpen,
+  onClose,
+  onConfirm,
+}) => {
+  const { t } = useTranslation('settings');
+
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="modal-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="reset-dialog-title"
+      onClick={onClose}
+    >
+      <div
+        className="delete-category-dialog reset-availability-dialog"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="delete-dialog-header">
+          <div className="delete-icon-wrap reset-icon-wrap" aria-hidden="true">
+            <RotateCcw size={20} />
+          </div>
+          <div className="delete-title-group">
+            <h3 id="reset-dialog-title" className="delete-dialog-title">
+              {t('menuSettings.manualResetConfirmTitle')}
+            </h3>
+          </div>
+        </div>
+
+        <div className="delete-dialog-body">
+          <p className="delete-dialog-desc">
+            {t('menuSettings.manualResetConfirmDesc')}
+          </p>
+        </div>
+
+        <div className="delete-dialog-actions">
+          <button
+            type="button"
+            className="btn-reset-confirm"
+            onClick={onConfirm}
+            autoFocus
+          >
+            <RotateCcw size={14} />
+            <span>{t('menuSettings.manualResetConfirmBtn')}</span>
+          </button>
+          <button
+            type="button"
+            className="modal-btn-secondary"
+            onClick={onClose}
+          >
+            {t('menuSettings.cancelBtn')}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const EditMenuSettings: React.FC<EditMenuSettingsProps> = ({
   onBack,
   onShowToast,
@@ -397,13 +469,15 @@ export const EditMenuSettings: React.FC<EditMenuSettingsProps> = ({
 
   const {
     categories,
+    autoAvailability,
     addCategory,
     updateCategory,
     deleteCategory,
     reorderCategories,
+    updateAutoAvailability,
   } = useMenuSettingsStore();
 
-  const { items } = useMenuStore();
+  const { items, updateItems } = useMenuStore();
 
   const [modalState, setModalState] = useState<{
     isOpen: boolean;
@@ -422,6 +496,8 @@ export const EditMenuSettings: React.FC<EditMenuSettingsProps> = ({
     isOpen: false,
     itemCount: 0,
   });
+
+  const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
 
   const getProductCountForCategory = (catId: string): number => {
     return items.filter((item) => item.category === catId).length;
@@ -529,6 +605,25 @@ export const EditMenuSettings: React.FC<EditMenuSettingsProps> = ({
     if (result.success) {
       onShowToast(t('menuSettings.toasts.reorderSuccess'), 'success');
     }
+  };
+
+  const handleToggleSyncWorkingHours = () => {
+    const nextVal = !autoAvailability.syncWithWorkingHours;
+    updateAutoAvailability({ syncWithWorkingHours: nextVal });
+    onShowToast(t('menuSettings.toasts.syncWorkingHoursUpdated'), 'success');
+  };
+
+  const handleToggleDailyReset = () => {
+    const nextVal = !autoAvailability.dailyAutoReset;
+    updateAutoAvailability({ dailyAutoReset: nextVal });
+    onShowToast(t('menuSettings.toasts.dailyAutoResetUpdated'), 'success');
+  };
+
+  const handleConfirmResetAll = () => {
+    const updatedItems = items.map((item) => ({ ...item, isAvailable: true }));
+    updateItems(updatedItems);
+    onShowToast(t('menuSettings.toasts.resetAvailabilitySuccess'), 'success');
+    setIsResetConfirmOpen(false);
   };
 
   return (
@@ -712,6 +807,228 @@ export const EditMenuSettings: React.FC<EditMenuSettingsProps> = ({
             })}
           </div>
         </section>
+
+        {/* Section 2: Automatic Availability Card */}
+        <section
+          className="menu-settings-card"
+          aria-labelledby="section-auto-availability-title"
+        >
+          <div className="card-header-row">
+            <div className="card-title-group">
+              <h2 id="section-auto-availability-title" className="card-section-title">
+                {t('menuSettings.autoAvailabilitySectionTitle')}
+              </h2>
+            </div>
+          </div>
+
+          <div className="settings-options-list">
+            {/* Toggle 1: Sync with Working Hours */}
+            <div className="setting-option-row">
+              <div className="option-icon-wrap" aria-hidden="true">
+                <Clock size={17} className="option-icon" />
+              </div>
+              <div className="option-text-group">
+                <div className="option-title-row">
+                  <span className="option-title">
+                    {t('menuSettings.syncWorkingHoursTitle')}
+                  </span>
+                  <span
+                    className={`option-status-badge ${
+                      autoAvailability.syncWithWorkingHours ? 'enabled' : 'disabled'
+                    }`}
+                  >
+                    {autoAvailability.syncWithWorkingHours
+                      ? t('menuSettings.statusEnabled')
+                      : t('menuSettings.statusDisabled')}
+                  </span>
+                </div>
+                <p className="option-description">
+                  {t('menuSettings.syncWorkingHoursDesc')}
+                </p>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                id="toggle-sync-working-hours"
+                aria-checked={autoAvailability.syncWithWorkingHours}
+                className={`menu-toggle-switch ${
+                  autoAvailability.syncWithWorkingHours ? 'active' : ''
+                }`}
+                onClick={handleToggleSyncWorkingHours}
+                aria-label={t('menuSettings.toggleAria', {
+                  title: t('menuSettings.syncWorkingHoursTitle'),
+                })}
+              >
+                <span className="toggle-knob" />
+              </button>
+            </div>
+
+            <div className="setting-divider" />
+
+            {/* Toggle 2: Daily Automatic Reset */}
+            <div className="setting-option-row">
+              <div className="option-icon-wrap" aria-hidden="true">
+                <RotateCcw size={17} className="option-icon" />
+              </div>
+              <div className="option-text-group">
+                <div className="option-title-row">
+                  <span className="option-title">
+                    {t('menuSettings.dailyAutoResetTitle')}
+                  </span>
+                  <span
+                    className={`option-status-badge ${
+                      autoAvailability.dailyAutoReset ? 'enabled' : 'disabled'
+                    }`}
+                  >
+                    {autoAvailability.dailyAutoReset
+                      ? t('menuSettings.statusEnabled')
+                      : t('menuSettings.statusDisabled')}
+                  </span>
+                </div>
+                <p className="option-description">
+                  {t('menuSettings.dailyAutoResetDesc')}
+                </p>
+              </div>
+              <button
+                type="button"
+                role="switch"
+                id="toggle-daily-auto-reset"
+                aria-checked={autoAvailability.dailyAutoReset}
+                className={`menu-toggle-switch ${
+                  autoAvailability.dailyAutoReset ? 'active' : ''
+                }`}
+                onClick={handleToggleDailyReset}
+                aria-label={t('menuSettings.toggleAria', {
+                  title: t('menuSettings.dailyAutoResetTitle'),
+                })}
+              >
+                <span className="toggle-knob" />
+              </button>
+            </div>
+
+            <div className="setting-divider" />
+
+            {/* Row 3: Manual Reset All Available Action */}
+            <div className="setting-option-row setting-action-row">
+              <div className="option-icon-wrap action-icon-wrap" aria-hidden="true">
+                <RotateCcw size={17} className="option-icon" />
+              </div>
+              <div className="option-text-group">
+                <div className="option-title-row">
+                  <span className="option-title">
+                    {t('menuSettings.manualResetTitle')}
+                  </span>
+                </div>
+                <p className="option-description">
+                  {t('menuSettings.manualResetDesc')}
+                </p>
+              </div>
+              <button
+                type="button"
+                id="btn-reset-all-available"
+                className="btn-manual-reset"
+                onClick={() => setIsResetConfirmOpen(true)}
+                aria-label={t('menuSettings.manualResetBtn')}
+              >
+                <RotateCcw size={13} strokeWidth={2.4} />
+                <span>{t('menuSettings.manualResetBtn')}</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {/* Section 3: Pricing Preferences Card */}
+        <section
+          className="menu-settings-card"
+          aria-labelledby="section-pricing-title"
+        >
+          <div className="card-header-row">
+            <div className="card-title-group">
+              <h2 id="section-pricing-title" className="card-section-title">
+                {t('menuSettings.pricingSectionTitle')}
+              </h2>
+              <span className="card-badge fixed-badge">
+                {t('menuSettings.fixedBadge')}
+              </span>
+            </div>
+          </div>
+
+          <p className="pricing-section-notice">
+            {t('menuSettings.pricingSectionDesc')}
+          </p>
+
+          <div className="settings-options-list">
+            {/* Preference 1: Standard Currency */}
+            <div className="setting-option-row pricing-info-row">
+              <div className="option-icon-wrap pricing-icon-wrap" aria-hidden="true">
+                <Coins size={17} className="option-icon" />
+              </div>
+              <div className="option-text-group">
+                <div className="option-title-row">
+                  <span className="option-title">
+                    {t('menuSettings.currencyLabel')}
+                  </span>
+                </div>
+                <p className="option-description">
+                  {t('menuSettings.currencyDesc')}
+                </p>
+              </div>
+              <div className="pricing-value-tag">
+                <span className="pricing-value-text">
+                  {t('menuSettings.currencyValue')}
+                </span>
+              </div>
+            </div>
+
+            <div className="setting-divider" />
+
+            {/* Preference 2: Tax Policy */}
+            <div className="setting-option-row pricing-info-row">
+              <div className="option-icon-wrap pricing-icon-wrap" aria-hidden="true">
+                <Receipt size={17} className="option-icon" />
+              </div>
+              <div className="option-text-group">
+                <div className="option-title-row">
+                  <span className="option-title">
+                    {t('menuSettings.taxPolicyLabel')}
+                  </span>
+                </div>
+                <p className="option-description">
+                  {t('menuSettings.taxPolicyDesc')}
+                </p>
+              </div>
+              <div className="pricing-value-tag tax-tag">
+                <span className="pricing-value-text">
+                  {t('menuSettings.taxPolicyValue')}
+                </span>
+              </div>
+            </div>
+
+            <div className="setting-divider" />
+
+            {/* Preference 3: Decimal Precision */}
+            <div className="setting-option-row pricing-info-row">
+              <div className="option-icon-wrap pricing-icon-wrap" aria-hidden="true">
+                <Hash size={17} className="option-icon" />
+              </div>
+              <div className="option-text-group">
+                <div className="option-title-row">
+                  <span className="option-title">
+                    {t('menuSettings.precisionLabel')}
+                  </span>
+                </div>
+                <p className="option-description">
+                  {t('menuSettings.precisionDesc')}
+                </p>
+              </div>
+              <div className="pricing-value-tag">
+                <span className="pricing-value-text">
+                  {t('menuSettings.precisionValue')}
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
 
       {/* Add / Edit Category Modal */}
@@ -730,6 +1047,13 @@ export const EditMenuSettings: React.FC<EditMenuSettingsProps> = ({
         itemCount={deleteDialogState.itemCount}
         onClose={handleCloseDelete}
         onConfirmDelete={handleConfirmDelete}
+      />
+
+      {/* Reset Availability Confirmation Dialog */}
+      <ResetAvailabilityDialog
+        isOpen={isResetConfirmOpen}
+        onClose={() => setIsResetConfirmOpen(false)}
+        onConfirm={handleConfirmResetAll}
       />
     </div>
   );

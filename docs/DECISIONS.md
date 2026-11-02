@@ -424,5 +424,27 @@ To faithfully deliver the Categories Management interface inside Menu Settings (
 - **Reordering Controls**: Sequential Move Up and Move Down buttons update `sortOrder` via `menuSettingsStore.reorderCategories`, cleanly disabling boundary actions (Move Up on first item, Move Down on last item).
 - **Design Tokens & Viewport Conformance**: Enforces `--radius-card: 6px`, `--radius-btn: 5px`, and `--radius-badge: 4px`. Fully verified across $390 \times 844\text{ CSS px}$ mobile baseline with zero horizontal overflow in Arabic RTL Light/Dark and English LTR Light/Dark modes via automated CDP test suite (`scratch/test_menu_settings_phase3_ui.mjs`).
 
+## D-042: Menu Settings Automatic Availability & Pricing Preferences UI Architecture (Phase 4)
+
+To deliver the Automatic Availability and Pricing Preferences sections inside Menu Settings (`src/features/settings/components/EditMenuSettings.tsx` and `.css`):
+
+- **Section 2: Automatic Availability UI**:
+  - *Sync with Working Hours*: Accessible toggle switch (`role="switch"`, `id="toggle-sync-working-hours"`) bound to `autoAvailability.syncWithWorkingHours` (default: `false`), persisted via `menuSettingsStore.updateAutoAvailability`. Clear explanatory copy indicates that when enabled, a closed restaurant blocks/pauses order acceptance with an operational banner while products remain visible for customer browsing.
+  - *Daily Automatic Reset*: Accessible toggle switch (`role="switch"`, `id="toggle-daily-auto-reset"`) bound to `autoAvailability.dailyAutoReset` (default: `false`), persisted via `menuSettingsStore.updateAutoAvailability`. Explains that unavailable items are automatically restored to available upon app launch at the start of a new business day.
+  - *Individual Product Status Preservation*: Neither toggle directly modifies individual product availability flags. Manual availability toggles made on the Menu screen remain strictly authoritative until an explicit reset action or scheduled boundary.
+  - *Manual Reset Action & Confirmation*: Dedicated action button (`#btn-reset-all-available`) with `RotateCcw` icon. Requires explicit confirmation via `ResetAvailabilityDialog` before applying. On confirmation, restores 100% of menu items to `isAvailable: true` using existing `menuStore.updateItems()`, displays a localized success toast, and dismisses the dialog.
+- **Section 3: Pricing Preferences Informational Display**:
+  - Displays store pricing standards in a clean, non-editable card with fixed badges.
+  - *Currency*: Egyptian Pound (`EGP` / `ج.م`) marked as the base currency with a "Fixed" ("ثابت") badge.
+  - *Tax Policy*: Tax-Inclusive pricing (`VAT Included`) with an emerald status tag. Explains all displayed prices are inclusive of VAT.
+  - *Decimal Precision*: Integer display (`0` decimals) without fractional values.
+  - Strictly free of inputs, selects, tax managers, or editable controls, ensuring zero impact on financial calculations or seed order totals.
+- **Visual Design & Token Conformance**:
+  - Adheres to established design tokens: `--radius-card: 6px`, `--radius-btn: 5px`, `--radius-badge: 4px`, `--color-primary-dark: #111827`.
+  - Toggle switches feature directional knob translation for both LTR (`translateX(18px)`) and RTL (`translateX(-18px)`).
+  - Fully responsive to $390 \times 844\text{ CSS px}$ mobile baseline with zero horizontal overflow in Arabic RTL and English LTR, Light and Dark themes.
+- **Verification**: Created `scratch/run_menu_settings_phase4_verification.cjs` covering all 10 specification tests (10/10 passed), with full pass on Phase 2 (20/20), Phase 3 (10/10), Phase 5 analytics (23/23), and `tsc && vite build` (exit code 0).
+
+
 
 

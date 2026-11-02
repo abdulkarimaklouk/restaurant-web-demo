@@ -529,26 +529,48 @@ Update this checklist during implementation. Do not mark an item complete until 
   - `menu-settings-delete-confirm.png`
 - [x] Production build (`npm run build`) succeeded with 0 errors.
 
-## Menu Settings (Planned UI & System Integration)
+## Menu Settings Phase 4: Automatic Availability & Pricing UI
+
+- [x] Section 2 (Automatic Availability) card positioned cleanly below Categories Management.
+- [x] Working-hours synchronization toggle (`role="switch"`, `id="toggle-sync-working-hours"`) defaults to `false`.
+- [x] Working-hours synchronization toggle persists updates via `menuSettingsStore.updateAutoAvailability`.
+- [x] Explanatory copy clarifies order acceptance is paused while products remain visible for customer browsing when restaurant is closed.
+- [x] Daily availability auto-reset toggle (`role="switch"`, `id="toggle-daily-auto-reset"`) defaults to `false`.
+- [x] Daily availability auto-reset toggle persists updates via `menuSettingsStore.updateAutoAvailability`.
+- [x] Explanatory copy clarifies unavailable items are restored at the beginning of each new business day upon app launch.
+- [x] Individual product availability statuses are not silently or directly modified when toggles change.
+- [x] Manual reset button (`#btn-reset-all-available`) opens `ResetAvailabilityDialog` for explicit confirmation.
+- [x] Confirming manual reset restores 100% of menu items to `isAvailable: true` via `menuStore.updateItems()`.
+- [x] Localized feedback toast confirms reset completion (`toasts.resetAvailabilitySuccess`).
+- [x] Section 3 (Pricing Preferences) card positioned cleanly below Automatic Availability.
+- [x] Pricing preferences displayed as strictly informational and non-editable (no inputs, selects, or edit controls).
+- [x] Base currency indicator displays Egyptian Pound (`EGP` / `ج.م`) with fixed badge.
+- [x] Tax policy communicates strictly VAT inclusion (`VAT Included`) with zero claims of additional fees.
+- [x] Price precision displays integer formatting (`0` decimals) without fractional values.
+- [x] Historical order snapshots, seed order totals, and financial calculations remain completely unaffected.
+- [x] Design tokens strictly adhered to (`--radius-card: 6px`, `--radius-btn: 5px`, `--radius-badge: 4px`, `--color-primary-dark`).
+- [x] Switch knob translation handles LTR (`translateX(18px)`) and RTL (`translateX(-18px)`).
+- [x] Bilingual support verified across Arabic RTL and English LTR layouts with "customer browsing" phrasing.
+- [x] Theme support verified across Light and Dark modes.
+- [x] Mobile viewport baseline (390 × 844 CSS px) verified with 0 horizontal overflow.
+- [x] Automated test runner (`node scratch/run_menu_settings_phase4_verification.cjs`) passed 10/10 tests with exit code 0.
+- [x] Browser-level CDP automation suite (`node --experimental-websocket scratch/test_menu_settings_phase4_ui.mjs`) passed 12/12 tests with exit code 0 and captured screenshots:
+  - `menu-settings-phase4-ar-light.png`
+  - `menu-settings-phase4-reset-dialog.png`
+  - `menu-settings-phase4-en-light.png`
+  - `menu-settings-phase4-ar-dark.png`
+- [x] Production build (`npm run build`) succeeded with 0 errors.
+
+## Menu Settings (Planned UI & System Integration - Phase 5 & 6)
 
 ### Category Safety & Dynamic Management (Menu Screen Integration - Planned Phase 5)
 - [ ] Category tabs in MenuPage reflect dynamic categories list from menuSettingsStore.
 - [ ] AddProductScreen and EditProductScreen dynamically render category selectors from menuSettingsStore.
 - [ ] MenuFilterSheet dynamically populates categories from menuSettingsStore.
 
-### Automatic Availability & Operational Synchronization (UI Integration - Planned Phase 4 & 5)
-- [ ] Working-hours synchronization defaults to disabled (`false`).
-- [ ] When working-hours sync is enabled and restaurant is closed, ordering is paused while products remain visible.
-- [ ] Daily availability auto-reset defaults to disabled (`false`).
+### Operational Synchronization Integration (Menu Screen Integration - Planned Phase 5)
+- [ ] When working-hours sync is enabled and restaurant is closed, an operational banner indicates ordering is paused.
 - [ ] When daily auto-reset is enabled, launching the app on a new business day restores unavailable items to available.
-- [ ] Explicit "Reset All Items to Available Now" button in settings UI triggers availability reset with localized toast feedback.
 - [ ] Manual availability toggles made on the Menu screen take precedence until the next explicit reset or day boundary.
-
-### Pricing Preferences & Financial Baseline (UI Integration - Planned Phase 4)
-- [ ] Base currency indicator displays Egyptian Pound (`EGP` / `ج.م`).
-- [ ] Tax-inclusive status is displayed as active/informational and cannot be disabled.
-- [ ] Price display maintains clean integer formatting matching seed orders.
-- [ ] No dynamic tax, VAT, or service charge calculations are introduced.
-- [ ] Historical order snapshots and seed order totals remain completely unaffected.
 
 
